@@ -5,3 +5,9 @@ parts:
   chapters:
   - file: L742313_Key_developments
   - file: L991141_Random_walk
+  - file: L128493_Skip_gram_model
+  - file: L883045_Message_Passing_Neural_Networks
+- caption: Models
+  chapters:
+  - file: C870584_DeepWalk
+  - file: C067906_LINE
