@@ -34,7 +34,7 @@ parts:
   - file: T611050_Node2vec_in_PyTorch_Geometric_on_CORA_dataset
   - file: T815556_Node2vec_on_Karateclub
   - file: T894941_Node2vec_on_ML_latest_in_Keras
-  - file: T926278_Node2vec,_Edge2vec,_and_Graph2vec
+  - file: T926278_Node2vec_Edge2vec_and_Graph2vec
   - file: T401127_GEM_on_Karateclub
   - file: T481518_Struc2vec_on_airports_graph
   - file: T516490_Learn_embeddings_using_Graph_Networks
