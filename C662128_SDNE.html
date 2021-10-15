@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Random walk &#8212; graph-embeddings</title>
+    <title>SDNE &#8212; graph-embeddings</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Skip-gram model" href="L128493_Skip_gram_model.html" />
-    <link rel="prev" title="Key developments" href="L742313_Key_developments.html" />
+    <link rel="next" title="Node2vec" href="C039027_Node2vec.html" />
+    <link rel="prev" title="LINE" href="C067906_LINE.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -93,14 +93,14 @@
   Concepts
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="L742313_Key_developments.html">
    Key developments
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="L991141_Random_walk.html">
    Random walk
   </a>
  </li>
@@ -120,7 +120,7 @@
   Models
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="C870584_DeepWalk.html">
    DeepWalk
@@ -131,8 +131,8 @@
    LINE
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="C662128_SDNE.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    SDNE
   </a>
  </li>
@@ -182,7 +182,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/L991141_Random_walk.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/C662128_SDNE.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -207,7 +207,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/L991141_Random_walk.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/C662128_SDNE.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -215,7 +215,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/L991141_Random_walk.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/C662128_SDNE.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -238,6 +238,11 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#abstract">
+   Abstract
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
    References
   </a>
@@ -253,16 +258,18 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="random-walk">
-<h1>Random walk<a class="headerlink" href="#random-walk" title="Permalink to this headline">¶</a></h1>
-<p>The term “random walk” was first mentioned by Karl Pearson in 1905 in a letter to Nature magazine titled <strong><a class="reference external" href="https://www.nature.com/physics/looking-back/pearson/index.html">The Problem of the Random Walk</a></strong>. Study of random walks date back even further to the <strong><a class="reference external" href="https://en.wikipedia.org/wiki/Gambler%27s_ruin">Gambler’s ruin</a></strong> problem, where it could be used to show that a gambler would eventually go bankrupt against an opponent with infinite wealth. It’s only in the last couple of decades, however, that researchers have studied them with respect to networks.</p>
-<p><center><img src='_images/L991141_1.png'></center></p><p>Random Walk is an algorithm that provides random paths in a graph. A random walk means that we start at one node, choose a neighbor to navigate to at random or based on a provided probability distribution, and then do the same from that node, keeping the resulting path in a list. It’s similar to how a drunk person traverses a city.</p>
-<p><center><figure><img src='_images/L991141_2.png'><figcaption>An overview of the pipeline for random-walk graph embedding methods.</figcaption></figure></center></p><div class="section" id="references">
+  <div class="tex2jax_ignore mathjax_ignore section" id="sdne">
+<h1>SDNE<a class="headerlink" href="#sdne" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>Structural Deep Network Embedding</p>
+</div></blockquote>
+<div class="section" id="abstract">
+<h2>Abstract<a class="headerlink" href="#abstract" title="Permalink to this headline">¶</a></h2>
+<p><em>Network embedding is an important method to learn low-dimensional representations of vertexes in networks, aiming to capture and preserve the network structure. Almost all the existing network embedding methods adopt shallow models. However, since the underlying network structure is complex, shallow models cannot capture the highly non-linear network structure, resulting in sub-optimal network representations. Therefore, how to find a method that is able to effectively capture the highly non-linear network structure and preserve the global and local structure is an open yet important problem. To solve this problem, in this paper we propose a Structural Deep Network Embedding method, namely SDNE. More specifically, we first propose a semi-supervised deep model, which has multiple layers of non-linear functions, thereby being able to capture the highly non-linear network structure. Then we propose to exploit the first-order and second-order proximity jointly to preserve the network structure. The second-order proximity is used by the unsupervised component to capture the global network structure. While the first-order proximity is used as the supervised information in the supervised component to preserve the local network structure. By jointly optimizing them in the semi-supervised deep model, our method can preserve both the local and global network structure and is robust to sparse networks. Empirically, we conduct the experiments on five real-world networks, including a language network, a citation network and three social networks. The results show that compared to the baselines, our method can reconstruct the original network significantly better and achieves substantial gains in three applications,</em></p>
+<p><center><figure><img src='_images/C662128_1.png'><figcaption>The framework of the semi-supervised deep model of SDNE.</figcaption></figure></center></p></div>
+<div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
-<li><p><a class="reference external" href="https://www.mit.edu/~kardar/teaching/projects/chemotaxis(AndreaSchmidt)/random.htm">https://www.mit.edu/~kardar/teaching/projects/chemotaxis(AndreaSchmidt)/random.htm</a></p></li>
-<li><p><a class="reference external" href="https://youtu.be/stgYW6M5o4k">What is a Random Walk? | Infinite Series</a></p></li>
-</ol>
+<p><a class="reference external" href="https://github.com/shenweichen/GraphEmbedding">https://github.com/shenweichen/GraphEmbedding</a></p>
 </div>
 </div>
 
@@ -296,19 +303,19 @@
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="L742313_Key_developments.html" title="previous page">
+        <a class="left-prev" href="C067906_LINE.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Key developments</p>
+                <p class="prevnext-title">LINE</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="L128493_Skip_gram_model.html" title="next page">
+        <a class="right-next" href="C039027_Node2vec.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Skip-gram model</p>
+                <p class="prevnext-title">Node2vec</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Random walk &#8212; graph-embeddings</title>
+    <title>Node2vec &#8212; graph-embeddings</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -42,6 +42,8 @@
     <script src="_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe,.cell"
@@ -51,8 +53,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Skip-gram model" href="L128493_Skip_gram_model.html" />
-    <link rel="prev" title="Key developments" href="L742313_Key_developments.html" />
+    <link rel="prev" title="SDNE" href="C662128_SDNE.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -93,14 +94,14 @@
   Concepts
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="L742313_Key_developments.html">
    Key developments
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="L991141_Random_walk.html">
    Random walk
   </a>
  </li>
@@ -120,7 +121,7 @@
   Models
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="C870584_DeepWalk.html">
    DeepWalk
@@ -136,8 +137,8 @@
    SDNE
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="C039027_Node2vec.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Node2vec
   </a>
  </li>
@@ -182,7 +183,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/L991141_Random_walk.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/C039027_Node2vec.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -207,7 +208,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/L991141_Random_walk.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/C039027_Node2vec.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -215,7 +216,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/L991141_Random_walk.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/C039027_Node2vec.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -253,15 +254,25 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="random-walk">
-<h1>Random walk<a class="headerlink" href="#random-walk" title="Permalink to this headline">¶</a></h1>
-<p>The term “random walk” was first mentioned by Karl Pearson in 1905 in a letter to Nature magazine titled <strong><a class="reference external" href="https://www.nature.com/physics/looking-back/pearson/index.html">The Problem of the Random Walk</a></strong>. Study of random walks date back even further to the <strong><a class="reference external" href="https://en.wikipedia.org/wiki/Gambler%27s_ruin">Gambler’s ruin</a></strong> problem, where it could be used to show that a gambler would eventually go bankrupt against an opponent with infinite wealth. It’s only in the last couple of decades, however, that researchers have studied them with respect to networks.</p>
-<p><center><img src='_images/L991141_1.png'></center></p><p>Random Walk is an algorithm that provides random paths in a graph. A random walk means that we start at one node, choose a neighbor to navigate to at random or based on a provided probability distribution, and then do the same from that node, keeping the resulting path in a list. It’s similar to how a drunk person traverses a city.</p>
-<p><center><figure><img src='_images/L991141_2.png'><figcaption>An overview of the pipeline for random-walk graph embedding methods.</figcaption></figure></center></p><div class="section" id="references">
+  <div class="tex2jax_ignore mathjax_ignore section" id="node2vec">
+<h1>Node2vec<a class="headerlink" href="#node2vec" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>Scalable Feature Learning for Networks</p>
+</div></blockquote>
+<p>Nodes in networks could be organized based on communities they belong to (i.e., homophily); in other cases, the organization could be based on the structural roles of nodes in the network (i.e., structural equivalence). For instance, in the below figure, we observe nodes <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(s_1\)</span> belonging to the same tightly knit community of nodes, while the nodes <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(s_6\)</span> in the two distinct communities share the same structural role of a hub node. Real-world networks commonly exhibit a mixture of such equivalences.</p>
+<p><center><figure><img src='_images/C039027_1.png'><figcaption>BFS and DFS search strategies from node u (k = 3).</figcaption></figure></center></p><p>The node2vec framework learns low-dimensional representations for nodes in a graph by optimizing a neighborhood preserving objective. The objective is flexible, and the algorithm accommodates for various definitions of network neighborhoods by simulating biased random walks. Specifically, it provides a way of balancing the exploration-exploitation tradeoff that in turn leads to representations obeying a spectrum of equivalences from homophily to structural equivalence.</p>
+<p>Node2vec is a graph embedding method that comprehensively considers the DFS neighborhood and the BFS neighborhood. Simply put, it can be seen as an extension of deep walk, which combines DFS and BFS random walk.</p>
+<p>Node2Vec extends the skip-gram architecture to networks by maximizing the log-probability of observing a network neighborhood <span class="math notranslate nohighlight">\(\mathcal{N}_S(u)\)</span> for a node <span class="math notranslate nohighlight">\(u\)</span> conditioned on its feature representation given by f:</p>
+<div class="math notranslate nohighlight">
+\[\max_f \sum_{u \in V}logP(N_S(u) \vert f(u))\]</div>
+<div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
-<li><p><a class="reference external" href="https://www.mit.edu/~kardar/teaching/projects/chemotaxis(AndreaSchmidt)/random.htm">https://www.mit.edu/~kardar/teaching/projects/chemotaxis(AndreaSchmidt)/random.htm</a></p></li>
-<li><p><a class="reference external" href="https://youtu.be/stgYW6M5o4k">What is a Random Walk? | Infinite Series</a></p></li>
+<li><p><a class="reference external" href="https://pytorch-geometric.readthedocs.io/en/latest/modules/nn.html?highlight=node2vec#torch_geometric.nn.models.Node2Vec">PyTorch Geometric (2021) [Source code]</a></p></li>
+<li><p><a class="reference external" href="https://github.com/shenweichen/GraphEmbedding">https://github.com/shenweichen/GraphEmbedding</a> (2020) [Source code]</p></li>
+<li><p><a class="reference external" href="https://github.com/benedekrozemberczki/karateclub">https://github.com/benedekrozemberczki/karateclub</a> (2021) [Source code]</p></li>
+<li><p><a class="reference external" href="https://github.com/eliorc/node2vec">https://github.com/eliorc/node2vec</a> (2021) [Source code]</p></li>
+<li><p><a class="reference external" href="http://snap.stanford.edu/node2vec">http://snap.stanford.edu/node2vec</a></p></li>
 </ol>
 </div>
 </div>
@@ -296,23 +307,14 @@
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="L742313_Key_developments.html" title="previous page">
+        <a class="left-prev" href="C662128_SDNE.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Key developments</p>
+                <p class="prevnext-title">SDNE</p>
             </div>
         </a>
     </div>
-     <div id="next">
-        <a class="right-next" href="L128493_Skip_gram_model.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Skip-gram model</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
 
 </div>
         
