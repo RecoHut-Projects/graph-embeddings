@@ -1,0 +1,991 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Graph encoder &#8212; graph-embeddings</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="DeepWalk in python" href="T384270_DeepWalk_in_python.html" />
+    <link rel="prev" title="Graph Benchmarks" href="T118630_Graph_Benchmarks.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">graph-embeddings</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="US549467_Graph_embeddings.html">
+   Graph embeddings
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="L742313_Key_developments.html">
+   Key developments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L991141_Random_walk.html">
+   Random walk
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L128493_Skip_gram_model.html">
+   Skip-gram model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L883045_Message_Passing_Neural_Networks.html">
+   Message Passing Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Models
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="C870584_DeepWalk.html">
+   DeepWalk
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C067906_LINE.html">
+   LINE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C662128_SDNE.html">
+   SDNE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C039027_Node2vec.html">
+   Node2vec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C694808_Struc2Vec.html">
+   Struc2Vec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C779816_Splitter.html">
+   Splitter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C652166_CoKE.html">
+   CoKE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C047239_GAT.html">
+   GAT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C110059_GATv2.html">
+   GATv2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C538124_BigGraph.html">
+   BigGraph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C503513_KHGT.html">
+   KHGT
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Tutorials
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="T050508_Introduction_to_Networkx.html">
+   Introduction to Networkx
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T528562_Graph_properties.html">
+   Graph properties
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T118630_Graph_Benchmarks.html">
+   Graph Benchmarks
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Graph encoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T384270_DeepWalk_in_python.html">
+   DeepWalk in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T382881_DeepWalk_on_Karateclub.html">
+   DeepWalk on Karateclub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T677598_DeepWalk_on_ML_100k.html">
+   DeepWalk on ML-100k
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T862985_LINE_on_Wiki_network.html">
+   LINE on Wiki network
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T186367_Node2vec_from_scratch.html">
+   Node2vec from scratch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T611050_Node2vec_in_PyTorch_Geometric_on_CORA_dataset.html">
+   Node2vec in PyTorch Geometric on CORA dataset
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T815556_Node2vec_on_Karateclub.html">
+   Node2vec on Karateclub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T894941_Node2vec_on_ML_latest_in_Keras.html">
+   Node2vec on ML-latest in Keras
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T926278_Node2vec%2C_Edge2vec%2C_and_Graph2vec.html">
+   Node2vec, Edge2vec, and Graph2vec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T401127_GEM_on_Karateclub.html">
+   GEM on Karateclub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T481518_Struc2vec_on_airports_graph.html">
+   Struc2vec on airports graph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T516490_Learn_embeddings_using_Graph_Networks.html">
+   Learn Embeddings using Graph Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T981902_Shallow_embedding_methods.html">
+   Shallow embedding methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T189677_Graph_embeddings_using_SDNE.html">
+   Graph embeddings using SDNE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T873032_Graph_embeddings_using_Convnet_Stellargraph.html">
+   Graph embeddings using Convnet Stellargraph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T674201_Graph_embeddings.html">
+   Graph ML Embeddings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T457098_KHGT_knowledge_graph_embeddings.html">
+   KHGT knowledge graph embeddings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T403235_Contextualized_Knowledge_Graph_Embedding.html">
+   Contextualized Knowledge Graph Embedding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T643979_Learning_Node_Representations_from_Multiple_Social_Contexts.html">
+   SPLITTER: Learning Node Representations from Multiple Contexts
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T874868_GAT_in_Tensorflow.x.html">
+   GAT using Tensorflow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T249662_GAT_in_PyTorch_on_CORA.html">
+   GAT in PyTorch on CORA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T336765_FB15K_Graph_Embedding_Learning_in_PyTorch_Big_Graph.html">
+   FB15K Graph Embedding Learning in PyTorch Big Graph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T012114_SAGEConv_graph_embeddings_in_PyG.html">
+   SAGEConv graph embeddings in PyG
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/T984528_Graph_encoder.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/T984528_Graph_encoder.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/T984528_Graph_encoder.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#datasets">
+   Datasets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cora">
+   CORA
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#citeseer">
+   Citeseer
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#eu-email">
+   EU EMail
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dc-sbm">
+   DC-SBM
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="graph-encoder">
+<h1>Graph encoder<a class="headerlink" href="#graph-encoder" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">RepeatedKFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.discriminant_analysis</span> <span class="kn">import</span> <span class="n">LinearDiscriminantAnalysis</span>
+<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">MLPClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">EncoderLDA</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="n">begin1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">VT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">end1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">newx</span><span class="o">=</span><span class="p">([])</span>
+    <span class="n">dmax</span><span class="o">=</span><span class="mi">50</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">dmax</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">ASEKNN</span><span class="o">=</span><span class="p">[]</span>
+
+    <span class="c1">#Split Data</span>
+    <span class="n">rkf</span> <span class="o">=</span> <span class="n">RepeatedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_repeats</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">rkf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+         <span class="c1">#print(&quot;TRAIN:&quot;, train_index, &quot;TEST:&quot;, test_index)</span>
+         <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+         <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+         <span class="n">X1</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+         <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X1</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">X1</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+         <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">dmax</span><span class="p">):</span>
+            <span class="n">newx</span><span class="o">=</span><span class="n">U</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="n">d</span><span class="p">]</span><span class="o">*</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">d</span><span class="p">]</span><span class="o">**</span><span class="mf">0.5</span>
+            <span class="c1">#newx=np.reshape(newx,(n,d))</span>
+            <span class="n">clf2</span> <span class="o">=</span> <span class="n">LinearDiscriminantAnalysis</span><span class="p">()</span>
+            <span class="n">newx_train</span><span class="p">,</span> <span class="n">newx_test</span> <span class="o">=</span><span class="n">newx</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">newx</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+            <span class="n">clf2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">newx_train</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+            <span class="n">tmp</span><span class="p">[</span><span class="n">d</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">tmp</span><span class="p">[</span><span class="n">d</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">clf2</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">newx_test</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span><span class="o">/</span><span class="mi">50</span>
+         
+         <span class="n">neigh2</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span><span class="n">metric</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
+         <span class="n">neigh2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">newx_train</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+         <span class="n">ASEKNN</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">neigh2</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">newx_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+
+    <span class="n">db</span><span class="o">=</span><span class="n">tmp</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
+    <span class="n">ASELDAACC</span><span class="o">=</span><span class="n">tmp</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">ASELDATIME</span><span class="o">=</span><span class="n">end1</span><span class="o">-</span><span class="n">begin1</span>
+    <span class="n">ASEKNNACC</span><span class="o">=</span><span class="nb">sum</span><span class="p">(</span><span class="n">ASEKNN</span><span class="p">)</span><span class="o">/</span><span class="mi">50</span>
+    <span class="c1">#nk,w,Z</span>
+    <span class="n">begin2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">AEEKNNACC</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">AEELDAACC</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">AEEKNN2ACC</span><span class="o">=</span><span class="p">[]</span>
+
+    <span class="n">rkf</span> <span class="o">=</span> <span class="n">RepeatedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_repeats</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">rkf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+         <span class="c1">#print(&quot;TRAIN:&quot;, train_index, &quot;TEST:&quot;, test_index)</span>
+         <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+         <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+         <span class="n">X1</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+         <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X1</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">X1</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+            
+         <span class="n">begin4</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+         <span class="n">nk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="n">K</span><span class="p">))</span>
+
+         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">nk</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span><span class="o">=</span><span class="n">nk</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span><span class="o">+</span><span class="mi">1</span>
+                <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">y_train</span><span class="p">)),</span><span class="n">K</span><span class="p">))</span>
+
+         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">y_train</span><span class="p">))):</span>
+                <span class="n">k</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">nk</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+         <span class="n">z_train</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">w</span><span class="p">)</span>
+         <span class="n">z_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">w</span><span class="p">)</span>
+         <span class="n">end4</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+         <span class="n">zTIME</span> <span class="o">=</span> <span class="n">end4</span><span class="o">-</span><span class="n">begin4</span>
+
+         <span class="n">begin2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+         <span class="n">neigh</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span><span class="n">metric</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
+         <span class="n">neigh</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">z_train</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+         <span class="n">AEEKNNACC</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">neigh</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">z_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+         <span class="n">end2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+         <span class="n">AEEKNNTIME</span><span class="o">=</span><span class="n">end2</span><span class="o">-</span><span class="n">begin2</span>
+            
+         <span class="n">neigh3</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span><span class="n">metric</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
+         <span class="n">neigh</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">z_train</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+         <span class="n">AEEKNN2ACC</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">neigh</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">z_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+            
+         <span class="n">begin3</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+         <span class="n">clf4</span> <span class="o">=</span> <span class="n">LinearDiscriminantAnalysis</span><span class="p">()</span>
+         <span class="n">clf4</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">z_train</span><span class="p">,</span><span class="n">y_train</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+         <span class="n">AEELDAACC</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">clf4</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">z_test</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">ravel</span><span class="p">()))</span>
+         <span class="n">end3</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+         <span class="n">AEELDATIME</span><span class="o">=</span><span class="n">end3</span><span class="o">-</span><span class="n">begin3</span>
+
+    <span class="c1">#Get result</span>
+    <span class="n">AeK</span><span class="o">=</span><span class="nb">sum</span><span class="p">(</span><span class="n">AEEKNNACC</span><span class="p">)</span><span class="o">/</span><span class="mi">50</span>
+    <span class="n">AeL</span><span class="o">=</span><span class="nb">sum</span><span class="p">(</span><span class="n">AEELDAACC</span><span class="p">)</span><span class="o">/</span><span class="mi">50</span>
+    <span class="n">AeK2</span><span class="o">=</span><span class="nb">sum</span><span class="p">(</span><span class="n">AEEKNN2ACC</span><span class="p">)</span><span class="o">/</span><span class="mi">50</span>
+    <span class="n">Acc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ASELDAACC</span><span class="p">,</span><span class="n">ASEKNNACC</span><span class="p">,</span><span class="n">AeK</span><span class="p">,</span><span class="n">AeL</span><span class="p">,</span><span class="n">AeK2</span><span class="p">])</span>
+    <span class="n">Acc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">Acc</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">Time</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ASELDATIME</span><span class="p">,</span><span class="n">AEEKNNTIME</span><span class="o">+</span><span class="n">zTIME</span><span class="p">,</span><span class="n">AEELDATIME</span><span class="o">+</span><span class="n">zTIME</span><span class="p">])</span>
+    <span class="n">Time</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">Time</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;d = </span><span class="si">{</span><span class="n">db</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy for each method: ASELDA=</span><span class="si">{</span><span class="n">Acc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">,ASEKNN=</span><span class="si">{</span><span class="n">Acc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">,AEEKNN=</span><span class="si">{</span><span class="n">Acc</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">,AEELDA=</span><span class="si">{</span><span class="n">Acc</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">,AEEKNN2=</span><span class="si">{</span><span class="n">Acc</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Time for each method: </span><span class="si">{</span><span class="n">Time</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="datasets">
+<h2>Datasets<a class="headerlink" href="#datasets" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!git clone https://github.com/sparsh-ai/graph-embeddings.git
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cloning into &#39;graph-embeddings&#39;...
+remote: Enumerating objects: 83, done.
+remote: Counting objects: 100% (83/83), done.
+remote: Compressing objects: 100% (74/74), done.
+remote: Total 83 (delta 7), reused 79 (delta 7), pack-reused 0
+Unpacking objects: 100% (83/83), done.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!apt-get -qq install tree
+!tree --du -h ./graph-embeddings/data/bronze
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Selecting previously unselected package tree.
+(Reading database ... 155047 files and directories currently installed.)
+Preparing to unpack .../tree_1.7.0-5_amd64.deb ...
+Unpacking tree (1.7.0-5) ...
+Setting up tree (1.7.0-5) ...
+Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+./graph-embeddings/data/bronze
+├── [ 61K]  Citeseer
+│   ├── [ 45K]  citeseer edges.csv
+│   ├── [9.6K]  citeseer node_labels.csv
+│   └── [1.8K]  readme.html
+├── [7.6M]  Cora
+│   ├── [ 68K]  cora.cites
+│   ├── [7.5M]  cora.content
+│   ├── [ 53K]  cora edges.csv
+│   └── [7.9K]  cora node_labels.csv
+├── [ 11K]  DD244
+│   ├── [6.6K]  DD244 Edges.csv
+│   └── [ 758]  DD244 node_labels.csv
+├── [384K]  EU-EMAIL-CORE
+│   ├── [363K]  Core.xlsx
+│   └── [ 17K]  Labels.xlsx
+├── [ 24K]  Gene
+│   ├── [ 15K]  gene edges.csv
+│   ├── [3.2K]  gene node_labels.csv
+│   └── [1.8K]  readme.html
+├── [9.0K]  Internet Industry Partnerships
+│   ├── [4.5K]  internet-industry-partnershipsedges.csv
+│   └── [ 437]  internet-industry-partnerships node_labels.csv
+├── [ 93K]  KKI
+│   ├── [ 70K]  KKI edges.csv
+│   ├── [6.2K]  KKI.graph_idx
+│   ├── [ 203]  KKI.graph_labels
+│   ├── [7.2K]  KKI node_labels.csv
+│   ├── [2.9K]  KKI.readme
+│   └── [1.8K]  readme.html
+├── [323K]  Lastfm_Asia
+│   ├── [264K]  lastfm_asia_edges.csv
+│   └── [ 55K]  lastfm_asia_target.csv
+├── [ 52M]  Matlab
+│   ├── [ 16K]  adjnoun.mat
+│   ├── [564K]  BrainHippoShape.mat
+│   ├── [ 46K]  CoraAdj.mat
+│   ├── [2.0K]  DD244.mat
+│   ├── [ 482]  edge2adj.m
+│   ├── [106K]  email.mat
+│   ├── [ 14K]  Gene.mat
+│   ├── [1.5K]  gen_mixture.m
+│   ├── [ 41K]  graphCElegans.mat
+│   ├── [2.6K]  IIP.mat
+│   ├── [ 34K]  KKI.mat
+│   ├── [303K]  lastfm.mat
+│   ├── [185K]  mixture.mat
+│   ├── [212K]  OHSU.mat
+│   ├── [ 14K]  output.mat
+│   ├── [ 14K]  output-old.mat
+│   ├── [ 67K]  Peking.mat
+│   ├── [138K]  polblogs.mat
+│   ├── [743K]  PubMed edges.csv
+│   ├── [ 226]  pubmed.m
+│   ├── [ 23M]  pubmed.mat
+│   ├── [203K]  PubMed node_labels.csv
+│   └── [ 27M]  Wiki_Data.mat
+├── [347K]  OHSU
+│   ├── [298K]  OHSU edges.csv
+│   ├── [ 18K]  OHSU.graph_idx
+│   ├── [ 193]  OHSU.graph_labels
+│   ├── [ 21K]  OHSU node_labels.csv
+│   ├── [2.9K]  OHSU.readme
+│   └── [1.8K]  readme.html
+├── [149K]  Peking-1
+│   ├── [120K]  Peking-1 edges.csv
+│   ├── [9.5K]  Peking-1.graph_idx
+│   ├── [ 219]  Peking-1.graph_labels
+│   ├── [ 10K]  Peking-1 node_labels.csv
+│   ├── [2.9K]  Peking-1.readme
+│   └── [1.8K]  readme.html
+└── [3.4M]  Pubmed
+    ├── [1.0M]  pubmed A.csv.zip
+    ├── [1.6M]  Pubmed-Diabetes.DIRECTED.cites.tab
+    ├── [743K]  PubMed edges.csv
+    ├── [ 58K]  PubMed node_labels.csv
+    └── [1.8K]  readme.html
+
+  65M used in 12 directories, 64 files
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data_basepath</span> <span class="o">=</span> <span class="s1">&#39;/content/graph-embeddings/data/bronze&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="cora">
+<h2>CORA<a class="headerlink" href="#cora" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Edges</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_basepath</span><span class="p">,</span><span class="s2">&quot;Cora/cora edges.csv&quot;</span><span class="p">),</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">Edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Edges</span><span class="p">)</span>
+
+<span class="n">Labels</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_basepath</span><span class="p">,</span><span class="s2">&quot;Cora/cora node_labels.csv&quot;</span><span class="p">),</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Labels</span><span class="p">)</span>
+
+<span class="n">Edges</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">Edges</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2708, (5429, 2), (2708, 1))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2708</span><span class="p">,</span><span class="mi">2708</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5429</span><span class="p">):</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">Edges</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">Edges</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">2708</span>
+<span class="n">K</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EncoderLDA</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d = 49
+Accuracy for each method: ASELDA=0.4,ASEKNN=0.46,AEEKNN=0.697,AEELDA=0.725,AEEKNN2=0.697
+Time for each method: [13.622  0.113  0.061]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="citeseer">
+<h2>Citeseer<a class="headerlink" href="#citeseer" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Edges</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_basepath</span><span class="p">,</span><span class="s2">&quot;Citeseer/citeseer edges.csv&quot;</span><span class="p">),</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">Edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Edges</span><span class="p">)</span>
+
+<span class="n">Labels</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_basepath</span><span class="p">,</span><span class="s2">&quot;Citeseer/citeseer node_labels.csv&quot;</span><span class="p">),</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Labels</span><span class="p">)</span>
+
+<span class="n">Edges</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">Edges</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3264, (4536, 2), (3264, 1))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3264</span><span class="p">,</span><span class="mi">3264</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4536</span><span class="p">):</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">Edges</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">Edges</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">3264</span>
+<span class="n">K</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EncoderLDA</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d = 47
+Accuracy for each method: ASELDA=0.332,ASEKNN=0.349,AEEKNN=0.472,AEELDA=0.48,AEEKNN2=0.472
+Time for each method: [23.402  0.117  0.057]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="eu-email">
+<h2>EU EMail<a class="headerlink" href="#eu-email" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_basepath</span><span class="p">,</span><span class="s2">&quot;EU-EMAIL-CORE/Labels.xlsx&quot;</span><span class="p">),</span> <span class="n">header</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_basepath</span><span class="p">,</span><span class="s2">&quot;EU-EMAIL-CORE/Core.xlsx&quot;</span><span class="p">),</span> <span class="n">header</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">Edge</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1005</span><span class="p">,</span><span class="mi">1005</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">25571</span><span class="p">):</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">Edge</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">Edge</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span><span class="o">=</span><span class="mi">1</span>
+
+<span class="n">n</span><span class="o">=</span><span class="mi">1005</span>
+<span class="n">K</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EncoderLDA</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d = 48
+Accuracy for each method: ASELDA=0.548,ASEKNN=0.585,AEEKNN=0.617,AEELDA=0.612,AEEKNN2=0.617
+Time for each method: [0.784 0.135 0.087]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dc-sbm">
+<h2>DC-SBM<a class="headerlink" href="#dc-sbm" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ADCSBM</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">theta2</span> <span class="o">=</span> <span class="n">theta</span><span class="o">/</span><span class="nb">sum</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">B</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.9</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">],[</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.6</span><span class="p">,</span><span class="mf">0.1</span><span class="p">],[</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.3</span><span class="p">]])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">theta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">theta</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">theta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">theta</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">B</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">theta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">theta</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">B</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">theta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">theta</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">):</span>
+            <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">A</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gety</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+    <span class="c1">#np.random.seed(2)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span><span class="mf">0.5</span><span class="p">])</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">k</span><span class="o">=</span><span class="mi">3</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">gety</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">A</span><span class="o">=</span><span class="n">ADCSBM</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">EncoderLDA</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d = 25
+Accuracy for each method: ASELDA=0.613,ASEKNN=0.544,AEEKNN=0.626,AEELDA=0.643,AEEKNN2=0.626
+Time for each method: [0.003 0.004 0.003]
+d = 18
+Accuracy for each method: ASELDA=0.626,ASEKNN=0.483,AEEKNN=0.66,AEELDA=0.705,AEEKNN2=0.66
+Time for each method: [0.017 0.007 0.006]
+d = 12
+Accuracy for each method: ASELDA=0.692,ASEKNN=0.591,AEEKNN=0.706,AEELDA=0.74,AEEKNN2=0.706
+Time for each method: [0.029 0.011 0.008]
+d = 14
+Accuracy for each method: ASELDA=0.69,ASEKNN=0.581,AEEKNN=0.715,AEELDA=0.75,AEEKNN2=0.715
+Time for each method: [0.062 0.025 0.021]
+d = 32
+Accuracy for each method: ASELDA=0.733,ASEKNN=0.653,AEEKNN=0.771,AEELDA=0.776,AEEKNN2=0.771
+Time for each method: [0.113 0.032 0.023]
+d = 28
+Accuracy for each method: ASELDA=0.739,ASEKNN=0.591,AEEKNN=0.758,AEELDA=0.778,AEEKNN2=0.758
+Time for each method: [0.191 0.045 0.041]
+d = 25
+Accuracy for each method: ASELDA=0.762,ASEKNN=0.641,AEEKNN=0.808,AEELDA=0.796,AEEKNN2=0.808
+Time for each method: [0.303 0.043 0.036]
+d = 30
+Accuracy for each method: ASELDA=0.747,ASEKNN=0.625,AEEKNN=0.781,AEELDA=0.781,AEEKNN2=0.781
+Time for each method: [0.389 0.032 0.036]
+d = 39
+Accuracy for each method: ASELDA=0.799,ASEKNN=0.698,AEEKNN=0.849,AEELDA=0.827,AEEKNN2=0.849
+Time for each method: [0.539 0.037 0.028]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "sparsh-ai/graph-embeddings",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="T118630_Graph_Benchmarks.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Graph Benchmarks</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="T384270_DeepWalk_in_python.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">DeepWalk in python</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Sparsh A.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

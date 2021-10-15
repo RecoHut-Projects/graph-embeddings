@@ -1,0 +1,873 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction to Networkx &#8212; graph-embeddings</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Graph properties" href="T528562_Graph_properties.html" />
+    <link rel="prev" title="KHGT" href="C503513_KHGT.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">graph-embeddings</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="US549467_Graph_embeddings.html">
+   Graph embeddings
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="L742313_Key_developments.html">
+   Key developments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L991141_Random_walk.html">
+   Random walk
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L128493_Skip_gram_model.html">
+   Skip-gram model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L883045_Message_Passing_Neural_Networks.html">
+   Message Passing Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Models
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="C870584_DeepWalk.html">
+   DeepWalk
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C067906_LINE.html">
+   LINE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C662128_SDNE.html">
+   SDNE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C039027_Node2vec.html">
+   Node2vec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C694808_Struc2Vec.html">
+   Struc2Vec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C779816_Splitter.html">
+   Splitter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C652166_CoKE.html">
+   CoKE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C047239_GAT.html">
+   GAT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C110059_GATv2.html">
+   GATv2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C538124_BigGraph.html">
+   BigGraph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C503513_KHGT.html">
+   KHGT
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Tutorials
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Introduction to Networkx
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T528562_Graph_properties.html">
+   Graph properties
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T118630_Graph_Benchmarks.html">
+   Graph Benchmarks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T984528_Graph_encoder.html">
+   Graph encoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T384270_DeepWalk_in_python.html">
+   DeepWalk in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T382881_DeepWalk_on_Karateclub.html">
+   DeepWalk on Karateclub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T677598_DeepWalk_on_ML_100k.html">
+   DeepWalk on ML-100k
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T862985_LINE_on_Wiki_network.html">
+   LINE on Wiki network
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T186367_Node2vec_from_scratch.html">
+   Node2vec from scratch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T611050_Node2vec_in_PyTorch_Geometric_on_CORA_dataset.html">
+   Node2vec in PyTorch Geometric on CORA dataset
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T815556_Node2vec_on_Karateclub.html">
+   Node2vec on Karateclub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T894941_Node2vec_on_ML_latest_in_Keras.html">
+   Node2vec on ML-latest in Keras
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T926278_Node2vec%2C_Edge2vec%2C_and_Graph2vec.html">
+   Node2vec, Edge2vec, and Graph2vec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T401127_GEM_on_Karateclub.html">
+   GEM on Karateclub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T481518_Struc2vec_on_airports_graph.html">
+   Struc2vec on airports graph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T516490_Learn_embeddings_using_Graph_Networks.html">
+   Learn Embeddings using Graph Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T981902_Shallow_embedding_methods.html">
+   Shallow embedding methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T189677_Graph_embeddings_using_SDNE.html">
+   Graph embeddings using SDNE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T873032_Graph_embeddings_using_Convnet_Stellargraph.html">
+   Graph embeddings using Convnet Stellargraph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T674201_Graph_embeddings.html">
+   Graph ML Embeddings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T457098_KHGT_knowledge_graph_embeddings.html">
+   KHGT knowledge graph embeddings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T403235_Contextualized_Knowledge_Graph_Embedding.html">
+   Contextualized Knowledge Graph Embedding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T643979_Learning_Node_Representations_from_Multiple_Social_Contexts.html">
+   SPLITTER: Learning Node Representations from Multiple Contexts
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T874868_GAT_in_Tensorflow.x.html">
+   GAT using Tensorflow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T249662_GAT_in_PyTorch_on_CORA.html">
+   GAT in PyTorch on CORA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T336765_FB15K_Graph_Embedding_Learning_in_PyTorch_Big_Graph.html">
+   FB15K Graph Embedding Learning in PyTorch Big Graph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T012114_SAGEConv_graph_embeddings_in_PyG.html">
+   SAGEConv graph embeddings in PyG
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/T050508_Introduction_to_Networkx.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/T050508_Introduction_to_Networkx.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/T050508_Introduction_to_Networkx.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#undirected-graph">
+   Undirected Graph
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#directed-graph">
+   Directed Graph
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#weighted-directed-graph">
+   Weighted Directed Graph
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bipartite-graph">
+   Bipartite Graph
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multi-graph">
+   Multi Graph
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="introduction-to-networkx">
+<h1>Introduction to Networkx<a class="headerlink" href="#introduction-to-networkx" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">from</span> <span class="nn">networkx.drawing.layout</span> <span class="kn">import</span> <span class="n">bipartite_layout</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="p">,</span> <span class="n">node_names</span><span class="o">=</span><span class="p">{},</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">plot_weight</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="n">node_size</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    
+    <span class="n">pos_attrs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">coords</span> <span class="ow">in</span> <span class="n">pos_nodes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">pos_attrs</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.08</span><span class="p">)</span>
+        
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_attrs</span><span class="p">,</span> <span class="n">font_family</span><span class="o">=</span><span class="s1">&#39;serif&#39;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    
+    
+    <span class="k">if</span> <span class="n">plot_weight</span><span class="p">:</span>
+        <span class="n">pos_attrs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">coords</span> <span class="ow">in</span> <span class="n">pos_nodes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">pos_attrs</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.08</span><span class="p">)</span>
+        
+        <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_attrs</span><span class="p">,</span> <span class="n">font_family</span><span class="o">=</span><span class="s1">&#39;serif&#39;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="n">edge_labels</span><span class="o">=</span><span class="nb">dict</span><span class="p">([((</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,),</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">d</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)])</span>
+        <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">axis</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mf">1.2</span><span class="o">*</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">axis</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()])</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mf">1.2</span><span class="o">*</span><span class="n">y</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">axis</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="undirected-graph">
+<h2>Undirected Graph<a class="headerlink" href="#undirected-graph" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">V</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span> <span class="s1">&#39;Paris&#39;</span><span class="p">,</span> <span class="s1">&#39;Milan&#39;</span><span class="p">,</span> <span class="s1">&#39;Rome&#39;</span><span class="p">}</span>
+<span class="n">E</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Dublin&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Paris&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="s1">&#39;Dublin&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Rome&#39;</span><span class="p">)]</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">shell_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/T050508_Introduction_to_Networkx_4_0.png" src="_images/T050508_Introduction_to_Networkx_4_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;V = </span><span class="si">{</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;E = </span><span class="si">{</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>V = [&#39;Dublin&#39;, &#39;Milan&#39;, &#39;Paris&#39;, &#39;Rome&#39;]
+E = [(&#39;Dublin&#39;, &#39;Milan&#39;), (&#39;Dublin&#39;, &#39;Paris&#39;), (&#39;Milan&#39;, &#39;Paris&#39;), (&#39;Milan&#39;, &#39;Rome&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Graph Order: </span><span class="si">{</span><span class="n">G</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Graph Size: </span><span class="si">{</span><span class="n">G</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Degree for nodes: </span><span class="si">{</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">}</span> <span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Neighbors for nodes: </span><span class="si">{</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">}</span> <span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Graph Order: 4
+Graph Size: 4
+Degree for nodes: {&#39;Dublin&#39;: 2, &#39;Milan&#39;: 3, &#39;Paris&#39;: 2, &#39;Rome&#39;: 1}
+Neighbors for nodes: {&#39;Dublin&#39;: [&#39;Milan&#39;, &#39;Paris&#39;], &#39;Milan&#39;: [&#39;Dublin&#39;, &#39;Paris&#39;, &#39;Rome&#39;], &#39;Paris&#39;: [&#39;Milan&#39;, &#39;Dublin&#39;], &#39;Rome&#39;: [&#39;Milan&#39;]}
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>Note: The neighborhood graph (also known as an ego graph) of a vertex v in a graph G is a subgraph of G, composed of the vertices adjacent to v and all edges connecting vertices adjacent to v.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ego_graph_milan</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">ego_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s2">&quot;Rome&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Nodes: </span><span class="si">{</span><span class="n">ego_graph_milan</span><span class="o">.</span><span class="n">nodes</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Edges: </span><span class="si">{</span><span class="n">ego_graph_milan</span><span class="o">.</span><span class="n">edges</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nodes: [&#39;Milan&#39;, &#39;Rome&#39;]
+Edges: [(&#39;Milan&#39;, &#39;Rome&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new_nodes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;London&#39;</span><span class="p">,</span> <span class="s1">&#39;Madrid&#39;</span><span class="p">}</span>
+<span class="n">new_edges</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;London&#39;</span><span class="p">,</span><span class="s1">&#39;Rome&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Madrid&#39;</span><span class="p">,</span><span class="s1">&#39;Paris&#39;</span><span class="p">)]</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">new_nodes</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">new_edges</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">shell_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/T050508_Introduction_to_Networkx_9_0.png" src="_images/T050508_Introduction_to_Networkx_9_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">node_remove</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;London&#39;</span><span class="p">,</span> <span class="s1">&#39;Rome&#39;</span><span class="p">}</span>
+<span class="n">G</span><span class="o">.</span><span class="n">remove_nodes_from</span><span class="p">(</span><span class="n">node_remove</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">shell_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/T050508_Introduction_to_Networkx_10_0.png" src="_images/T050508_Introduction_to_Networkx_10_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">node_edges</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Dublin&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Paris&#39;</span><span class="p">)]</span>
+<span class="n">G</span><span class="o">.</span><span class="n">remove_edges_from</span><span class="p">(</span><span class="n">node_edges</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">shell_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/T050508_Introduction_to_Networkx_11_0.png" src="_images/T050508_Introduction_to_Networkx_11_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">to_edgelist</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Dublin&#39;, &#39;Paris&#39;, {}), (&#39;Paris&#39;, &#39;Madrid&#39;, {})]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">to_pandas_adjacency</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        Dublin  Milan  Paris  Madrid
+Dublin     0.0    0.0    1.0     0.0
+Milan      0.0    0.0    0.0     0.0
+Paris      1.0    0.0    0.0     1.0
+Madrid     0.0    0.0    1.0     0.0
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="directed-graph">
+<h2>Directed Graph<a class="headerlink" href="#directed-graph" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+<span class="n">V</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span> <span class="s1">&#39;Paris&#39;</span><span class="p">,</span> <span class="s1">&#39;Milan&#39;</span><span class="p">,</span> <span class="s1">&#39;Rome&#39;</span><span class="p">}</span>
+<span class="n">E</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Dublin&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="s1">&#39;Milan&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="s1">&#39;Dublin&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Rome&#39;</span><span class="p">)]</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">shell_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/T050508_Introduction_to_Networkx_15_0.png" src="_images/T050508_Introduction_to_Networkx_15_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">to_pandas_edgelist</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  source  target
+0  Milan  Dublin
+1  Milan    Rome
+2  Paris   Milan
+3  Paris  Dublin
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">to_pandas_adjacency</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        Dublin  Milan  Paris  Rome
+Dublin     0.0    0.0    0.0   0.0
+Milan      1.0    0.0    0.0   1.0
+Paris      1.0    1.0    0.0   0.0
+Rome       0.0    0.0    0.0   0.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Indegree for nodes: </span><span class="si">{</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">G</span><span class="o">.</span><span class="n">in_degree</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">}</span> <span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Outdegree for nodes: </span><span class="si">{</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">G</span><span class="o">.</span><span class="n">out_degree</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">}</span> <span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Indegree for nodes: {&#39;Dublin&#39;: 2, &#39;Milan&#39;: 1, &#39;Paris&#39;: 0, &#39;Rome&#39;: 1}
+Outdegree for nodes: {&#39;Dublin&#39;: 0, &#39;Milan&#39;: 2, &#39;Paris&#39;: 2, &#39;Rome&#39;: 0}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="weighted-directed-graph">
+<h2>Weighted Directed Graph<a class="headerlink" href="#weighted-directed-graph" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">MultiDiGraph</span><span class="p">()</span>
+<span class="n">V</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span> <span class="s1">&#39;Dublin&#39;</span><span class="p">,</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span> <span class="s1">&#39;Rome&#39;</span><span class="p">}</span>
+<span class="n">E</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+     <span class="p">(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Rome&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span> <span class="mi">19</span><span class="p">)]</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_weighted_edges_from</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">shell_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">plot_weight</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/T050508_Introduction_to_Networkx_20_0.png" src="_images/T050508_Introduction_to_Networkx_20_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">to_pandas_edgelist</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  source  target  weight
+0  Milan    Rome       5
+1  Milan  Dublin      19
+2  Paris  Dublin      11
+3  Paris   Milan       8
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">to_pandas_adjacency</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        Dublin  Milan  Paris  Rome
+Dublin     0.0    0.0    0.0   0.0
+Milan     19.0    0.0    0.0   5.0
+Paris     11.0    8.0    0.0   0.0
+Rome       0.0    0.0    0.0   0.0
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="bipartite-graph">
+<h2>Bipartite Graph<a class="headerlink" href="#bipartite-graph" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n_nodes</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">n_edges</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="n">bottom_nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ith</span> <span class="k">for</span> <span class="n">ith</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_nodes</span><span class="p">)</span> <span class="k">if</span> <span class="n">ith</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">top_nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ith</span> <span class="k">for</span> <span class="n">ith</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_nodes</span><span class="p">)</span> <span class="k">if</span> <span class="n">ith</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">iter_edges</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">bottom_nodes</span><span class="p">,</span> <span class="n">n_edges</span><span class="p">),</span>  
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">top_nodes</span><span class="p">,</span> <span class="n">n_edges</span><span class="p">))</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">{</span><span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="n">a</span><span class="p">,</span> <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="n">b</span><span class="p">}</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">iter_edges</span><span class="p">])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">B</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">bottom_nodes</span><span class="p">,</span> <span class="n">bipartite</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">B</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">top_nodes</span><span class="p">,</span> <span class="n">bipartite</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">B</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([</span><span class="nb">tuple</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">edges</span><span class="o">.</span><span class="n">values</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pos</span> <span class="o">=</span> <span class="n">bipartite_layout</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">bottom_nodes</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/T050508_Introduction_to_Networkx_25_0.png" src="_images/T050508_Introduction_to_Networkx_25_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="multi-graph">
+<h2>Multi Graph<a class="headerlink" href="#multi-graph" title="Permalink to this headline">¶</a></h2>
+<p>A multigraph G is defined as G=(V, E), where V is a set of nodes and E is a multi-set (a set allowing multiple instances for each of its elements) of edges.</p>
+<p>A multigraph is called a directed multigraph if E is a multi-set of ordered couples; otherwise, if E is a multi-set of two-sets, then it is called an undirected multigraph.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">MultiDiGraph</span><span class="p">()</span>
+<span class="n">V</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span> <span class="s1">&#39;Paris&#39;</span><span class="p">,</span> <span class="s1">&#39;Milan&#39;</span><span class="p">,</span> <span class="s1">&#39;Rome&#39;</span><span class="p">}</span>
+<span class="n">E</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Dublin&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Dublin&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="s1">&#39;Milan&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="s1">&#39;Dublin&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Rome&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Rome&#39;</span><span class="p">)]</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">shell_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/T050508_Introduction_to_Networkx_28_0.png" src="_images/T050508_Introduction_to_Networkx_28_0.png" />
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "sparsh-ai/graph-embeddings",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="C503513_KHGT.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">KHGT</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="T528562_Graph_properties.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Graph properties</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Sparsh A.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

@@ -1,0 +1,846 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Graph embeddings using SDNE &#8212; graph-embeddings</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Graph embeddings using Convnet Stellargraph" href="T873032_Graph_embeddings_using_Convnet_Stellargraph.html" />
+    <link rel="prev" title="Shallow embedding methods" href="T981902_Shallow_embedding_methods.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">graph-embeddings</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="US549467_Graph_embeddings.html">
+   Graph embeddings
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="L742313_Key_developments.html">
+   Key developments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L991141_Random_walk.html">
+   Random walk
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L128493_Skip_gram_model.html">
+   Skip-gram model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L883045_Message_Passing_Neural_Networks.html">
+   Message Passing Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Models
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="C870584_DeepWalk.html">
+   DeepWalk
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C067906_LINE.html">
+   LINE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C662128_SDNE.html">
+   SDNE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C039027_Node2vec.html">
+   Node2vec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C694808_Struc2Vec.html">
+   Struc2Vec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C779816_Splitter.html">
+   Splitter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C652166_CoKE.html">
+   CoKE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C047239_GAT.html">
+   GAT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C110059_GATv2.html">
+   GATv2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C538124_BigGraph.html">
+   BigGraph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C503513_KHGT.html">
+   KHGT
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Tutorials
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="T050508_Introduction_to_Networkx.html">
+   Introduction to Networkx
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T528562_Graph_properties.html">
+   Graph properties
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T118630_Graph_Benchmarks.html">
+   Graph Benchmarks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T984528_Graph_encoder.html">
+   Graph encoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T384270_DeepWalk_in_python.html">
+   DeepWalk in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T382881_DeepWalk_on_Karateclub.html">
+   DeepWalk on Karateclub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T677598_DeepWalk_on_ML_100k.html">
+   DeepWalk on ML-100k
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T862985_LINE_on_Wiki_network.html">
+   LINE on Wiki network
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T186367_Node2vec_from_scratch.html">
+   Node2vec from scratch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T611050_Node2vec_in_PyTorch_Geometric_on_CORA_dataset.html">
+   Node2vec in PyTorch Geometric on CORA dataset
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T815556_Node2vec_on_Karateclub.html">
+   Node2vec on Karateclub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T894941_Node2vec_on_ML_latest_in_Keras.html">
+   Node2vec on ML-latest in Keras
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T926278_Node2vec%2C_Edge2vec%2C_and_Graph2vec.html">
+   Node2vec, Edge2vec, and Graph2vec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T401127_GEM_on_Karateclub.html">
+   GEM on Karateclub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T481518_Struc2vec_on_airports_graph.html">
+   Struc2vec on airports graph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T516490_Learn_embeddings_using_Graph_Networks.html">
+   Learn Embeddings using Graph Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T981902_Shallow_embedding_methods.html">
+   Shallow embedding methods
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Graph embeddings using SDNE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T873032_Graph_embeddings_using_Convnet_Stellargraph.html">
+   Graph embeddings using Convnet Stellargraph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T674201_Graph_embeddings.html">
+   Graph ML Embeddings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T457098_KHGT_knowledge_graph_embeddings.html">
+   KHGT knowledge graph embeddings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T403235_Contextualized_Knowledge_Graph_Embedding.html">
+   Contextualized Knowledge Graph Embedding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T643979_Learning_Node_Representations_from_Multiple_Social_Contexts.html">
+   SPLITTER: Learning Node Representations from Multiple Contexts
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T874868_GAT_in_Tensorflow.x.html">
+   GAT using Tensorflow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T249662_GAT_in_PyTorch_on_CORA.html">
+   GAT in PyTorch on CORA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T336765_FB15K_Graph_Embedding_Learning_in_PyTorch_Big_Graph.html">
+   FB15K Graph Embedding Learning in PyTorch Big Graph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T012114_SAGEConv_graph_embeddings_in_PyG.html">
+   SAGEConv graph embeddings in PyG
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/T189677_Graph_embeddings_using_SDNE.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/T189677_Graph_embeddings_using_SDNE.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/T189677_Graph_embeddings_using_SDNE.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="graph-embeddings-using-sdne">
+<h1>Graph embeddings using SDNE<a class="headerlink" href="#graph-embeddings-using-sdne" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install git+https://github.com/palash1992/GEM.git
+!pip install -U Ipython
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">tensorflow_version</span> <span class="mf">1.</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TensorFlow 1.x selected.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gem.embedding.sdne</span> <span class="kn">import</span> <span class="n">SDNE</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Code</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Code</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">getsource</span><span class="p">(</span><span class="n">SDNE</span><span class="p">),</span> <span class="n">language</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>.output_html .hll { background-color: #ffffcc }
+.output_html  { background: #f8f8f8; }
+.output_html .c { color: #408080; font-style: italic } /* Comment */
+.output_html .err { border: 1px solid #FF0000 } /* Error */
+.output_html .k { color: #008000; font-weight: bold } /* Keyword */
+.output_html .o { color: #666666 } /* Operator */
+.output_html .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.output_html .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.output_html .cp { color: #BC7A00 } /* Comment.Preproc */
+.output_html .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.output_html .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.output_html .cs { color: #408080; font-style: italic } /* Comment.Special */
+.output_html .gd { color: #A00000 } /* Generic.Deleted */
+.output_html .ge { font-style: italic } /* Generic.Emph */
+.output_html .gr { color: #FF0000 } /* Generic.Error */
+.output_html .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.output_html .gi { color: #00A000 } /* Generic.Inserted */
+.output_html .go { color: #888888 } /* Generic.Output */
+.output_html .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.output_html .gs { font-weight: bold } /* Generic.Strong */
+.output_html .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.output_html .gt { color: #0044DD } /* Generic.Traceback */
+.output_html .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.output_html .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.output_html .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.output_html .kp { color: #008000 } /* Keyword.Pseudo */
+.output_html .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.output_html .kt { color: #B00040 } /* Keyword.Type */
+.output_html .m { color: #666666 } /* Literal.Number */
+.output_html .s { color: #BA2121 } /* Literal.String */
+.output_html .na { color: #7D9029 } /* Name.Attribute */
+.output_html .nb { color: #008000 } /* Name.Builtin */
+.output_html .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.output_html .no { color: #880000 } /* Name.Constant */
+.output_html .nd { color: #AA22FF } /* Name.Decorator */
+.output_html .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.output_html .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.output_html .nf { color: #0000FF } /* Name.Function */
+.output_html .nl { color: #A0A000 } /* Name.Label */
+.output_html .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.output_html .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.output_html .nv { color: #19177C } /* Name.Variable */
+.output_html .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.output_html .w { color: #bbbbbb } /* Text.Whitespace */
+.output_html .mb { color: #666666 } /* Literal.Number.Bin */
+.output_html .mf { color: #666666 } /* Literal.Number.Float */
+.output_html .mh { color: #666666 } /* Literal.Number.Hex */
+.output_html .mi { color: #666666 } /* Literal.Number.Integer */
+.output_html .mo { color: #666666 } /* Literal.Number.Oct */
+.output_html .sa { color: #BA2121 } /* Literal.String.Affix */
+.output_html .sb { color: #BA2121 } /* Literal.String.Backtick */
+.output_html .sc { color: #BA2121 } /* Literal.String.Char */
+.output_html .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.output_html .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.output_html .s2 { color: #BA2121 } /* Literal.String.Double */
+.output_html .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.output_html .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.output_html .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.output_html .sx { color: #008000 } /* Literal.String.Other */
+.output_html .sr { color: #BB6688 } /* Literal.String.Regex */
+.output_html .s1 { color: #BA2121 } /* Literal.String.Single */
+.output_html .ss { color: #19177C } /* Literal.String.Symbol */
+.output_html .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.output_html .fm { color: #0000FF } /* Name.Function.Magic */
+.output_html .vc { color: #19177C } /* Name.Variable.Class */
+.output_html .vg { color: #19177C } /* Name.Variable.Global */
+.output_html .vi { color: #19177C } /* Name.Variable.Instance */
+.output_html .vm { color: #19177C } /* Name.Variable.Magic */
+.output_html .il { color: #666666 } /* Literal.Number.Integer.Long */</style><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SDNE</span><span class="p">(</span><span class="n">StaticGraphEmbedding</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">hyper_dict</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Initialize the SDNE class</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            d: dimension of the embedding</span>
+<span class="sd">            beta: penalty parameter in matrix B of 2nd order objective</span>
+<span class="sd">            alpha: weighing hyperparameter for 1st order objective</span>
+<span class="sd">            nu1: L1-reg hyperparameter</span>
+<span class="sd">            nu2: L2-reg hyperparameter</span>
+<span class="sd">            K: number of hidden layers in encoder/decoder</span>
+<span class="sd">            n_units: vector of length K-1 containing #units in hidden layers</span>
+<span class="sd">                     of encoder/decoder, not including the units in the</span>
+<span class="sd">                     embedding layer</span>
+<span class="sd">            rho: bounding ratio for number of units in consecutive layers (&lt; 1)</span>
+<span class="sd">            n_iter: number of sgd iterations for first embedding (const)</span>
+<span class="sd">            xeta: sgd step size parameter</span>
+<span class="sd">            n_batch: minibatch size for SGD</span>
+<span class="sd">            modelfile: Files containing previous encoder and decoder models</span>
+<span class="sd">            weightfile: Files containing previous encoder and decoder weights</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">hyper_params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;method_name&#39;</span><span class="p">:</span> <span class="s1">&#39;sdne&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;actfn&#39;</span><span class="p">:</span> <span class="s1">&#39;relu&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;modelfile&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;weightfile&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;savefilesuffix&#39;</span><span class="p">:</span> <span class="kc">None</span>
+
+        <span class="p">}</span>
+        <span class="n">hyper_params</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">hyper_params</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="s1">&#39;_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">key</span><span class="p">,</span> <span class="n">hyper_params</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">dictionary</span> <span class="ow">in</span> <span class="n">hyper_dict</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="s1">&#39;_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">key</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_method_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_method_name</span>
+
+    <span class="k">def</span> <span class="nf">get_method_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_method_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">learn_embedding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">edge_f</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">is_weighted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">no_python</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">graph</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">edge_f</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;graph/edge_f needed&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">graph</span><span class="p">:</span>
+            <span class="n">graph</span> <span class="o">=</span> <span class="n">graph_util</span><span class="o">.</span><span class="n">loadGraphFromEdgeListTxt</span><span class="p">(</span><span class="n">edge_f</span><span class="p">)</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_scipy_sparse_matrix</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="p">(</span><span class="n">S</span> <span class="o">+</span> <span class="n">S</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_node_num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
+
+        <span class="c1"># Generate encoder, decoder and autoencoder</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_iter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_iter</span>
+        <span class="c1"># If cannot use previous step information, initialize new models</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_encoder</span> <span class="o">=</span> <span class="n">get_encoder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_node_num</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d</span><span class="p">,</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">_K</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_units</span><span class="p">,</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">_nu1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nu2</span><span class="p">,</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">_actfn</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_decoder</span> <span class="o">=</span> <span class="n">get_decoder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_node_num</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_d</span><span class="p">,</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">_K</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_units</span><span class="p">,</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">_nu1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nu2</span><span class="p">,</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">_actfn</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_autoencoder</span> <span class="o">=</span> <span class="n">get_autoencoder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_encoder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decoder</span><span class="p">)</span>
+
+        <span class="c1"># Initialize self._model</span>
+        <span class="c1"># Input</span>
+        <span class="n">x_in</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_node_num</span><span class="p">,),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;x_in&#39;</span><span class="p">)</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">_node_num</span><span class="p">],</span>
+            <span class="n">output_shape</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_node_num</span><span class="p">,)</span>
+        <span class="p">)(</span><span class="n">x_in</span><span class="p">)</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_node_num</span><span class="p">:</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_node_num</span><span class="p">],</span>
+            <span class="n">output_shape</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_node_num</span><span class="p">,)</span>
+        <span class="p">)(</span><span class="n">x_in</span><span class="p">)</span>
+        <span class="c1"># Process inputs</span>
+        <span class="p">[</span><span class="n">x_hat1</span><span class="p">,</span> <span class="n">y1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_autoencoder</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+        <span class="p">[</span><span class="n">x_hat2</span><span class="p">,</span> <span class="n">y2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_autoencoder</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span>
+        <span class="c1"># Outputs</span>
+        <span class="n">x_diff1</span> <span class="o">=</span> <span class="n">merge</span><span class="p">([</span><span class="n">x_hat1</span><span class="p">,</span> <span class="n">x1</span><span class="p">],</span>
+                        <span class="n">mode</span><span class="o">=</span><span class="k">lambda</span> <span class="n">ab</span><span class="p">:</span> <span class="n">ab</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">ab</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                        <span class="n">output_shape</span><span class="o">=</span><span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">x_diff2</span> <span class="o">=</span> <span class="n">merge</span><span class="p">([</span><span class="n">x_hat2</span><span class="p">,</span> <span class="n">x2</span><span class="p">],</span>
+                        <span class="n">mode</span><span class="o">=</span><span class="k">lambda</span> <span class="n">ab</span><span class="p">:</span> <span class="n">ab</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">ab</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                        <span class="n">output_shape</span><span class="o">=</span><span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">y_diff</span> <span class="o">=</span> <span class="n">merge</span><span class="p">([</span><span class="n">y2</span><span class="p">,</span> <span class="n">y1</span><span class="p">],</span>
+                       <span class="n">mode</span><span class="o">=</span><span class="k">lambda</span> <span class="n">ab</span><span class="p">:</span> <span class="n">ab</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">ab</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                       <span class="n">output_shape</span><span class="o">=</span><span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># Objectives</span>
+        <span class="k">def</span> <span class="nf">weighted_mse_x</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+            <span class="sd">&#39;&#39;&#39; Hack: This fn doesn&#39;t accept additional arguments.</span>
+<span class="sd">                      We use y_true to pass them.</span>
+<span class="sd">                y_pred: Contains x_hat - x</span>
+<span class="sd">                y_true: Contains [b, deg]</span>
+<span class="sd">            &#39;&#39;&#39;</span>
+            <span class="k">return</span> <span class="n">KBack</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+                <span class="n">KBack</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">*</span> <span class="n">y_true</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">_node_num</span><span class="p">]),</span>
+                <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">y_true</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_node_num</span><span class="p">]</span>
+
+        <span class="k">def</span> <span class="nf">weighted_mse_y</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+            <span class="sd">&#39;&#39;&#39; Hack: This fn doesn&#39;t accept additional arguments.</span>
+<span class="sd">                      We use y_true to pass them.</span>
+<span class="sd">            y_pred: Contains y2 - y1</span>
+<span class="sd">            y_true: Contains s12</span>
+<span class="sd">            &#39;&#39;&#39;</span>
+            <span class="n">min_batch_size</span> <span class="o">=</span> <span class="n">KBack</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">y_true</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">KBack</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
+                <span class="n">KBack</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">KBack</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">y_pred</span><span class="p">),</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">),</span>
+                <span class="p">[</span><span class="n">min_batch_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="p">)</span> <span class="o">*</span> <span class="n">y_true</span>
+
+        <span class="c1"># Model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">x_in</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="n">x_diff1</span><span class="p">,</span> <span class="n">x_diff2</span><span class="p">,</span> <span class="n">y_diff</span><span class="p">])</span>
+        <span class="n">sgd</span> <span class="o">=</span> <span class="n">SGD</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_xeta</span><span class="p">,</span> <span class="n">decay</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.99</span><span class="p">,</span> <span class="n">nesterov</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># adam = Adam(lr=self._xeta, beta_1=0.9, beta_2=0.999, epsilon=1e-08)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+            <span class="n">optimizer</span><span class="o">=</span><span class="n">sgd</span><span class="p">,</span>
+            <span class="n">loss</span><span class="o">=</span><span class="p">[</span><span class="n">weighted_mse_x</span><span class="p">,</span> <span class="n">weighted_mse_x</span><span class="p">,</span> <span class="n">weighted_mse_y</span><span class="p">],</span>
+            <span class="n">loss_weights</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alpha</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">fit_generator</span><span class="p">(</span>
+            <span class="n">generator</span><span class="o">=</span><span class="n">batch_generator_sdne</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_beta</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_batch</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+            <span class="n">nb_epoch</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_num_iter</span><span class="p">,</span>
+            <span class="n">samples_per_epoch</span><span class="o">=</span><span class="n">S</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_batch</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>
+        <span class="c1"># Get embedding for all points</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Y</span> <span class="o">=</span> <span class="n">model_batch_predictor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_autoencoder</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_batch</span><span class="p">)</span>
+        <span class="n">t2</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+        <span class="c1"># Save the autoencoder and its weights</span>
+        <span class="k">if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_weightfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">saveweights</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_encoder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weightfile</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">saveweights</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_decoder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weightfile</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_modelfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">savemodel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_encoder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_modelfile</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">savemodel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_decoder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_modelfile</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_savefilesuffix</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">saveweights</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_encoder</span><span class="p">,</span>
+                <span class="s1">&#39;encoder_weights_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_savefilesuffix</span> <span class="o">+</span> <span class="s1">&#39;.hdf5&#39;</span>
+            <span class="p">)</span>
+            <span class="n">saveweights</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_decoder</span><span class="p">,</span>
+                <span class="s1">&#39;decoder_weights_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_savefilesuffix</span> <span class="o">+</span> <span class="s1">&#39;.hdf5&#39;</span>
+            <span class="p">)</span>
+            <span class="n">savemodel</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_encoder</span><span class="p">,</span>
+                <span class="s1">&#39;encoder_model_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_savefilesuffix</span> <span class="o">+</span> <span class="s1">&#39;.json&#39;</span>
+            <span class="p">)</span>
+            <span class="n">savemodel</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_decoder</span><span class="p">,</span>
+                <span class="s1">&#39;decoder_model_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_savefilesuffix</span> <span class="o">+</span> <span class="s1">&#39;.json&#39;</span>
+            <span class="p">)</span>
+            <span class="c1"># Save the embedding</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s1">&#39;embedding_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_savefilesuffix</span> <span class="o">+</span> <span class="s1">&#39;.txt&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Y</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Y</span><span class="p">,</span> <span class="p">(</span><span class="n">t2</span> <span class="o">-</span> <span class="n">t1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_embedding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filesuffix</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Y</span> <span class="k">if</span> <span class="n">filesuffix</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span>
+            <span class="s1">&#39;embedding_&#39;</span> <span class="o">+</span> <span class="n">filesuffix</span> <span class="o">+</span> <span class="s1">&#39;.txt&#39;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_edge_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">embed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filesuffix</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">embed</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">filesuffix</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">embed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Y</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">embed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;embedding_&#39;</span> <span class="o">+</span> <span class="n">filesuffix</span> <span class="o">+</span> <span class="s1">&#39;.txt&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">S_hat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_reconst_from_embed</span><span class="p">(</span><span class="n">embed</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="p">:],</span> <span class="n">filesuffix</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">S_hat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">S_hat</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+
+    <span class="k">def</span> <span class="nf">get_reconstructed_adj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">embed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">node_l</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filesuffix</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">embed</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">filesuffix</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">embed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Y</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">embed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;embedding_&#39;</span> <span class="o">+</span> <span class="n">filesuffix</span> <span class="o">+</span> <span class="s1">&#39;.txt&#39;</span><span class="p">)</span>
+        <span class="n">S_hat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_reconst_from_embed</span><span class="p">(</span><span class="n">embed</span><span class="p">,</span> <span class="n">node_l</span><span class="p">,</span> <span class="n">filesuffix</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">graphify</span><span class="p">(</span><span class="n">S_hat</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_reconst_from_embed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">embed</span><span class="p">,</span> <span class="n">node_l</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filesuffix</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">filesuffix</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">node_l</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decoder</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
+                    <span class="n">embed</span><span class="p">,</span>
+                    <span class="n">batch_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_batch</span><span class="p">)[:,</span> <span class="n">node_l</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decoder</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">embed</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_batch</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">decoder</span> <span class="o">=</span> <span class="n">model_from_json</span><span class="p">(</span>
+                    <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;decoder_model_&#39;</span> <span class="o">+</span> <span class="n">filesuffix</span> <span class="o">+</span> <span class="s1">&#39;.json&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                <span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error reading file: </span><span class="si">{0}</span><span class="s1">. Cannot load previous model&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;decoder_model_&#39;</span><span class="o">+</span><span class="n">filesuffix</span><span class="o">+</span><span class="s1">&#39;.json&#39;</span><span class="p">))</span>
+                <span class="n">exit</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">decoder</span><span class="o">.</span><span class="n">load_weights</span><span class="p">(</span><span class="s1">&#39;decoder_weights_&#39;</span> <span class="o">+</span> <span class="n">filesuffix</span> <span class="o">+</span> <span class="s1">&#39;.hdf5&#39;</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error reading file: </span><span class="si">{0}</span><span class="s1">. Cannot load previous weights&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;decoder_weights_&#39;</span><span class="o">+</span><span class="n">filesuffix</span><span class="o">+</span><span class="s1">&#39;.hdf5&#39;</span><span class="p">))</span>
+                <span class="n">exit</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">node_l</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">decoder</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">embed</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_batch</span><span class="p">)[:,</span> <span class="n">node_l</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">decoder</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">embed</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_batch</span><span class="p">)</span>
+</pre></div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">karate_club_graph</span><span class="p">()</span>
+
+<span class="n">m1</span> <span class="o">=</span> <span class="n">SDNE</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">nu1</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">nu2</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">n_units</span><span class="o">=</span><span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">15</span><span class="p">,],</span> <span class="n">rho</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> 
+          <span class="n">xeta</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">n_batch</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+          <span class="n">modelfile</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;enc_model.json&#39;</span><span class="p">,</span> <span class="s1">&#39;dec_model.json&#39;</span><span class="p">],</span>
+          <span class="n">weightfile</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;enc_weights.hdf5&#39;</span><span class="p">,</span> <span class="s1">&#39;dec_weights.hdf5&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">m1</span><span class="o">.</span><span class="n">learn_embedding</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">m1</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "sparsh-ai/graph-embeddings",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="T981902_Shallow_embedding_methods.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Shallow embedding methods</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="T873032_Graph_embeddings_using_Convnet_Stellargraph.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Graph embeddings using Convnet Stellargraph</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Sparsh A.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

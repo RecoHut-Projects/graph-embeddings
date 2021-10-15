@@ -1,0 +1,870 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GEM on Karateclub &#8212; graph-embeddings</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Struc2vec on airports graph" href="T481518_Struc2vec_on_airports_graph.html" />
+    <link rel="prev" title="Node2vec, Edge2vec, and Graph2vec" href="T926278_Node2vec%2C_Edge2vec%2C_and_Graph2vec.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">graph-embeddings</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="US549467_Graph_embeddings.html">
+   Graph embeddings
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="L742313_Key_developments.html">
+   Key developments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L991141_Random_walk.html">
+   Random walk
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L128493_Skip_gram_model.html">
+   Skip-gram model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L883045_Message_Passing_Neural_Networks.html">
+   Message Passing Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Models
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="C870584_DeepWalk.html">
+   DeepWalk
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C067906_LINE.html">
+   LINE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C662128_SDNE.html">
+   SDNE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C039027_Node2vec.html">
+   Node2vec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C694808_Struc2Vec.html">
+   Struc2Vec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C779816_Splitter.html">
+   Splitter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C652166_CoKE.html">
+   CoKE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C047239_GAT.html">
+   GAT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C110059_GATv2.html">
+   GATv2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C538124_BigGraph.html">
+   BigGraph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C503513_KHGT.html">
+   KHGT
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Tutorials
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="T050508_Introduction_to_Networkx.html">
+   Introduction to Networkx
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T528562_Graph_properties.html">
+   Graph properties
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T118630_Graph_Benchmarks.html">
+   Graph Benchmarks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T984528_Graph_encoder.html">
+   Graph encoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T384270_DeepWalk_in_python.html">
+   DeepWalk in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T382881_DeepWalk_on_Karateclub.html">
+   DeepWalk on Karateclub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T677598_DeepWalk_on_ML_100k.html">
+   DeepWalk on ML-100k
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T862985_LINE_on_Wiki_network.html">
+   LINE on Wiki network
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T186367_Node2vec_from_scratch.html">
+   Node2vec from scratch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T611050_Node2vec_in_PyTorch_Geometric_on_CORA_dataset.html">
+   Node2vec in PyTorch Geometric on CORA dataset
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T815556_Node2vec_on_Karateclub.html">
+   Node2vec on Karateclub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T894941_Node2vec_on_ML_latest_in_Keras.html">
+   Node2vec on ML-latest in Keras
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T926278_Node2vec%2C_Edge2vec%2C_and_Graph2vec.html">
+   Node2vec, Edge2vec, and Graph2vec
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   GEM on Karateclub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T481518_Struc2vec_on_airports_graph.html">
+   Struc2vec on airports graph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T516490_Learn_embeddings_using_Graph_Networks.html">
+   Learn Embeddings using Graph Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T981902_Shallow_embedding_methods.html">
+   Shallow embedding methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T189677_Graph_embeddings_using_SDNE.html">
+   Graph embeddings using SDNE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T873032_Graph_embeddings_using_Convnet_Stellargraph.html">
+   Graph embeddings using Convnet Stellargraph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T674201_Graph_embeddings.html">
+   Graph ML Embeddings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T457098_KHGT_knowledge_graph_embeddings.html">
+   KHGT knowledge graph embeddings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T403235_Contextualized_Knowledge_Graph_Embedding.html">
+   Contextualized Knowledge Graph Embedding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T643979_Learning_Node_Representations_from_Multiple_Social_Contexts.html">
+   SPLITTER: Learning Node Representations from Multiple Contexts
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T874868_GAT_in_Tensorflow.x.html">
+   GAT using Tensorflow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T249662_GAT_in_PyTorch_on_CORA.html">
+   GAT in PyTorch on CORA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T336765_FB15K_Graph_Embedding_Learning_in_PyTorch_Big_Graph.html">
+   FB15K Graph Embedding Learning in PyTorch Big Graph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T012114_SAGEConv_graph_embeddings_in_PyG.html">
+   SAGEConv graph embeddings in PyG
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/T401127_GEM_on_Karateclub.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/T401127_GEM_on_Karateclub.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/T401127_GEM_on_Karateclub.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#karateclub-dataset">
+   Karateclub Dataset
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="gem-on-karateclub">
+<h1>GEM on Karateclub<a class="headerlink" href="#gem-on-karateclub" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!git clone https://github.com/palash1992/GEM.git
+%cd GEM
+!mkdir gem/intermediate
+!pip install .
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/content/GEM
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install keras==2.0.2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">tensorflow_version</span> <span class="mf">1.</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TensorFlow 1.x selected.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="karateclub-dataset">
+<h2>Karateclub Dataset<a class="headerlink" href="#karateclub-dataset" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!wget -q --show-progress https://github.com/palash1992/GEM/raw/master/examples/data/karate.edgelist
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>karate.edgelist       0%[                    ]       0  --.-KB/s               
+karate.edgelist     100%[===================&gt;]     405  --.-KB/s    in 0s      
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Run the graph embedding methods on Karate graph and evaluate them on </span>
+<span class="sd">graph reconstruction and visualization. Please copy the </span>
+<span class="sd">gem/data/karate.edgelist to the working directory</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+
+<span class="kn">from</span> <span class="nn">gem.utils</span>      <span class="kn">import</span> <span class="n">graph_util</span><span class="p">,</span> <span class="n">plot_util</span>
+<span class="kn">from</span> <span class="nn">gem.evaluation</span> <span class="kn">import</span> <span class="n">visualize_embedding</span> <span class="k">as</span> <span class="n">viz</span>
+<span class="kn">from</span> <span class="nn">gem.evaluation</span> <span class="kn">import</span> <span class="n">evaluate_graph_reconstruction</span> <span class="k">as</span> <span class="n">gr</span>
+
+<span class="kn">from</span> <span class="nn">gem.embedding.gf</span>       <span class="kn">import</span> <span class="n">GraphFactorization</span>
+<span class="kn">from</span> <span class="nn">gem.embedding.hope</span>     <span class="kn">import</span> <span class="n">HOPE</span>
+<span class="kn">from</span> <span class="nn">gem.embedding.lap</span>      <span class="kn">import</span> <span class="n">LaplacianEigenmaps</span>
+<span class="kn">from</span> <span class="nn">gem.embedding.lle</span>      <span class="kn">import</span> <span class="n">LocallyLinearEmbedding</span>
+<span class="kn">from</span> <span class="nn">gem.embedding.node2vec</span> <span class="kn">import</span> <span class="n">node2vec</span>
+<span class="kn">from</span> <span class="nn">gem.embedding.sdne</span>     <span class="kn">import</span> <span class="n">SDNE</span>
+<span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">ArgumentParser</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39; Sample usage</span>
+<span class="sd">    python run_karate.py -node2vec 1</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Graph Embedding Experiments on Karate Graph&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-node2vec&#39;</span><span class="p">,</span> <span class="s1">&#39;--node2vec&#39;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;whether to run node2vec (default: False)&#39;</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">{}))</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">run_n2v</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;node2vec&quot;</span><span class="p">]))</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">run_n2v</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># File that contains the edges. Format: source target</span>
+    <span class="c1"># Optionally, you can add weights as third column: source target weight</span>
+    <span class="n">edge_f</span> <span class="o">=</span> <span class="s1">&#39;karate.edgelist&#39;</span>
+    <span class="c1"># Specify whether the edges are directed</span>
+    <span class="n">isDirected</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># Load graph</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">graph_util</span><span class="o">.</span><span class="n">loadGraphFromEdgeListTxt</span><span class="p">(</span><span class="n">edge_f</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="n">isDirected</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">to_directed</span><span class="p">()</span>
+
+    <span class="n">models</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Load the models you want to run</span>
+    <span class="n">models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">GraphFactorization</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mi">1</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">4</span><span class="p">,</span> <span class="n">regu</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">data_set</span><span class="o">=</span><span class="s1">&#39;karate&#39;</span><span class="p">))</span>
+    <span class="n">models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">HOPE</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">0.01</span><span class="p">))</span>
+    <span class="n">models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">LaplacianEigenmaps</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">LocallyLinearEmbedding</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">run_n2v</span><span class="p">:</span>
+        <span class="n">models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">node2vec</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">walk_len</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">num_walks</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">con_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">ret_p</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inout_p</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="n">models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">SDNE</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">nu1</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">nu2</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">n_units</span><span class="o">=</span><span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">15</span><span class="p">,],</span> <span class="n">rho</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">xeta</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">n_batch</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                    <span class="n">modelfile</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;enc_model.json&#39;</span><span class="p">,</span> <span class="s1">&#39;dec_model.json&#39;</span><span class="p">],</span>
+                    <span class="n">weightfile</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;enc_weights.hdf5&#39;</span><span class="p">,</span> <span class="s1">&#39;dec_weights.hdf5&#39;</span><span class="p">]))</span>
+
+    <span class="c1"># For each model, learn the embedding and evaluate on graph reconstruction and visualization</span>
+    <span class="k">for</span> <span class="n">embedding</span> <span class="ow">in</span> <span class="n">models</span><span class="p">:</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Num nodes: </span><span class="si">%d</span><span class="s1">, num edges: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">(),</span> <span class="n">G</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">()))</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+        <span class="c1"># Learn embedding - accepts a networkx graph or file with edge list</span>
+        <span class="n">Y</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">embedding</span><span class="o">.</span><span class="n">learn_embedding</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">G</span><span class="p">,</span> <span class="n">edge_f</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">is_weighted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">no_python</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="n">embedding</span><span class="o">.</span><span class="n">_method_name</span><span class="o">+</span><span class="s1">&#39;:</span><span class="se">\n\t</span><span class="s1">Training time: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t1</span><span class="p">))</span>
+        <span class="c1"># Evaluate on graph reconstruction</span>
+        <span class="n">MAP</span><span class="p">,</span> <span class="n">prec_curv</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="n">err_baseline</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">evaluateStaticGraphReconstruction</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">embedding</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="c1">#---------------------------------------------------------------------------------</span>
+        <span class="nb">print</span><span class="p">((</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">MAP: </span><span class="si">{}</span><span class="s2"> </span><span class="se">\t</span><span class="s2"> preccision curve: </span><span class="si">{}</span><span class="se">\n\n\n\n</span><span class="s2">&quot;</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">MAP</span><span class="p">,</span><span class="n">prec_curv</span><span class="p">[:</span><span class="mi">5</span><span class="p">]))</span>
+        <span class="c1">#---------------------------------------------------------------------------------</span>
+        <span class="c1"># Visualize</span>
+        <span class="n">viz</span><span class="o">.</span><span class="n">plot_embedding2D</span><span class="p">(</span><span class="n">embedding</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">(),</span> <span class="n">di_graph</span><span class="o">=</span><span class="n">G</span><span class="p">,</span> <span class="n">node_colors</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Num nodes: 34, num edges: 77
+[Errno 2] No such file or directory: &#39;gem/c_exe/gf&#39;: &#39;gem/c_exe/gf&#39;
+./gf not found. Reverting to Python implementation. Please compile gf, place node2vec in the path and grant executable permission
+		Iter id: 0, Objective: 77.007, f1: 76.9991, f2: 0.00790408
+		Iter id: 10000, Objective: 76.9945, f1: 76.991, f2: 0.00352807
+		Iter id: 20000, Objective: 76.9909, f1: 76.9863, f2: 0.00451933
+		Iter id: 30000, Objective: 76.989, f1: 76.9838, f2: 0.00522236
+		Iter id: 40000, Objective: 76.9882, f1: 76.9826, f2: 0.0055596
+graph_factor_sgd:
+	Training time: 46.538126
+	MAP: 0.6191474659185656 	 preccision curve: [0.0, 0.5, 0.6666666666666666, 0.5, 0.4]
+
+
+
+----------------------------------------------------------------------------------------------------
+</pre></div>
+</div>
+<img alt="_images/T401127_GEM_on_Karateclub_8_1.png" src="_images/T401127_GEM_on_Karateclub_8_1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Num nodes: 34, num edges: 77
+SVD error (low rank): 0.053622
+hope_gsvd:
+	Training time: 0.010363
+	MAP: 0.11624245565569587 	 preccision curve: [1.0, 1.0, 0.6666666666666666, 0.5, 0.4]
+
+
+
+----------------------------------------------------------------------------------------------------
+Embedding dimension greater than 2, use tSNE to reduce it to 2
+</pre></div>
+</div>
+<img alt="_images/T401127_GEM_on_Karateclub_8_3.png" src="_images/T401127_GEM_on_Karateclub_8_3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Num nodes: 34, num edges: 77
+Laplacian matrix recon. error (low rank): 6.293280
+lap_eigmap_svd:
+	Training time: 0.012866
+	MAP: 0.420547084646048 	 preccision curve: [0.0, 0.0, 0.0, 0.25, 0.2]
+
+
+
+----------------------------------------------------------------------------------------------------
+</pre></div>
+</div>
+<img alt="_images/T401127_GEM_on_Karateclub_8_5.png" src="_images/T401127_GEM_on_Karateclub_8_5.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Num nodes: 34, num edges: 77
+lle_svd:
+	Training time: 0.011724
+	MAP: 0.4525345405438006 	 preccision curve: [0.0, 0.0, 0.0, 0.25, 0.2]
+
+
+
+----------------------------------------------------------------------------------------------------
+</pre></div>
+</div>
+<img alt="_images/T401127_GEM_on_Karateclub_8_7.png" src="_images/T401127_GEM_on_Karateclub_8_7.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Num nodes: 34, num edges: 77
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/content/GEM/gem/embedding/sdne_utils.py:71: UserWarning: Update your `Dense` call to the Keras 2 API: `Dense(50, activation=&quot;relu&quot;, kernel_regularizer=&lt;keras.reg...)`
+  W_regularizer=Reg.l1_l2(l1=nu1, l2=nu2))(y[i])
+/content/GEM/gem/embedding/sdne_utils.py:71: UserWarning: Update your `Dense` call to the Keras 2 API: `Dense(15, activation=&quot;relu&quot;, kernel_regularizer=&lt;keras.reg...)`
+  W_regularizer=Reg.l1_l2(l1=nu1, l2=nu2))(y[i])
+/content/GEM/gem/embedding/sdne_utils.py:73: UserWarning: Update your `Dense` call to the Keras 2 API: `Dense(2, activation=&quot;relu&quot;, kernel_regularizer=&lt;keras.reg...)`
+  W_regularizer=Reg.l1_l2(l1=nu1, l2=nu2))(y[K - 1])
+/content/GEM/gem/embedding/sdne_utils.py:75: UserWarning: Update your `Model` call to the Keras 2 API: `Model(inputs=Tensor(&quot;in..., outputs=Tensor(&quot;de...)`
+  encoder = Model(input=x, output=y[K])
+/content/GEM/gem/embedding/sdne_utils.py:90: UserWarning: Update your `Dense` call to the Keras 2 API: `Dense(15, activation=&quot;relu&quot;, kernel_regularizer=&lt;keras.reg...)`
+  W_regularizer=Reg.l1_l2(l1=nu1, l2=nu2))(y_hat[i + 1])
+/content/GEM/gem/embedding/sdne_utils.py:90: UserWarning: Update your `Dense` call to the Keras 2 API: `Dense(50, activation=&quot;relu&quot;, kernel_regularizer=&lt;keras.reg...)`
+  W_regularizer=Reg.l1_l2(l1=nu1, l2=nu2))(y_hat[i + 1])
+/content/GEM/gem/embedding/sdne_utils.py:92: UserWarning: Update your `Dense` call to the Keras 2 API: `Dense(34, activation=&quot;relu&quot;, kernel_regularizer=&lt;keras.reg...)`
+  W_regularizer=Reg.l1_l2(l1=nu1, l2=nu2))(y_hat[1])
+/content/GEM/gem/embedding/sdne_utils.py:96: UserWarning: Update your `Model` call to the Keras 2 API: `Model(inputs=Tensor(&quot;in..., outputs=Tensor(&quot;de...)`
+  decoder = Model(input=y, output=x_hat)
+/content/GEM/gem/embedding/sdne_utils.py:108: UserWarning: Update your `Model` call to the Keras 2 API: `Model(inputs=Tensor(&quot;in..., outputs=[&lt;tf.Tenso...)`
+  autoencoder = Model(input=x, output=[x_hat, y])
+/content/GEM/gem/embedding/sdne.py:115: UserWarning: The `merge` function is deprecated and will be removed after 08/2017. Use instead layers from `keras.layers.merge`, e.g. `add`, `concatenate`, etc.
+  output_shape=lambda L: L[1])
+/usr/local/lib/python3.7/dist-packages/keras/legacy/layers.py:456: UserWarning: The `Merge` layer is deprecated and will be removed after 08/2017. Use instead layers from `keras.layers.merge`, e.g. `add`, `concatenate`, etc.
+  name=name)
+/content/GEM/gem/embedding/sdne.py:118: UserWarning: The `merge` function is deprecated and will be removed after 08/2017. Use instead layers from `keras.layers.merge`, e.g. `add`, `concatenate`, etc.
+  output_shape=lambda L: L[1])
+/content/GEM/gem/embedding/sdne.py:121: UserWarning: The `merge` function is deprecated and will be removed after 08/2017. Use instead layers from `keras.layers.merge`, e.g. `add`, `concatenate`, etc.
+  output_shape=lambda L: L[1])
+/content/GEM/gem/embedding/sdne.py:147: UserWarning: Update your `Model` call to the Keras 2 API: `Model(inputs=Tensor(&quot;x_..., outputs=[&lt;tf.Tenso...)`
+  self._model = Model(input=x_in, output=[x_diff1, x_diff2, y_diff])
+/content/GEM/gem/embedding/sdne.py:160: UserWarning: The semantics of the Keras 2 argument  `steps_per_epoch` is not the same as the Keras 1 argument `samples_per_epoch`. `steps_per_epoch` is the number of batches to draw from the generator at each epoch. Update your method calls accordingly.
+  verbose=1
+/content/GEM/gem/embedding/sdne.py:160: UserWarning: Update your `fit_generator` call to the Keras 2 API: `fit_generator(generator=&lt;generator..., verbose=1, steps_per_epoch=1, epochs=50)`
+  verbose=1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/50
+1/1 [==============================] - 0s - loss: 12.1330 - merge_7_loss: 6.0581 - merge_8_loss: 6.0708 - merge_9_loss: 0.0682
+Epoch 2/50
+1/1 [==============================] - 0s - loss: 10.9185 - merge_7_loss: 5.4773 - merge_8_loss: 5.4371 - merge_9_loss: 0.0870
+Epoch 3/50
+1/1 [==============================] - 0s - loss: 8.8308 - merge_7_loss: 4.3549 - merge_8_loss: 4.4718 - merge_9_loss: 0.1013
+Epoch 4/50
+1/1 [==============================] - 0s - loss: 7.9360 - merge_7_loss: 3.9711 - merge_8_loss: 3.9607 - merge_9_loss: 0.1523
+Epoch 5/50
+1/1 [==============================] - 0s - loss: 8.0556 - merge_7_loss: 4.0007 - merge_8_loss: 4.0508 - merge_9_loss: 0.1761
+Epoch 6/50
+1/1 [==============================] - 0s - loss: 8.1064 - merge_7_loss: 4.0821 - merge_8_loss: 4.0202 - merge_9_loss: 0.1653
+Epoch 7/50
+1/1 [==============================] - 0s - loss: 7.5945 - merge_7_loss: 3.7810 - merge_8_loss: 3.8094 - merge_9_loss: 0.1847
+Epoch 8/50
+1/1 [==============================] - 0s - loss: 7.4507 - merge_7_loss: 3.7095 - merge_8_loss: 3.7371 - merge_9_loss: 0.1755
+Epoch 9/50
+1/1 [==============================] - 0s - loss: 7.3810 - merge_7_loss: 3.6152 - merge_8_loss: 3.7617 - merge_9_loss: 0.1879
+Epoch 10/50
+1/1 [==============================] - 0s - loss: 7.4408 - merge_7_loss: 3.5968 - merge_8_loss: 3.8399 - merge_9_loss: 0.1810
+Epoch 11/50
+1/1 [==============================] - 0s - loss: 7.5103 - merge_7_loss: 3.8140 - merge_8_loss: 3.6922 - merge_9_loss: 0.1923
+Epoch 12/50
+1/1 [==============================] - 0s - loss: 7.2038 - merge_7_loss: 3.5153 - merge_8_loss: 3.6844 - merge_9_loss: 0.2032
+Epoch 13/50
+1/1 [==============================] - 0s - loss: 6.9794 - merge_7_loss: 3.4569 - merge_8_loss: 3.5184 - merge_9_loss: 0.1999
+Epoch 14/50
+1/1 [==============================] - 0s - loss: 6.6399 - merge_7_loss: 3.3003 - merge_8_loss: 3.3356 - merge_9_loss: 0.1938
+Epoch 15/50
+1/1 [==============================] - 0s - loss: 6.4525 - merge_7_loss: 3.1617 - merge_8_loss: 3.2867 - merge_9_loss: 0.2010
+Epoch 16/50
+1/1 [==============================] - 0s - loss: 6.3169 - merge_7_loss: 3.1657 - merge_8_loss: 3.1471 - merge_9_loss: 0.1929
+Epoch 17/50
+1/1 [==============================] - 0s - loss: 6.5748 - merge_7_loss: 3.3138 - merge_8_loss: 3.2568 - merge_9_loss: 0.2064
+Epoch 18/50
+1/1 [==============================] - 0s - loss: 6.4503 - merge_7_loss: 3.2396 - merge_8_loss: 3.2066 - merge_9_loss: 0.2125
+Epoch 19/50
+1/1 [==============================] - 0s - loss: 6.3556 - merge_7_loss: 3.1890 - merge_8_loss: 3.1626 - merge_9_loss: 0.1919
+Epoch 20/50
+1/1 [==============================] - 0s - loss: 5.2230 - merge_7_loss: 2.5691 - merge_8_loss: 2.6498 - merge_9_loss: 0.1859
+Epoch 21/50
+1/1 [==============================] - 0s - loss: 5.0252 - merge_7_loss: 2.5691 - merge_8_loss: 2.4520 - merge_9_loss: 0.1833
+Epoch 22/50
+1/1 [==============================] - 0s - loss: 5.1288 - merge_7_loss: 2.5634 - merge_8_loss: 2.5614 - merge_9_loss: 0.2035
+Epoch 23/50
+1/1 [==============================] - 0s - loss: 4.9313 - merge_7_loss: 2.4796 - merge_8_loss: 2.4476 - merge_9_loss: 0.1933
+Epoch 24/50
+1/1 [==============================] - 0s - loss: 4.4765 - merge_7_loss: 2.1973 - merge_8_loss: 2.2751 - merge_9_loss: 0.2221
+Epoch 25/50
+1/1 [==============================] - 0s - loss: 4.3238 - merge_7_loss: 2.1582 - merge_8_loss: 2.1615 - merge_9_loss: 0.2436
+Epoch 26/50
+1/1 [==============================] - 0s - loss: 4.1798 - merge_7_loss: 2.0935 - merge_8_loss: 2.0822 - merge_9_loss: 0.2562
+Epoch 27/50
+1/1 [==============================] - 0s - loss: 4.0782 - merge_7_loss: 2.0421 - merge_8_loss: 2.0321 - merge_9_loss: 0.2945
+Epoch 28/50
+1/1 [==============================] - 0s - loss: 4.2889 - merge_7_loss: 2.1035 - merge_8_loss: 2.1814 - merge_9_loss: 0.3163
+Epoch 29/50
+1/1 [==============================] - 0s - loss: 4.3672 - merge_7_loss: 2.1934 - merge_8_loss: 2.1698 - merge_9_loss: 0.3065
+Epoch 30/50
+1/1 [==============================] - 0s - loss: 4.1783 - merge_7_loss: 2.0959 - merge_8_loss: 2.0782 - merge_9_loss: 0.4078
+Epoch 31/50
+1/1 [==============================] - 0s - loss: 4.3195 - merge_7_loss: 2.1326 - merge_8_loss: 2.1828 - merge_9_loss: 0.3914
+Epoch 32/50
+1/1 [==============================] - 0s - loss: 4.2551 - merge_7_loss: 2.0767 - merge_8_loss: 2.1742 - merge_9_loss: 0.4238
+Epoch 33/50
+1/1 [==============================] - 0s - loss: 4.0893 - merge_7_loss: 2.0857 - merge_8_loss: 1.9995 - merge_9_loss: 0.5679
+Epoch 34/50
+1/1 [==============================] - 0s - loss: 3.8847 - merge_7_loss: 1.9427 - merge_8_loss: 1.9378 - merge_9_loss: 0.5300
+Epoch 35/50
+1/1 [==============================] - 0s - loss: 4.0011 - merge_7_loss: 2.0433 - merge_8_loss: 1.9537 - merge_9_loss: 0.6036
+Epoch 36/50
+1/1 [==============================] - 0s - loss: 3.9569 - merge_7_loss: 1.9964 - merge_8_loss: 1.9563 - merge_9_loss: 0.6150
+Epoch 37/50
+1/1 [==============================] - 0s - loss: 3.5944 - merge_7_loss: 1.8812 - merge_8_loss: 1.7091 - merge_9_loss: 0.8621
+Epoch 38/50
+1/1 [==============================] - 0s - loss: 3.7394 - merge_7_loss: 1.8781 - merge_8_loss: 1.8571 - merge_9_loss: 0.8816
+Epoch 39/50
+1/1 [==============================] - 0s - loss: 3.8171 - merge_7_loss: 1.8553 - merge_8_loss: 1.9576 - merge_9_loss: 0.7917
+Epoch 40/50
+1/1 [==============================] - 0s - loss: 3.7858 - merge_7_loss: 1.8361 - merge_8_loss: 1.9454 - merge_9_loss: 1.1101
+Epoch 41/50
+1/1 [==============================] - 0s - loss: 3.7459 - merge_7_loss: 1.8462 - merge_8_loss: 1.8955 - merge_9_loss: 1.0691
+Epoch 42/50
+1/1 [==============================] - 0s - loss: 3.8567 - merge_7_loss: 1.9417 - merge_8_loss: 1.9108 - merge_9_loss: 1.0604
+Epoch 43/50
+1/1 [==============================] - 0s - loss: 3.6980 - merge_7_loss: 1.8111 - merge_8_loss: 1.8827 - merge_9_loss: 1.0951
+Epoch 44/50
+1/1 [==============================] - 0s - loss: 3.7687 - merge_7_loss: 1.9253 - merge_8_loss: 1.8392 - merge_9_loss: 1.0935
+Epoch 45/50
+1/1 [==============================] - 0s - loss: 3.8344 - merge_7_loss: 1.9603 - merge_8_loss: 1.8699 - merge_9_loss: 0.9988
+Epoch 46/50
+1/1 [==============================] - 0s - loss: 3.6375 - merge_7_loss: 1.8485 - merge_8_loss: 1.7848 - merge_9_loss: 1.4021
+Epoch 47/50
+1/1 [==============================] - 0s - loss: 3.5957 - merge_7_loss: 1.8143 - merge_8_loss: 1.7771 - merge_9_loss: 1.1572
+Epoch 48/50
+1/1 [==============================] - 0s - loss: 3.5337 - merge_7_loss: 1.7392 - merge_8_loss: 1.7902 - merge_9_loss: 1.3315
+Epoch 49/50
+1/1 [==============================] - 0s - loss: 3.4873 - merge_7_loss: 1.7150 - merge_8_loss: 1.7680 - merge_9_loss: 1.4241
+Epoch 50/50
+1/1 [==============================] - 0s - loss: 3.4027 - merge_7_loss: 1.7065 - merge_8_loss: 1.6919 - merge_9_loss: 1.4855
+sdne:
+	Training time: 2.307054
+	MAP: 0.3312286029446099 	 preccision curve: [0.0, 0.0, 0.0, 0.25, 0.2]
+
+
+
+----------------------------------------------------------------------------------------------------
+</pre></div>
+</div>
+<img alt="_images/T401127_GEM_on_Karateclub_8_11.png" src="_images/T401127_GEM_on_Karateclub_8_11.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!wget -q --show-progress https://github.com/palash1992/GEM/raw/master/examples/data/sbm_node_labels.pickle
+!wget -q --show-progress https://github.com/palash1992/GEM/raw/master/examples/data/sbm.gpickle
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sbm_node_labels.pic 100%[===================&gt;]  60.36K  --.-KB/s    in 0.007s  
+sbm.gpickle         100%[===================&gt;]   1.17M  --.-KB/s    in 0.04s   
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "sparsh-ai/graph-embeddings",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="T926278_Node2vec%2C_Edge2vec%2C_and_Graph2vec.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Node2vec, Edge2vec, and Graph2vec</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="T481518_Struc2vec_on_airports_graph.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Struc2vec on airports graph</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Sparsh A.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

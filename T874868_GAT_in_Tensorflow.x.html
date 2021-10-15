@@ -1,0 +1,1171 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GAT using Tensorflow &#8212; graph-embeddings</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GAT in PyTorch on CORA" href="T249662_GAT_in_PyTorch_on_CORA.html" />
+    <link rel="prev" title="SPLITTER: Learning Node Representations from Multiple Contexts" href="T643979_Learning_Node_Representations_from_Multiple_Social_Contexts.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">graph-embeddings</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="US549467_Graph_embeddings.html">
+   Graph embeddings
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="L742313_Key_developments.html">
+   Key developments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L991141_Random_walk.html">
+   Random walk
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L128493_Skip_gram_model.html">
+   Skip-gram model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L883045_Message_Passing_Neural_Networks.html">
+   Message Passing Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Models
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="C870584_DeepWalk.html">
+   DeepWalk
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C067906_LINE.html">
+   LINE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C662128_SDNE.html">
+   SDNE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C039027_Node2vec.html">
+   Node2vec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C694808_Struc2Vec.html">
+   Struc2Vec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C779816_Splitter.html">
+   Splitter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C652166_CoKE.html">
+   CoKE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C047239_GAT.html">
+   GAT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C110059_GATv2.html">
+   GATv2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C538124_BigGraph.html">
+   BigGraph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C503513_KHGT.html">
+   KHGT
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Tutorials
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="T050508_Introduction_to_Networkx.html">
+   Introduction to Networkx
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T528562_Graph_properties.html">
+   Graph properties
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T118630_Graph_Benchmarks.html">
+   Graph Benchmarks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T984528_Graph_encoder.html">
+   Graph encoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T384270_DeepWalk_in_python.html">
+   DeepWalk in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T382881_DeepWalk_on_Karateclub.html">
+   DeepWalk on Karateclub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T677598_DeepWalk_on_ML_100k.html">
+   DeepWalk on ML-100k
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T862985_LINE_on_Wiki_network.html">
+   LINE on Wiki network
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T186367_Node2vec_from_scratch.html">
+   Node2vec from scratch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T611050_Node2vec_in_PyTorch_Geometric_on_CORA_dataset.html">
+   Node2vec in PyTorch Geometric on CORA dataset
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T815556_Node2vec_on_Karateclub.html">
+   Node2vec on Karateclub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T894941_Node2vec_on_ML_latest_in_Keras.html">
+   Node2vec on ML-latest in Keras
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T926278_Node2vec%2C_Edge2vec%2C_and_Graph2vec.html">
+   Node2vec, Edge2vec, and Graph2vec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T401127_GEM_on_Karateclub.html">
+   GEM on Karateclub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T481518_Struc2vec_on_airports_graph.html">
+   Struc2vec on airports graph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T516490_Learn_embeddings_using_Graph_Networks.html">
+   Learn Embeddings using Graph Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T981902_Shallow_embedding_methods.html">
+   Shallow embedding methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T189677_Graph_embeddings_using_SDNE.html">
+   Graph embeddings using SDNE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T873032_Graph_embeddings_using_Convnet_Stellargraph.html">
+   Graph embeddings using Convnet Stellargraph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T674201_Graph_embeddings.html">
+   Graph ML Embeddings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T457098_KHGT_knowledge_graph_embeddings.html">
+   KHGT knowledge graph embeddings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T403235_Contextualized_Knowledge_Graph_Embedding.html">
+   Contextualized Knowledge Graph Embedding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T643979_Learning_Node_Representations_from_Multiple_Social_Contexts.html">
+   SPLITTER: Learning Node Representations from Multiple Contexts
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   GAT using Tensorflow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T249662_GAT_in_PyTorch_on_CORA.html">
+   GAT in PyTorch on CORA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T336765_FB15K_Graph_Embedding_Learning_in_PyTorch_Big_Graph.html">
+   FB15K Graph Embedding Learning in PyTorch Big Graph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T012114_SAGEConv_graph_embeddings_in_PyG.html">
+   SAGEConv graph embeddings in PyG
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/T874868_GAT_in_Tensorflow.x.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/T874868_GAT_in_Tensorflow.x.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/T874868_GAT_in_Tensorflow.x.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cli-run">
+   CLI Run
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#api-exploration">
+   API Exploration
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cora-dataset">
+     CORA Dataset
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gat">
+     GAT
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#utils">
+     Utils
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#main">
+     Main
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="gat-using-tensorflow">
+<h1>GAT using Tensorflow<a class="headerlink" href="#gat-using-tensorflow" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">tensorflow_version</span> <span class="mf">1.</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TensorFlow 1.x selected.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install -q h5py==2.10.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;TF_CPP_MIN_LOG_LEVEL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;3&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="cli-run">
+<h2>CLI Run<a class="headerlink" href="#cli-run" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!git clone https://github.com/shenweichen/GraphNeuralNetwork.git
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">cd</span> <span class="n">GraphNeuralNetwork</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/content/GraphNeuralNetwork
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!cd gnn &amp;&amp; python run_gat_cora.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dataset has 2708 nodes, 5429 edges, 1433 features.
+WARNING:tensorflow:From /tensorflow-1.15.2/python3.7/tensorflow_core/python/ops/resource_variable_ops.py:1630: calling BaseResourceVariable.__init__ (from tensorflow.python.ops.resource_variable_ops) with constraint is deprecated and will be removed in a future version.
+Instructions for updating:
+If using Keras pass *_constraint arguments to layers.
+WARNING:tensorflow:Entity &lt;bound method GATLayer.call of &lt;gat.GATLayer object at 0x7ff6bd25ad90&gt;&gt; could not be transformed and will be executed as-is. Please report this to the AutoGraph team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output. Cause: Bad argument number for Name: 3, expecting 4
+WARNING:tensorflow:Large dropout rate: 0.6 (&gt;0.5). In TensorFlow 2.x, dropout() uses dropout rate instead of keep_prob. Please ensure that this is intended.
+WARNING:tensorflow:From /content/GraphNeuralNetwork/gnn/gat.py:82: calling reduce_sum_v1 (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+WARNING:tensorflow:From /content/GraphNeuralNetwork/gnn/gat.py:93: calling softmax (from tensorflow.python.ops.nn_ops) with dim is deprecated and will be removed in a future version.
+Instructions for updating:
+dim is deprecated, use axis instead
+WARNING:tensorflow:Large dropout rate: 0.6 (&gt;0.5). In TensorFlow 2.x, dropout() uses dropout rate instead of keep_prob. Please ensure that this is intended.
+WARNING:tensorflow:Large dropout rate: 0.6 (&gt;0.5). In TensorFlow 2.x, dropout() uses dropout rate instead of keep_prob. Please ensure that this is intended.
+WARNING:tensorflow:Entity &lt;bound method GATLayer.call of &lt;gat.GATLayer object at 0x7ff6bc52ba10&gt;&gt; could not be transformed and will be executed as-is. Please report this to the AutoGraph team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output. Cause: Bad argument number for Name: 3, expecting 4
+WARNING:tensorflow:Large dropout rate: 0.6 (&gt;0.5). In TensorFlow 2.x, dropout() uses dropout rate instead of keep_prob. Please ensure that this is intended.
+WARNING:tensorflow:Large dropout rate: 0.6 (&gt;0.5). In TensorFlow 2.x, dropout() uses dropout rate instead of keep_prob. Please ensure that this is intended.
+start training
+Train on 2708 samples, validate on 2708 samples
+2021-10-11 17:05:57.286617: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2021-10-11 17:05:57.309128: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:983] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-11 17:05:57.309974: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Found device 0 with properties: 
+name: Tesla K80 major: 3 minor: 7 memoryClockRate(GHz): 0.8235
+pciBusID: 0000:00:04.0
+2021-10-11 17:05:57.310370: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.1
+2021-10-11 17:05:57.312092: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10
+2021-10-11 17:05:57.313126: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcufft.so.10
+2021-10-11 17:05:57.313523: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcurand.so.10
+2021-10-11 17:05:57.315344: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusolver.so.10
+2021-10-11 17:05:57.316239: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusparse.so.10
+2021-10-11 17:05:57.319748: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudnn.so.7
+2021-10-11 17:05:57.319913: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:983] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-11 17:05:57.320764: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:983] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-11 17:05:57.321542: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1767] Adding visible gpu devices: 0
+2021-10-11 17:05:57.327387: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2299995000 Hz
+2021-10-11 17:05:57.327694: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5628b351c680 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2021-10-11 17:05:57.327734: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2021-10-11 17:05:57.442324: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:983] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-11 17:05:57.443204: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5628b351c840 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2021-10-11 17:05:57.443253: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Tesla K80, Compute Capability 3.7
+2021-10-11 17:05:57.443487: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:983] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-11 17:05:57.444227: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Found device 0 with properties: 
+name: Tesla K80 major: 3 minor: 7 memoryClockRate(GHz): 0.8235
+pciBusID: 0000:00:04.0
+2021-10-11 17:05:57.444334: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.1
+2021-10-11 17:05:57.444395: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10
+2021-10-11 17:05:57.444450: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcufft.so.10
+2021-10-11 17:05:57.444495: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcurand.so.10
+2021-10-11 17:05:57.444540: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusolver.so.10
+2021-10-11 17:05:57.444594: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusparse.so.10
+2021-10-11 17:05:57.444644: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudnn.so.7
+2021-10-11 17:05:57.444747: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:983] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-11 17:05:57.445536: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:983] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-11 17:05:57.446217: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1767] Adding visible gpu devices: 0
+2021-10-11 17:05:57.446293: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.1
+2021-10-11 17:05:57.447880: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1180] Device interconnect StreamExecutor with strength 1 edge matrix:
+2021-10-11 17:05:57.447917: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1186]      0 
+2021-10-11 17:05:57.447939: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1199] 0:   N 
+2021-10-11 17:05:57.448089: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:983] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-11 17:05:57.448932: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:983] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-11 17:05:57.449675: W tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:39] Overriding allow_growth setting because the TF_FORCE_GPU_ALLOW_GROWTH environment variable is set. Original config value was 0.
+2021-10-11 17:05:57.449778: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1325] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 10813 MB memory) -&gt; physical GPU (device: 0, name: Tesla K80, pci bus id: 0000:00:04.0, compute capability: 3.7)
+Epoch 1/10
+2021-10-11 17:05:58.829413: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10
+2708/2708 - 1s - loss: 0.1397 - weighted_categorical_crossentropy: 1.9421 - weighted_acc: 0.1786 - val_loss: 0.3927 - val_weighted_categorical_crossentropy: 1.9451 - val_weighted_acc: 0.1380
+Epoch 2/10
+2708/2708 - 0s - loss: 0.1345 - weighted_categorical_crossentropy: 1.9524 - weighted_acc: 0.0929 - val_loss: 0.3873 - val_weighted_categorical_crossentropy: 1.9439 - val_weighted_acc: 0.1360
+Epoch 3/10
+2708/2708 - 0s - loss: 0.1288 - weighted_categorical_crossentropy: 1.9432 - weighted_acc: 0.1929 - val_loss: 0.3831 - val_weighted_categorical_crossentropy: 1.9451 - val_weighted_acc: 0.1220
+Epoch 4/10
+2708/2708 - 0s - loss: 0.1248 - weighted_categorical_crossentropy: 1.9511 - weighted_acc: 0.1643 - val_loss: 0.3792 - val_weighted_categorical_crossentropy: 1.9445 - val_weighted_acc: 0.1420
+Epoch 5/10
+2708/2708 - 0s - loss: 0.1207 - weighted_categorical_crossentropy: 1.9450 - weighted_acc: 0.1143 - val_loss: 0.3757 - val_weighted_categorical_crossentropy: 1.9421 - val_weighted_acc: 0.1540
+Epoch 6/10
+2708/2708 - 0s - loss: 0.1176 - weighted_categorical_crossentropy: 1.9439 - weighted_acc: 0.1714 - val_loss: 0.3730 - val_weighted_categorical_crossentropy: 1.9413 - val_weighted_acc: 0.1980
+Epoch 7/10
+2708/2708 - 0s - loss: 0.1154 - weighted_categorical_crossentropy: 1.9493 - weighted_acc: 0.1643 - val_loss: 0.3709 - val_weighted_categorical_crossentropy: 1.9405 - val_weighted_acc: 0.3160
+Epoch 8/10
+2708/2708 - 0s - loss: 0.1125 - weighted_categorical_crossentropy: 1.9326 - weighted_acc: 0.2286 - val_loss: 0.3693 - val_weighted_categorical_crossentropy: 1.9400 - val_weighted_acc: 0.2560
+Epoch 9/10
+2708/2708 - 0s - loss: 0.1110 - weighted_categorical_crossentropy: 1.9314 - weighted_acc: 0.2357 - val_loss: 0.3681 - val_weighted_categorical_crossentropy: 1.9397 - val_weighted_acc: 0.2000
+Epoch 10/10
+2708/2708 - 0s - loss: 0.1100 - weighted_categorical_crossentropy: 1.9339 - weighted_acc: 0.2000 - val_loss: 0.3673 - val_weighted_categorical_crossentropy: 1.9396 - val_weighted_acc: 0.1840
+2708/2708 [==============================] - 0s 17us/sample - loss: 0.7249 - weighted_categorical_crossentropy: 1.9383 - weighted_acc: 0.1960
+Done.
+Test loss: 0.7249464392662048
+Test weighted_loss: 1.9382561445236206
+Test accuracy: 0.19599999487400055
+&lt;Figure size 640x480 with 1 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="api-exploration">
+<h2>API Exploration<a class="headerlink" href="#api-exploration" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cora-dataset">
+<h3>CORA Dataset<a class="headerlink" href="#cora-dataset" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!mkdir -p /content/data/cora
+%cd /content/data/cora
+!wget -q --show-progress https://github.com/shenweichen/GraphNeuralNetwork/raw/master/data/cora/cora.content
+!wget -q --show-progress https://github.com/shenweichen/GraphNeuralNetwork/raw/master/data/cora/cora.features
+!wget -q --show-progress https://github.com/shenweichen/GraphNeuralNetwork/raw/master/data/cora/cora_edgelist.txt
+!wget -q --show-progress https://github.com/shenweichen/GraphNeuralNetwork/raw/master/data/cora/cora_labels.txt
+!wget -q --show-progress https://github.com/shenweichen/GraphNeuralNetwork/raw/master/data/cora/cora.cites
+%cd /content
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/content/data/cora
+cora.content        100%[===================&gt;]   7.46M  --.-KB/s    in 0.1s    
+cora.features       100%[===================&gt;]  14.81M  98.1MB/s    in 0.2s    
+cora_edgelist.txt   100%[===================&gt;]  97.30K  --.-KB/s    in 0.01s   
+cora_labels.txt     100%[===================&gt;]  17.43K  --.-KB/s    in 0s      
+cora.cites          100%[===================&gt;]  68.29K  --.-KB/s    in 0.01s   
+/content
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="gat">
+<h3>GAT<a class="headerlink" href="#gat" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">tensorflow.python.keras</span> <span class="kn">import</span> <span class="n">backend</span> <span class="k">as</span> <span class="n">K</span>
+<span class="kn">from</span> <span class="nn">tensorflow.python.keras.initializers</span> <span class="kn">import</span> <span class="n">Zeros</span>
+<span class="kn">from</span> <span class="nn">tensorflow.python.keras.layers</span> <span class="kn">import</span> <span class="n">Layer</span><span class="p">,</span> <span class="n">Dropout</span><span class="p">,</span><span class="n">Input</span>
+<span class="kn">from</span> <span class="nn">tensorflow.python.keras.regularizers</span> <span class="kn">import</span> <span class="n">l2</span>
+<span class="kn">from</span> <span class="nn">tensorflow.python.keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
+
+
+<span class="k">class</span> <span class="nc">GATLayer</span><span class="p">(</span><span class="n">Layer</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">att_embedding_size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">head_num</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">dropout_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">l2_reg</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span><span class="p">,</span>
+                 <span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;concat&#39;</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">head_num</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;head_num must be a int &gt; 0&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">att_embedding_size</span> <span class="o">=</span> <span class="n">att_embedding_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head_num</span> <span class="o">=</span> <span class="n">head_num</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout_rate</span> <span class="o">=</span> <span class="n">dropout_rate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">l2_reg</span> <span class="o">=</span> <span class="n">l2_reg</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="n">activation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">act</span> <span class="o">=</span> <span class="n">activation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reduction</span> <span class="o">=</span> <span class="n">reduction</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_bias</span> <span class="o">=</span> <span class="n">use_bias</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GATLayer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">):</span>
+
+        <span class="n">X</span><span class="p">,</span> <span class="n">A</span> <span class="o">=</span> <span class="n">input_shape</span>
+        <span class="n">embedding_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_weight</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="n">embedding_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">att_embedding_size</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">head_num</span><span class="p">],</span>
+                                      <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
+                                      <span class="n">regularizer</span><span class="o">=</span><span class="n">l2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">l2_reg</span><span class="p">),</span>
+                                      <span class="n">initializer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">initializers</span><span class="o">.</span><span class="n">glorot_uniform</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">att_self_weight</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_weight</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;att_self_weight&#39;</span><span class="p">,</span>
+                                               <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">head_num</span><span class="p">,</span>
+                                                      <span class="bp">self</span><span class="o">.</span><span class="n">att_embedding_size</span><span class="p">],</span>
+                                               <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
+                                               <span class="n">regularizer</span><span class="o">=</span><span class="n">l2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">l2_reg</span><span class="p">),</span>
+                                               <span class="n">initializer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">initializers</span><span class="o">.</span><span class="n">glorot_uniform</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">att_neighs_weight</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_weight</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;att_neighs_weight&#39;</span><span class="p">,</span>
+                                                 <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">head_num</span><span class="p">,</span>
+                                                        <span class="bp">self</span><span class="o">.</span><span class="n">att_embedding_size</span><span class="p">],</span>
+                                                 <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
+                                                 <span class="n">regularizer</span><span class="o">=</span><span class="n">l2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">l2_reg</span><span class="p">),</span>
+                                                 <span class="n">initializer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">initializers</span><span class="o">.</span><span class="n">glorot_uniform</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_bias</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bias_weight</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_weight</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;bias&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">head_num</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">att_embedding_size</span><span class="p">],</span>
+                                               <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
+                                               <span class="n">initializer</span><span class="o">=</span><span class="n">Zeros</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_dropout</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dropout_rate</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feat_dropout</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dropout_rate</span><span class="p">,</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">att_dropout</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dropout_rate</span><span class="p">,</span> <span class="p">)</span>
+        <span class="c1"># Be sure to call this somewhere!</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GATLayer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">input_shape</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="n">X</span><span class="p">,</span> <span class="n">A</span> <span class="o">=</span> <span class="n">inputs</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_dropout</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  <span class="c1"># N * D</span>
+        <span class="c1"># A = self.att_dropout(A, training=training)</span>
+        <span class="k">if</span> <span class="n">K</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Unexpected inputs dimensions </span><span class="si">%d</span><span class="s2">, expect to be 2 dimensions&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">X</span><span class="p">)))</span>
+
+        <span class="n">features</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="p">)</span>  <span class="c1"># None F&#39;*head_num</span>
+        <span class="n">features</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
+            <span class="n">features</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">head_num</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">att_embedding_size</span><span class="p">])</span>  <span class="c1"># None head_num F&#39;</span>
+
+        <span class="c1"># attn_for_self = K.dot(features, attention_kernel[0])  # (N x 1), [a_1]^T [Wh_i]</span>
+        <span class="c1"># attn_for_neighs = K.dot(features, attention_kernel[1])  # (N x 1), [a_2]^T [Wh_j]</span>
+
+        <span class="c1"># head_num None F D --- &gt; head_num None(F) D</span>
+
+        <span class="c1"># querys = tf.stack(tf.split(querys, self.head_num, axis=1))</span>
+        <span class="c1"># keys = tf.stack(tf.split(keys, self.head_num, axis=1))#[?,1,1433,64]</span>
+
+        <span class="c1"># features = tf.stack(tf.split(features, self.head_num, axis=1))  # head_num None F&#39;</span>
+        <span class="n">attn_for_self</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span>
+            <span class="n">features</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">att_self_weight</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keep_dims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># None head_num 1</span>
+        <span class="n">attn_for_neighs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span>
+            <span class="n">features</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">att_neighs_weight</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keep_dims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">dense</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span>
+            <span class="n">attn_for_self</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">attn_for_neighs</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+        <span class="n">dense</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">leaky_relu</span><span class="p">(</span><span class="n">dense</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10e9</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">A</span><span class="p">)</span>
+        <span class="n">dense</span> <span class="o">+=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># [?,8,8], [1,?,2708]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">normalized_att_scores</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span>
+            <span class="n">dense</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="p">)</span>  <span class="c1"># head_num None(F) None(F)</span>
+
+        <span class="n">features</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">feat_dropout</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">normalized_att_scores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">att_dropout</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">normalized_att_scores</span><span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">normalized_att_scores</span><span class="p">,</span>
+                           <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>  <span class="c1"># head_num None F D   [8,2708,8] [8,2708,3]</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>  <span class="c1"># None head_num attsize</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_bias</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias_weight</span>
+
+        <span class="c1"># head_num Node embeding_size</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduction</span> <span class="o">==</span> <span class="s2">&quot;concat&quot;</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+                <span class="n">tf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">head_num</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">act</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+        <span class="n">result</span><span class="o">.</span><span class="n">_uses_learning_phase</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="nf">compute_output_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduction</span> <span class="o">==</span> <span class="s2">&quot;concat&quot;</span><span class="p">:</span>
+
+            <span class="k">return</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">att_embedding_size</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">head_num</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">att_embedding_size</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;att_embedding_size&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">att_embedding_size</span><span class="p">,</span> <span class="s1">&#39;head_num&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">head_num</span><span class="p">,</span> <span class="s1">&#39;use_res&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_res</span><span class="p">,</span>
+                  <span class="s1">&#39;seed&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="p">}</span>
+        <span class="n">base_config</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">GATLayer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_config</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">base_config</span><span class="o">.</span><span class="n">items</span><span class="p">())</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+
+
+
+
+<span class="k">def</span> <span class="nf">GAT</span><span class="p">(</span><span class="n">adj_dim</span><span class="p">,</span><span class="n">feature_dim</span><span class="p">,</span><span class="n">num_class</span><span class="p">,</span><span class="n">num_layers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">n_attn_heads</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span><span class="n">att_embedding_size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">dropout_rate</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">l2_reg</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">use_bias</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">X_in</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">feature_dim</span><span class="p">,))</span>
+    <span class="n">A_in</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">adj_dim</span><span class="p">,))</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">X_in</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">GATLayer</span><span class="p">(</span><span class="n">att_embedding_size</span><span class="o">=</span><span class="n">att_embedding_size</span><span class="p">,</span> <span class="n">head_num</span><span class="o">=</span><span class="n">n_attn_heads</span><span class="p">,</span> <span class="n">dropout_rate</span><span class="o">=</span><span class="n">dropout_rate</span><span class="p">,</span> <span class="n">l2_reg</span><span class="o">=</span><span class="n">l2_reg</span><span class="p">,</span>
+                                     <span class="n">activation</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">elu</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="n">use_bias</span><span class="p">,</span> <span class="p">)([</span><span class="n">h</span><span class="p">,</span> <span class="n">A_in</span><span class="p">])</span>
+
+    <span class="n">h</span> <span class="o">=</span> <span class="n">GATLayer</span><span class="p">(</span><span class="n">att_embedding_size</span><span class="o">=</span><span class="n">num_class</span><span class="p">,</span> <span class="n">head_num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dropout_rate</span><span class="o">=</span><span class="n">dropout_rate</span><span class="p">,</span> <span class="n">l2_reg</span><span class="o">=</span><span class="n">l2_reg</span><span class="p">,</span>
+                                 <span class="n">activation</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="n">use_bias</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)([</span><span class="n">h</span><span class="p">,</span> <span class="n">A_in</span><span class="p">])</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">X_in</span><span class="p">,</span> <span class="n">A_in</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="n">h</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="utils">
+<h3>Utils<a class="headerlink" href="#utils" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">TSNE</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pickle</span> <span class="k">as</span> <span class="nn">pkl</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+
+<span class="k">def</span> <span class="nf">get_splits</span><span class="p">(</span><span class="n">y</span><span class="p">,):</span>
+    <span class="n">idx_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+    <span class="c1"># train_val, idx_test = train_test_split(idx_list, test_size=0.2, random_state=1024)  # 1000</span>
+    <span class="c1"># idx_train, idx_val = train_test_split(train_val, test_size=0.2, random_state=1024)  # 500</span>
+
+    <span class="n">idx_train</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">label_count</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">label_count</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+            <span class="n">idx_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">label_count</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_count</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="n">idx_val_test</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">idx_list</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">idx_train</span><span class="p">))</span>
+    <span class="n">idx_val</span> <span class="o">=</span> <span class="n">idx_val_test</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">500</span><span class="p">]</span>
+    <span class="n">idx_test</span> <span class="o">=</span> <span class="n">idx_val_test</span><span class="p">[</span><span class="mi">500</span><span class="p">:</span><span class="mi">1500</span><span class="p">]</span>
+
+
+    <span class="n">y_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">y_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">y_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">y_train</span><span class="p">[</span><span class="n">idx_train</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">idx_train</span><span class="p">]</span>
+    <span class="n">y_val</span><span class="p">[</span><span class="n">idx_val</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">idx_val</span><span class="p">]</span>
+    <span class="n">y_test</span><span class="p">[</span><span class="n">idx_test</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">idx_test</span><span class="p">]</span>
+    <span class="n">train_mask</span> <span class="o">=</span> <span class="n">sample_mask</span><span class="p">(</span><span class="n">idx_train</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">val_mask</span> <span class="o">=</span> <span class="n">sample_mask</span><span class="p">(</span><span class="n">idx_val</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">test_mask</span> <span class="o">=</span> <span class="n">sample_mask</span><span class="p">(</span><span class="n">idx_test</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span><span class="n">train_mask</span><span class="p">,</span> <span class="n">val_mask</span><span class="p">,</span> <span class="n">test_mask</span>
+
+
+<span class="k">def</span> <span class="nf">load_data_v1</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;cora&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;data/cora/&quot;</span><span class="p">,):</span>
+
+    <span class="n">idx_features_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2">.content&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">dataset</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">csr_matrix</span><span class="p">(</span><span class="n">idx_features_labels</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">onehot_labels</span> <span class="o">=</span> <span class="n">encode_onehot</span><span class="p">(</span><span class="n">idx_features_labels</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># build graph</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">idx_features_labels</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">idx_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">j</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">idx</span><span class="p">)}</span>
+    <span class="n">edges_unordered</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2">.cites&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">dataset</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">idx_map</span><span class="o">.</span><span class="n">get</span><span class="p">,</span> <span class="n">edges_unordered</span><span class="o">.</span><span class="n">flatten</span><span class="p">())),</span>
+                     <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">edges_unordered</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">adj</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">coo_matrix</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">edges</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="p">(</span><span class="n">edges</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">edges</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])),</span>
+                        <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">onehot_labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">onehot_labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+    <span class="c1"># build symmetric adjacency matrix</span>
+    <span class="c1"># adj = adj + adj.T.multiply(adj.T &gt; adj) - adj.multiply(adj.T &gt; adj)</span>
+    <span class="n">adj</span> <span class="o">=</span> <span class="n">convert_symmetric</span><span class="p">(</span><span class="n">adj</span><span class="p">,</span> <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dataset has </span><span class="si">{}</span><span class="s1"> nodes, </span><span class="si">{}</span><span class="s1"> edges, </span><span class="si">{}</span><span class="s1"> features.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">adj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">edges</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="n">y_train</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">train_mask</span><span class="p">,</span> <span class="n">val_mask</span><span class="p">,</span> <span class="n">test_mask</span> <span class="o">=</span> <span class="n">get_splits</span><span class="p">(</span><span class="n">onehot_labels</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">adj</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">train_mask</span><span class="p">,</span> <span class="n">val_mask</span><span class="p">,</span> <span class="n">test_mask</span>
+
+
+
+<span class="k">def</span> <span class="nf">parse_index_file</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Parse index file.&quot;&quot;&quot;</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="n">index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="n">index</span>
+
+<span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">dataset_str</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Load data.&quot;&quot;&quot;</span>
+    <span class="n">FILE_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+    <span class="n">DIR_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">FILE_PATH</span><span class="p">)</span>
+    <span class="n">DATA_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR_PATH</span><span class="p">,</span> <span class="s1">&#39;data/&#39;</span><span class="p">)</span>
+    <span class="n">DATA_PATH</span> <span class="o">=</span> <span class="s2">&quot;data/cora/&quot;</span>
+
+    <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;tx&#39;</span><span class="p">,</span> <span class="s1">&#39;ty&#39;</span><span class="p">,</span> <span class="s1">&#39;allx&#39;</span><span class="p">,</span> <span class="s1">&#39;ally&#39;</span><span class="p">,</span> <span class="s1">&#39;graph&#39;</span><span class="p">]</span>
+    <span class="n">objects</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">names</span><span class="p">)):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">ind.</span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">DATA_PATH</span><span class="p">,</span> <span class="n">dataset_str</span><span class="p">,</span> <span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="n">objects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pkl</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin1&#39;</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">objects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pkl</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">tx</span><span class="p">,</span> <span class="n">ty</span><span class="p">,</span> <span class="n">allx</span><span class="p">,</span> <span class="n">ally</span><span class="p">,</span> <span class="n">graph</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">objects</span><span class="p">)</span>
+    <span class="n">test_idx_reorder</span> <span class="o">=</span> <span class="n">parse_index_file</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">ind.</span><span class="si">{}</span><span class="s2">.test.index&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">DATA_PATH</span><span class="p">,</span> <span class="n">dataset_str</span><span class="p">))</span>
+    <span class="n">test_idx_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">test_idx_reorder</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">dataset_str</span> <span class="o">==</span> <span class="s1">&#39;citeseer&#39;</span><span class="p">:</span>
+        <span class="c1"># Fix citeseer dataset (there are some isolated nodes in the graph)</span>
+        <span class="c1"># Find isolated nodes, add them as zero-vecs into the right position</span>
+        <span class="n">test_idx_range_full</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">test_idx_reorder</span><span class="p">),</span>
+                                    <span class="nb">max</span><span class="p">(</span><span class="n">test_idx_reorder</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">tx_extended</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lil_matrix</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">test_idx_range_full</span><span class="p">),</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">tx_extended</span><span class="p">[</span><span class="n">test_idx_range</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">test_idx_range</span><span class="p">),</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">tx</span>
+        <span class="n">tx</span> <span class="o">=</span> <span class="n">tx_extended</span>
+        <span class="n">ty_extended</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">test_idx_range_full</span><span class="p">),</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">ty_extended</span><span class="p">[</span><span class="n">test_idx_range</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">test_idx_range</span><span class="p">),</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">ty</span>
+        <span class="n">ty</span> <span class="o">=</span> <span class="n">ty_extended</span>
+
+    <span class="n">features</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">allx</span><span class="p">,</span> <span class="n">tx</span><span class="p">))</span><span class="o">.</span><span class="n">tolil</span><span class="p">()</span>
+    <span class="n">features</span><span class="p">[</span><span class="n">test_idx_reorder</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">test_idx_range</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">adj</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">from_dict_of_lists</span><span class="p">(</span><span class="n">graph</span><span class="p">))</span>
+
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">ally</span><span class="p">,</span> <span class="n">ty</span><span class="p">))</span>
+    <span class="n">labels</span><span class="p">[</span><span class="n">test_idx_reorder</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">test_idx_range</span><span class="p">,</span> <span class="p">:]</span>
+
+    <span class="n">idx_test</span> <span class="o">=</span> <span class="n">test_idx_range</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">idx_train</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+    <span class="n">idx_val</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="mi">500</span><span class="p">)</span>
+
+    <span class="n">train_mask</span> <span class="o">=</span> <span class="n">sample_mask</span><span class="p">(</span><span class="n">idx_train</span><span class="p">,</span> <span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">val_mask</span> <span class="o">=</span> <span class="n">sample_mask</span><span class="p">(</span><span class="n">idx_val</span><span class="p">,</span> <span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">test_mask</span> <span class="o">=</span> <span class="n">sample_mask</span><span class="p">(</span><span class="n">idx_test</span><span class="p">,</span> <span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">y_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">y_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">y_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">y_train</span><span class="p">[</span><span class="n">train_mask</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">train_mask</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">y_val</span><span class="p">[</span><span class="n">val_mask</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">val_mask</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">y_test</span><span class="p">[</span><span class="n">test_mask</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">test_mask</span><span class="p">,</span> <span class="p">:]</span>
+
+
+    <span class="k">return</span> <span class="n">sp</span><span class="o">.</span><span class="n">csr_matrix</span><span class="p">(</span><span class="n">adj</span><span class="p">),</span> <span class="n">features</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">train_mask</span><span class="p">,</span> <span class="n">val_mask</span><span class="p">,</span> <span class="n">test_mask</span>
+
+
+
+<span class="k">def</span> <span class="nf">sample_mask</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+    <span class="n">mask</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">convert_symmetric</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">sparse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">sparse</span><span class="p">:</span>
+        <span class="n">X</span> <span class="o">+=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">sp</span><span class="o">.</span><span class="n">diags</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">diagonal</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">X</span> <span class="o">+=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">diagonal</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">X</span>
+
+
+<span class="k">def</span> <span class="nf">encode_onehot</span><span class="p">(</span><span class="n">labels</span><span class="p">):</span>
+    <span class="n">classes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+    <span class="n">classes_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">))[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">classes</span><span class="p">)}</span>
+    <span class="n">labels_onehot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">classes_dict</span><span class="o">.</span><span class="n">get</span><span class="p">,</span> <span class="n">labels</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">labels_onehot</span>
+
+
+<span class="k">def</span> <span class="nf">normalize_adj</span><span class="p">(</span><span class="n">adj</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">symmetric</span><span class="p">:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diags</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">adj</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">a_norm</span> <span class="o">=</span> <span class="n">adj</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diags</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">adj</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">a_norm</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">adj</span><span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">a_norm</span>
+
+
+<span class="k">def</span> <span class="nf">preprocess_adj</span><span class="p">(</span><span class="n">adj</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">adj</span> <span class="o">=</span> <span class="n">adj</span> <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">adj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">adj</span> <span class="o">=</span> <span class="n">normalize_adj</span><span class="p">(</span><span class="n">adj</span><span class="p">,</span> <span class="n">symmetric</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">adj</span>
+
+
+<span class="k">def</span> <span class="nf">plot_embeddings</span><span class="p">(</span><span class="n">embeddings</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+
+    <span class="n">emb_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">X</span><span class="p">:</span>
+        <span class="n">emb_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">embeddings</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+    <span class="n">emb_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">emb_list</span><span class="p">)</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">TSNE</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">node_pos</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">emb_list</span><span class="p">)</span>
+
+    <span class="n">color_idx</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
+        <span class="n">color_idx</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">][:],</span> <span class="p">[])</span>
+        <span class="n">color_idx</span><span class="p">[</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">][:]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">color_idx</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">node_pos</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">node_pos</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">preprocess_features</span><span class="p">(</span><span class="n">features</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Row-normalize feature matrix and convert to tuple representation&quot;&quot;&quot;</span>
+    <span class="n">rowsum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">r_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rowsum</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="n">r_inv</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">r_inv</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="n">r_mat_inv</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diags</span><span class="p">(</span><span class="n">r_inv</span><span class="p">)</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">r_mat_inv</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">features</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="main">
+<h3>Main<a class="headerlink" href="#main" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span>  <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">tensorflow.python.keras.callbacks</span> <span class="kn">import</span> <span class="n">ModelCheckpoint</span>
+<span class="kn">from</span> <span class="nn">tensorflow.python.keras.layers</span> <span class="kn">import</span> <span class="n">Lambda</span>
+<span class="kn">from</span> <span class="nn">tensorflow.python.keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">tensorflow.python.keras.optimizers</span> <span class="kn">import</span> <span class="n">Adam</span>
+
+<span class="c1"># from gat import GAT</span>
+<span class="c1"># from utils import plot_embeddings,load_data_v1</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># Read data</span>
+
+    <span class="n">FEATURE_LESS</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="n">A</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">train_mask</span><span class="p">,</span> <span class="n">val_mask</span><span class="p">,</span> <span class="n">test_mask</span> <span class="o">=</span> <span class="n">load_data_v1</span><span class="p">(</span>
+        <span class="s1">&#39;cora&#39;</span><span class="p">)</span>
+
+    <span class="n">A</span> <span class="o">=</span> <span class="n">A</span> <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">features</span> <span class="o">/=</span> <span class="n">features</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">GAT</span><span class="p">(</span><span class="n">adj_dim</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">feature_dim</span><span class="o">=</span><span class="n">features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">num_class</span><span class="o">=</span><span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">num_layers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                <span class="n">n_attn_heads</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">att_embedding_size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+                <span class="n">dropout_rate</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">l2_reg</span><span class="o">=</span><span class="mf">2.5e-4</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">Adam</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.005</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+                  <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span>
+                  <span class="n">weighted_metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="s1">&#39;acc&#39;</span><span class="p">])</span>
+
+    <span class="n">model_input</span> <span class="o">=</span> <span class="p">[</span><span class="n">features</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">toarray</span><span class="p">()]</span>
+
+    <span class="n">val_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">model_input</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="n">val_mask</span><span class="p">)</span>
+
+    <span class="n">mc_callback</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="s1">&#39;./best_model.h5&#39;</span><span class="p">,</span>
+                                  <span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_weighted_categorical_crossentropy&#39;</span><span class="p">,</span>
+                                  <span class="n">save_best_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                  <span class="n">save_weights_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;start training&quot;</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">model_input</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">train_mask</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="n">val_data</span><span class="p">,</span>
+              <span class="n">batch_size</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+              <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">mc_callback</span><span class="p">])</span>
+    <span class="c1"># test</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">load_weights</span><span class="p">(</span><span class="s1">&#39;./best_model.h5&#39;</span><span class="p">)</span>
+    <span class="n">eval_results</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span>
+        <span class="n">model_input</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">test_mask</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Done.</span><span class="se">\n</span><span class="s1">&#39;</span>
+          <span class="s1">&#39;Test loss: </span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span>
+          <span class="s1">&#39;Test weighted_loss: </span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span>
+          <span class="s1">&#39;Test accuracy: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">eval_results</span><span class="p">))</span>
+
+    <span class="n">gcn_embedding</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">embedding_model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">input</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">Lambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">gcn_embedding</span><span class="o">.</span><span class="n">output</span><span class="p">)(</span><span class="n">model</span><span class="o">.</span><span class="n">input</span><span class="p">))</span>
+    <span class="n">embedding_weights</span> <span class="o">=</span> <span class="n">embedding_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">model_input</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2">.content&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;data/cora/&#39;</span><span class="p">,</span> <span class="s1">&#39;cora&#39;</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="nb">str</span><span class="p">))[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">plot_embeddings</span><span class="p">(</span><span class="n">embedding_weights</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 2/5
+2708/2708 - 2s - loss: 0.1326 - weighted_categorical_crossentropy: 1.9456 - weighted_acc: 0.1643 - val_loss: 0.3845 - val_weighted_categorical_crossentropy: 1.9364 - val_weighted_acc: 0.3920
+Epoch 3/5
+2708/2708 - 2s - loss: 0.1275 - weighted_categorical_crossentropy: 1.9457 - weighted_acc: 0.1000 - val_loss: 0.3801 - val_weighted_categorical_crossentropy: 1.9369 - val_weighted_acc: 0.3940
+Epoch 4/5
+2708/2708 - 2s - loss: 0.1229 - weighted_categorical_crossentropy: 1.9419 - weighted_acc: 0.1571 - val_loss: 0.3763 - val_weighted_categorical_crossentropy: 1.9364 - val_weighted_acc: 0.4020
+Epoch 5/5
+2708/2708 - 2s - loss: 0.1193 - weighted_categorical_crossentropy: 1.9444 - weighted_acc: 0.1571 - val_loss: 0.3732 - val_weighted_categorical_crossentropy: 1.9362 - val_weighted_acc: 0.4140
+2708/2708 [==============================] - 1s 200us/sample - loss: 0.7323 - weighted_categorical_crossentropy: 1.9405 - weighted_acc: 0.3230
+Done.
+Test loss: 0.7323194146156311
+Test weighted_loss: 1.9405198097229004
+Test accuracy: 0.3230000138282776
+</pre></div>
+</div>
+<img alt="_images/T874868_GAT_in_Tensorflow.x_16_1.png" src="_images/T874868_GAT_in_Tensorflow.x_16_1.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "sparsh-ai/graph-embeddings",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="T643979_Learning_Node_Representations_from_Multiple_Social_Contexts.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">SPLITTER: Learning Node Representations from Multiple Contexts</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="T249662_GAT_in_PyTorch_on_CORA.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">GAT in PyTorch on CORA</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Sparsh A.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

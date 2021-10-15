@@ -1,0 +1,1398 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Struc2vec on airports graph &#8212; graph-embeddings</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Learn Embeddings using Graph Networks" href="T516490_Learn_embeddings_using_Graph_Networks.html" />
+    <link rel="prev" title="GEM on Karateclub" href="T401127_GEM_on_Karateclub.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">graph-embeddings</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="US549467_Graph_embeddings.html">
+   Graph embeddings
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="L742313_Key_developments.html">
+   Key developments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L991141_Random_walk.html">
+   Random walk
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L128493_Skip_gram_model.html">
+   Skip-gram model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L883045_Message_Passing_Neural_Networks.html">
+   Message Passing Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Models
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="C870584_DeepWalk.html">
+   DeepWalk
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C067906_LINE.html">
+   LINE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C662128_SDNE.html">
+   SDNE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C039027_Node2vec.html">
+   Node2vec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C694808_Struc2Vec.html">
+   Struc2Vec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C779816_Splitter.html">
+   Splitter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C652166_CoKE.html">
+   CoKE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C047239_GAT.html">
+   GAT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C110059_GATv2.html">
+   GATv2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C538124_BigGraph.html">
+   BigGraph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C503513_KHGT.html">
+   KHGT
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Tutorials
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="T050508_Introduction_to_Networkx.html">
+   Introduction to Networkx
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T528562_Graph_properties.html">
+   Graph properties
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T118630_Graph_Benchmarks.html">
+   Graph Benchmarks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T984528_Graph_encoder.html">
+   Graph encoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T384270_DeepWalk_in_python.html">
+   DeepWalk in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T382881_DeepWalk_on_Karateclub.html">
+   DeepWalk on Karateclub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T677598_DeepWalk_on_ML_100k.html">
+   DeepWalk on ML-100k
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T862985_LINE_on_Wiki_network.html">
+   LINE on Wiki network
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T186367_Node2vec_from_scratch.html">
+   Node2vec from scratch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T611050_Node2vec_in_PyTorch_Geometric_on_CORA_dataset.html">
+   Node2vec in PyTorch Geometric on CORA dataset
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T815556_Node2vec_on_Karateclub.html">
+   Node2vec on Karateclub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T894941_Node2vec_on_ML_latest_in_Keras.html">
+   Node2vec on ML-latest in Keras
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T926278_Node2vec%2C_Edge2vec%2C_and_Graph2vec.html">
+   Node2vec, Edge2vec, and Graph2vec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T401127_GEM_on_Karateclub.html">
+   GEM on Karateclub
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Struc2vec on airports graph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T516490_Learn_embeddings_using_Graph_Networks.html">
+   Learn Embeddings using Graph Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T981902_Shallow_embedding_methods.html">
+   Shallow embedding methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T189677_Graph_embeddings_using_SDNE.html">
+   Graph embeddings using SDNE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T873032_Graph_embeddings_using_Convnet_Stellargraph.html">
+   Graph embeddings using Convnet Stellargraph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T674201_Graph_embeddings.html">
+   Graph ML Embeddings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T457098_KHGT_knowledge_graph_embeddings.html">
+   KHGT knowledge graph embeddings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T403235_Contextualized_Knowledge_Graph_Embedding.html">
+   Contextualized Knowledge Graph Embedding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T643979_Learning_Node_Representations_from_Multiple_Social_Contexts.html">
+   SPLITTER: Learning Node Representations from Multiple Contexts
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T874868_GAT_in_Tensorflow.x.html">
+   GAT using Tensorflow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T249662_GAT_in_PyTorch_on_CORA.html">
+   GAT in PyTorch on CORA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T336765_FB15K_Graph_Embedding_Learning_in_PyTorch_Big_Graph.html">
+   FB15K Graph Embedding Learning in PyTorch Big Graph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T012114_SAGEConv_graph_embeddings_in_PyG.html">
+   SAGEConv graph embeddings in PyG
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/T481518_Struc2vec_on_airports_graph.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/T481518_Struc2vec_on_airports_graph.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/T481518_Struc2vec_on_airports_graph.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#utils">
+   Utils
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#biased-random-walker">
+   Biased Random walker
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model">
+   Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run">
+   Run
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="struc2vec-on-airports-graph">
+<h1>Struc2vec on airports graph<a class="headerlink" href="#struc2vec-on-airports-graph" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">ChainMap</span><span class="p">,</span> <span class="n">deque</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">fastdtw</span> <span class="kn">import</span> <span class="n">fastdtw</span>
+<span class="kn">from</span> <span class="nn">gensim.models</span> <span class="kn">import</span> <span class="n">Word2Vec</span>
+<span class="kn">from</span> <span class="nn">joblib</span> <span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
+<span class="kn">from</span> <span class="nn">tqdm.notebook</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">TSNE</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.multiclass</span> <span class="kn">import</span> <span class="n">OneVsRestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MultiLabelBinarizer</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="utils">
+<h2>Utils<a class="headerlink" href="#utils" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_alias_table</span><span class="p">(</span><span class="n">area_ratio</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param area_ratio: sum(area_ratio)=1</span>
+<span class="sd">    :return: accept,alias</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">area_ratio</span><span class="p">)</span>
+    <span class="n">accept</span><span class="p">,</span> <span class="n">alias</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">l</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">l</span>
+    <span class="n">small</span><span class="p">,</span> <span class="n">large</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="n">area_ratio_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">area_ratio</span><span class="p">)</span> <span class="o">*</span> <span class="n">l</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">prob</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">area_ratio_</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">prob</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="n">small</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">large</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="n">small</span> <span class="ow">and</span> <span class="n">large</span><span class="p">:</span>
+        <span class="n">small_idx</span><span class="p">,</span> <span class="n">large_idx</span> <span class="o">=</span> <span class="n">small</span><span class="o">.</span><span class="n">pop</span><span class="p">(),</span> <span class="n">large</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="n">accept</span><span class="p">[</span><span class="n">small_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">area_ratio_</span><span class="p">[</span><span class="n">small_idx</span><span class="p">]</span>
+        <span class="n">alias</span><span class="p">[</span><span class="n">small_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">large_idx</span>
+        <span class="n">area_ratio_</span><span class="p">[</span><span class="n">large_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">area_ratio_</span><span class="p">[</span><span class="n">large_idx</span><span class="p">]</span> <span class="o">-</span> \
+            <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">area_ratio_</span><span class="p">[</span><span class="n">small_idx</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">area_ratio_</span><span class="p">[</span><span class="n">large_idx</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="n">small</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">large_idx</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">large</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">large_idx</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="n">large</span><span class="p">:</span>
+        <span class="n">large_idx</span> <span class="o">=</span> <span class="n">large</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="n">accept</span><span class="p">[</span><span class="n">large_idx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">small</span><span class="p">:</span>
+        <span class="n">small_idx</span> <span class="o">=</span> <span class="n">small</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="n">accept</span><span class="p">[</span><span class="n">small_idx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">accept</span><span class="p">,</span> <span class="n">alias</span>
+
+
+<span class="k">def</span> <span class="nf">alias_sample</span><span class="p">(</span><span class="n">accept</span><span class="p">,</span> <span class="n">alias</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param accept:</span>
+<span class="sd">    :param alias:</span>
+<span class="sd">    :return: sample index</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">accept</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">accept</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">i</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">alias</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">preprocess_nxgraph</span><span class="p">(</span><span class="n">graph</span><span class="p">):</span>
+    <span class="n">node2idx</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">idx2node</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">node_size</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+        <span class="n">node2idx</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">node_size</span>
+        <span class="n">idx2node</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="n">node_size</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">idx2node</span><span class="p">,</span> <span class="n">node2idx</span>
+
+
+<span class="k">def</span> <span class="nf">partition_dict</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">workers</span><span class="p">):</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vertices</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">workers</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">part_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">part</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">v1</span><span class="p">,</span> <span class="n">nbs</span> <span class="ow">in</span> <span class="n">vertices</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">v1</span><span class="p">,</span> <span class="n">nbs</span><span class="p">))</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">%</span> <span class="n">batch_size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">part_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+            <span class="n">part</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">part</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">part_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">part_list</span>
+
+
+<span class="k">def</span> <span class="nf">partition_list</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">workers</span><span class="p">):</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vertices</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">workers</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">part_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">part</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">v1</span><span class="p">,</span> <span class="n">nbs</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vertices</span><span class="p">):</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">v1</span><span class="p">,</span> <span class="n">nbs</span><span class="p">))</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">%</span> <span class="n">batch_size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">part_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+            <span class="n">part</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">part</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">part_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">part_list</span>
+
+
+<span class="k">def</span> <span class="nf">partition_num</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">workers</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">num</span> <span class="o">%</span> <span class="n">workers</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">num</span><span class="o">//</span><span class="n">workers</span><span class="p">]</span><span class="o">*</span><span class="n">workers</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">num</span><span class="o">//</span><span class="n">workers</span><span class="p">]</span><span class="o">*</span><span class="n">workers</span> <span class="o">+</span> <span class="p">[</span><span class="n">num</span> <span class="o">%</span> <span class="n">workers</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="biased-random-walker">
+<h2>Biased Random walker<a class="headerlink" href="#biased-random-walker" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BiasedWalker</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx2node</span><span class="p">,</span> <span class="n">temp_path</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">idx2node</span> <span class="o">=</span> <span class="n">idx2node</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">idx</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idx2node</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span> <span class="o">=</span> <span class="n">temp_path</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">simulate_walks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_walks</span><span class="p">,</span> <span class="n">walk_length</span><span class="p">,</span> <span class="n">stay_prob</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+
+        <span class="n">layers_adj</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span><span class="o">+</span><span class="s1">&#39;layers_adj.pkl&#39;</span><span class="p">)</span>
+        <span class="n">layers_alias</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span><span class="o">+</span><span class="s1">&#39;layers_alias.pkl&#39;</span><span class="p">)</span>
+        <span class="n">layers_accept</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span><span class="o">+</span><span class="s1">&#39;layers_accept.pkl&#39;</span><span class="p">)</span>
+        <span class="n">gamma</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span><span class="o">+</span><span class="s1">&#39;gamma.pkl&#39;</span><span class="p">)</span>
+        <span class="n">walks</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">initialLayer</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">idx</span>  <span class="c1"># list(self.g.nodes())</span>
+
+        <span class="n">results</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">workers</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span> <span class="p">)(</span>
+            <span class="n">delayed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_simulate_walks</span><span class="p">)(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="n">walk_length</span><span class="p">,</span> <span class="n">stay_prob</span><span class="p">,</span> <span class="n">layers_adj</span><span class="p">,</span> <span class="n">layers_accept</span><span class="p">,</span> <span class="n">layers_alias</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span>
+            <span class="n">partition_num</span><span class="p">(</span><span class="n">num_walks</span><span class="p">,</span> <span class="n">workers</span><span class="p">))</span>
+
+        <span class="n">walks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">results</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">walks</span>
+
+    <span class="k">def</span> <span class="nf">_simulate_walks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">num_walks</span><span class="p">,</span> <span class="n">walk_length</span><span class="p">,</span> <span class="n">stay_prob</span><span class="p">,</span> <span class="n">layers_adj</span><span class="p">,</span> <span class="n">layers_accept</span><span class="p">,</span> <span class="n">layers_alias</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
+        <span class="n">walks</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_walks</span><span class="p">):</span>
+            <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+                <span class="n">walks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exec_random_walk</span><span class="p">(</span><span class="n">layers_adj</span><span class="p">,</span> <span class="n">layers_accept</span><span class="p">,</span> <span class="n">layers_alias</span><span class="p">,</span>
+                                                    <span class="n">v</span><span class="p">,</span> <span class="n">walk_length</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">stay_prob</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">walks</span>
+
+    <span class="k">def</span> <span class="nf">_exec_random_walk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graphs</span><span class="p">,</span> <span class="n">layers_accept</span><span class="p">,</span> <span class="n">layers_alias</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">walk_length</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">stay_prob</span><span class="o">=</span><span class="mf">0.3</span><span class="p">):</span>
+        <span class="n">initialLayer</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">layer</span> <span class="o">=</span> <span class="n">initialLayer</span>
+
+        <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idx2node</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">walk_length</span><span class="p">:</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">r</span> <span class="o">&lt;</span> <span class="n">stay_prob</span><span class="p">):</span>  <span class="c1"># same layer</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">chooseNeighbor</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">graphs</span><span class="p">,</span> <span class="n">layers_alias</span><span class="p">,</span>
+                                   <span class="n">layers_accept</span><span class="p">,</span> <span class="n">layer</span><span class="p">)</span>
+                <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idx2node</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># different layer</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">x</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">gamma</span><span class="p">[</span><span class="n">layer</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">e</span><span class="p">)</span>
+                    <span class="n">p_moveup</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">()</span>
+
+                <span class="k">if</span><span class="p">(</span><span class="n">r</span> <span class="o">&gt;</span> <span class="n">p_moveup</span><span class="p">):</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">layer</span> <span class="o">&gt;</span> <span class="n">initialLayer</span><span class="p">):</span>
+                        <span class="n">layer</span> <span class="o">=</span> <span class="n">layer</span> <span class="o">-</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span><span class="p">((</span><span class="n">layer</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">in</span> <span class="n">graphs</span> <span class="ow">and</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">graphs</span><span class="p">[</span><span class="n">layer</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]):</span>
+                        <span class="n">layer</span> <span class="o">=</span> <span class="n">layer</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">path</span>
+
+
+<span class="k">def</span> <span class="nf">chooseNeighbor</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">graphs</span><span class="p">,</span> <span class="n">layers_alias</span><span class="p">,</span> <span class="n">layers_accept</span><span class="p">,</span> <span class="n">layer</span><span class="p">):</span>
+
+    <span class="n">v_list</span> <span class="o">=</span> <span class="n">graphs</span><span class="p">[</span><span class="n">layer</span><span class="p">][</span><span class="n">v</span><span class="p">]</span>
+
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">alias_sample</span><span class="p">(</span><span class="n">layers_accept</span><span class="p">[</span><span class="n">layer</span><span class="p">][</span><span class="n">v</span><span class="p">],</span> <span class="n">layers_alias</span><span class="p">[</span><span class="n">layer</span><span class="p">][</span><span class="n">v</span><span class="p">])</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">v_list</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">v</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Struc2Vec</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">walk_length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">num_walks</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stay_prob</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">opt1_reduce_len</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">opt2_reduce_sim_calc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">opt3_num_layers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">temp_path</span><span class="o">=</span><span class="s1">&#39;./temp_struc2vec/&#39;</span><span class="p">,</span> <span class="n">reuse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="n">graph</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">idx2node</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">node2idx</span> <span class="o">=</span> <span class="n">preprocess_nxgraph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">idx</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idx2node</span><span class="p">)))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">opt1_reduce_len</span> <span class="o">=</span> <span class="n">opt1_reduce_len</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opt2_reduce_sim_calc</span> <span class="o">=</span> <span class="n">opt2_reduce_sim_calc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opt3_num_layers</span> <span class="o">=</span> <span class="n">opt3_num_layers</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">resue</span> <span class="o">=</span> <span class="n">reuse</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span> <span class="o">=</span> <span class="n">temp_path</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">reuse</span><span class="p">:</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_context_graph</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opt3_num_layers</span><span class="p">,</span> <span class="n">workers</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prepare_biased_walk</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">walker</span> <span class="o">=</span> <span class="n">BiasedWalker</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idx2node</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sentences</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">walker</span><span class="o">.</span><span class="n">simulate_walks</span><span class="p">(</span>
+            <span class="n">num_walks</span><span class="p">,</span> <span class="n">walk_length</span><span class="p">,</span> <span class="n">stay_prob</span><span class="p">,</span> <span class="n">workers</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_embeddings</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">create_context_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_num_layers</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,):</span>
+
+        <span class="n">pair_distances</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_structural_distance</span><span class="p">(</span>
+            <span class="n">max_num_layers</span><span class="p">,</span> <span class="n">workers</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,)</span>
+        <span class="n">layers_adj</span><span class="p">,</span> <span class="n">layers_distances</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_layer_rep</span><span class="p">(</span><span class="n">pair_distances</span><span class="p">)</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">layers_adj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span> <span class="o">+</span> <span class="s1">&#39;layers_adj.pkl&#39;</span><span class="p">)</span>
+
+        <span class="n">layers_accept</span><span class="p">,</span> <span class="n">layers_alias</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_transition_probs</span><span class="p">(</span>
+            <span class="n">layers_adj</span><span class="p">,</span> <span class="n">layers_distances</span><span class="p">)</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">layers_alias</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span> <span class="o">+</span> <span class="s1">&#39;layers_alias.pkl&#39;</span><span class="p">)</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">layers_accept</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span> <span class="o">+</span> <span class="s1">&#39;layers_accept.pkl&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">prepare_biased_walk</span><span class="p">(</span><span class="bp">self</span><span class="p">,):</span>
+
+        <span class="n">sum_weights</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">sum_edges</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">average_weight</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">gamma</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">layer</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span><span class="o">+</span><span class="s1">&#39;norm_weights_distance-layer-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.pkl&#39;</span><span class="p">)):</span>
+            <span class="n">probs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span><span class="o">+</span><span class="s1">&#39;norm_weights_distance-layer-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.pkl&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">list_weights</span> <span class="ow">in</span> <span class="n">probs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">sum_weights</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="n">sum_edges</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="n">sum_weights</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">list_weights</span><span class="p">)</span>
+                <span class="n">sum_edges</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">list_weights</span><span class="p">)</span>
+
+            <span class="n">average_weight</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum_weights</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span> <span class="o">/</span> <span class="n">sum_edges</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span>
+
+            <span class="n">gamma</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="p">{})</span>
+
+            <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">list_weights</span> <span class="ow">in</span> <span class="n">probs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">num_neighbours</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">list_weights</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">w</span> <span class="o">&gt;</span> <span class="n">average_weight</span><span class="p">[</span><span class="n">layer</span><span class="p">]):</span>
+                        <span class="n">num_neighbours</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">gamma</span><span class="p">[</span><span class="n">layer</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">num_neighbours</span>
+
+            <span class="n">layer</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">pd</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">average_weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span> <span class="o">+</span> <span class="s1">&#39;average_weight&#39;</span><span class="p">)</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span> <span class="o">+</span> <span class="s1">&#39;gamma.pkl&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">embed_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="nb">iter</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+
+        <span class="c1"># pd.read_pickle(self.temp_path+&#39;walks.pkl&#39;)</span>
+        <span class="n">sentences</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentences</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Learning representation...&quot;</span><span class="p">)</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Word2Vec</span><span class="p">(</span><span class="n">sentences</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">embed_size</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="n">window_size</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">hs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sg</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="n">workers</span><span class="p">,</span>
+                         <span class="nb">iter</span><span class="o">=</span><span class="nb">iter</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Learning representation done!&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w2v_model</span> <span class="o">=</span> <span class="n">model</span>
+
+        <span class="k">return</span> <span class="n">model</span>
+
+    <span class="k">def</span> <span class="nf">get_embeddings</span><span class="p">(</span><span class="bp">self</span><span class="p">,):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">w2v_model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;model not train&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_embeddings</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_embeddings</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">w2v_model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="n">word</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_embeddings</span>
+
+    <span class="k">def</span> <span class="nf">_compute_ordered_degreelist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_num_layers</span><span class="p">):</span>
+
+        <span class="n">degreeList</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">vertices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">idx</span>  <span class="c1"># self.g.nodes()</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vertices</span><span class="p">:</span>
+            <span class="n">degreeList</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_order_degreelist_node</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">max_num_layers</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">degreeList</span>
+
+    <span class="k">def</span> <span class="nf">_get_order_degreelist_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">max_num_layers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">max_num_layers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">max_num_layers</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+
+        <span class="n">ordered_degree_sequence_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span>
+        <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+        <span class="n">level</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+        <span class="n">visited</span><span class="p">[</span><span class="n">root</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">while</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">level</span> <span class="o">&lt;=</span> <span class="n">max_num_layers</span><span class="p">):</span>
+
+            <span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">opt1_reduce_len</span><span class="p">:</span>
+                <span class="n">degree_list</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">degree_list</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+
+                <span class="n">top</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">idx2node</span><span class="p">[</span><span class="n">top</span><span class="p">]</span>
+                <span class="n">degree</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">])</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">opt1_reduce_len</span><span class="p">:</span>
+                    <span class="n">degree_list</span><span class="p">[</span><span class="n">degree</span><span class="p">]</span> <span class="o">=</span> <span class="n">degree_list</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">degree</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">degree_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">degree</span><span class="p">)</span>
+
+                <span class="k">for</span> <span class="n">nei</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+                    <span class="n">nei_idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node2idx</span><span class="p">[</span><span class="n">nei</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">nei_idx</span><span class="p">]:</span>
+                        <span class="n">visited</span><span class="p">[</span><span class="n">nei_idx</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nei_idx</span><span class="p">)</span>
+                <span class="n">count</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">opt1_reduce_len</span><span class="p">:</span>
+                <span class="n">orderd_degree_list</span> <span class="o">=</span> <span class="p">[(</span><span class="n">degree</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span>
+                                      <span class="k">for</span> <span class="n">degree</span><span class="p">,</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">degree_list</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+                <span class="n">orderd_degree_list</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">orderd_degree_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">degree_list</span><span class="p">)</span>
+            <span class="n">ordered_degree_sequence_dict</span><span class="p">[</span><span class="n">level</span><span class="p">]</span> <span class="o">=</span> <span class="n">orderd_degree_list</span>
+            <span class="n">level</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">ordered_degree_sequence_dict</span>
+
+    <span class="k">def</span> <span class="nf">_compute_structural_distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_num_layers</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,):</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span><span class="o">+</span><span class="s1">&#39;structural_dist.pkl&#39;</span><span class="p">):</span>
+            <span class="n">structural_dist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span><span class="o">+</span><span class="s1">&#39;structural_dist.pkl&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">opt1_reduce_len</span><span class="p">:</span>
+                <span class="n">dist_func</span> <span class="o">=</span> <span class="n">cost_max</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dist_func</span> <span class="o">=</span> <span class="n">cost</span>
+
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span> <span class="o">+</span> <span class="s1">&#39;degreelist.pkl&#39;</span><span class="p">):</span>
+                <span class="n">degreeList</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span> <span class="o">+</span> <span class="s1">&#39;degreelist.pkl&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">degreeList</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_ordered_degreelist</span><span class="p">(</span><span class="n">max_num_layers</span><span class="p">)</span>
+                <span class="n">pd</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">degreeList</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span> <span class="o">+</span> <span class="s1">&#39;degreelist.pkl&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">opt2_reduce_sim_calc</span><span class="p">:</span>
+                <span class="n">degrees</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_vectors</span><span class="p">()</span>
+                <span class="n">degreeListsSelected</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">vertices</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">n_nodes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idx</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">idx</span><span class="p">:</span>  <span class="c1"># c:list of vertex</span>
+                    <span class="n">nbs</span> <span class="o">=</span> <span class="n">get_vertices</span><span class="p">(</span>
+                        <span class="n">v</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">idx2node</span><span class="p">[</span><span class="n">v</span><span class="p">]]),</span> <span class="n">degrees</span><span class="p">,</span> <span class="n">n_nodes</span><span class="p">)</span>
+                    <span class="n">vertices</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">nbs</span>  <span class="c1"># store nbs</span>
+                    <span class="n">degreeListsSelected</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">degreeList</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>  <span class="c1"># store dist</span>
+                    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nbs</span><span class="p">:</span>
+                        <span class="c1"># store dist of nbs</span>
+                        <span class="n">degreeListsSelected</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">degreeList</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">vertices</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">degreeList</span><span class="p">:</span>
+                    <span class="n">vertices</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">vd</span> <span class="k">for</span> <span class="n">vd</span> <span class="ow">in</span> <span class="n">degreeList</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">vd</span> <span class="o">&gt;</span> <span class="n">v</span><span class="p">]</span>
+
+            <span class="n">results</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">workers</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,)(</span>
+                <span class="n">delayed</span><span class="p">(</span><span class="n">compute_dtw_dist</span><span class="p">)(</span><span class="n">part_list</span><span class="p">,</span> <span class="n">degreeList</span><span class="p">,</span> <span class="n">dist_func</span><span class="p">)</span> <span class="k">for</span> <span class="n">part_list</span> <span class="ow">in</span> <span class="n">partition_dict</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">workers</span><span class="p">))</span>
+            <span class="n">dtw_dist</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">ChainMap</span><span class="p">(</span><span class="o">*</span><span class="n">results</span><span class="p">))</span>
+
+            <span class="n">structural_dist</span> <span class="o">=</span> <span class="n">convert_dtw_struc_dist</span><span class="p">(</span><span class="n">dtw_dist</span><span class="p">)</span>
+            <span class="n">pd</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">structural_dist</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span> <span class="o">+</span>
+                         <span class="s1">&#39;structural_dist.pkl&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">structural_dist</span>
+
+    <span class="k">def</span> <span class="nf">_create_vectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">degrees</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># sotre v list of degree</span>
+        <span class="n">degrees_sorted</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c1"># store degree</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">idx</span><span class="p">:</span>
+            <span class="n">degree</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">idx2node</span><span class="p">[</span><span class="n">v</span><span class="p">]])</span>
+            <span class="n">degrees_sorted</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">degree</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">degree</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">degrees</span><span class="p">):</span>
+                <span class="n">degrees</span><span class="p">[</span><span class="n">degree</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">degrees</span><span class="p">[</span><span class="n">degree</span><span class="p">][</span><span class="s1">&#39;vertices&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">degrees</span><span class="p">[</span><span class="n">degree</span><span class="p">][</span><span class="s1">&#39;vertices&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">degrees_sorted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">degrees_sorted</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+        <span class="n">degrees_sorted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">degrees_sorted</span><span class="p">)</span>
+
+        <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">degrees_sorted</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">degree</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">degrees_sorted</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="n">degrees</span><span class="p">[</span><span class="n">degree</span><span class="p">][</span><span class="s1">&#39;before&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">degrees_sorted</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)):</span>
+                <span class="n">degrees</span><span class="p">[</span><span class="n">degree</span><span class="p">][</span><span class="s1">&#39;after&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">degrees_sorted</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">degrees</span>
+
+    <span class="k">def</span> <span class="nf">_get_layer_rep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pair_distances</span><span class="p">):</span>
+        <span class="n">layer_distances</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">layer_adj</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">v_pair</span><span class="p">,</span> <span class="n">layer_dist</span> <span class="ow">in</span> <span class="n">pair_distances</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">layer</span><span class="p">,</span> <span class="n">distance</span> <span class="ow">in</span> <span class="n">layer_dist</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">vx</span> <span class="o">=</span> <span class="n">v_pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">vy</span> <span class="o">=</span> <span class="n">v_pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+                <span class="n">layer_distances</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="p">{})</span>
+                <span class="n">layer_distances</span><span class="p">[</span><span class="n">layer</span><span class="p">][</span><span class="n">vx</span><span class="p">,</span> <span class="n">vy</span><span class="p">]</span> <span class="o">=</span> <span class="n">distance</span>
+
+                <span class="n">layer_adj</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="p">{})</span>
+                <span class="n">layer_adj</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">vx</span><span class="p">,</span> <span class="p">[])</span>
+                <span class="n">layer_adj</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">vy</span><span class="p">,</span> <span class="p">[])</span>
+                <span class="n">layer_adj</span><span class="p">[</span><span class="n">layer</span><span class="p">][</span><span class="n">vx</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vy</span><span class="p">)</span>
+                <span class="n">layer_adj</span><span class="p">[</span><span class="n">layer</span><span class="p">][</span><span class="n">vy</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vx</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">layer_adj</span><span class="p">,</span> <span class="n">layer_distances</span>
+
+    <span class="k">def</span> <span class="nf">_get_transition_probs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layers_adj</span><span class="p">,</span> <span class="n">layers_distances</span><span class="p">):</span>
+        <span class="n">layers_alias</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">layers_accept</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">layers_adj</span><span class="p">:</span>
+
+            <span class="n">neighbors</span> <span class="o">=</span> <span class="n">layers_adj</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span>
+            <span class="n">layer_distances</span> <span class="o">=</span> <span class="n">layers_distances</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span>
+            <span class="n">node_alias_dict</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">node_accept_dict</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">norm_weights</span> <span class="o">=</span> <span class="p">{}</span>
+
+            <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">neighbors</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">e_list</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">sum_w</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+                <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="ow">in</span> <span class="n">layer_distances</span><span class="p">:</span>
+                        <span class="n">wd</span> <span class="o">=</span> <span class="n">layer_distances</span><span class="p">[</span><span class="n">v</span><span class="p">,</span> <span class="n">n</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">wd</span> <span class="o">=</span> <span class="n">layer_distances</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span>
+                    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">wd</span><span class="p">))</span>
+                    <span class="n">e_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+                    <span class="n">sum_w</span> <span class="o">+=</span> <span class="n">w</span>
+
+                <span class="n">e_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="n">sum_w</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">e_list</span><span class="p">]</span>
+                <span class="n">norm_weights</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">e_list</span>
+                <span class="n">accept</span><span class="p">,</span> <span class="n">alias</span> <span class="o">=</span> <span class="n">create_alias_table</span><span class="p">(</span><span class="n">e_list</span><span class="p">)</span>
+                <span class="n">node_alias_dict</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">alias</span>
+                <span class="n">node_accept_dict</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">accept</span>
+
+            <span class="n">pd</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span>
+                <span class="n">norm_weights</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp_path</span> <span class="o">+</span> <span class="s1">&#39;norm_weights_distance-layer-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.pkl&#39;</span><span class="p">)</span>
+
+            <span class="n">layers_alias</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span> <span class="o">=</span> <span class="n">node_alias_dict</span>
+            <span class="n">layers_accept</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span> <span class="o">=</span> <span class="n">node_accept_dict</span>
+
+        <span class="k">return</span> <span class="n">layers_accept</span><span class="p">,</span> <span class="n">layers_alias</span>
+
+
+<span class="k">def</span> <span class="nf">cost</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">ep</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="n">ep</span>
+    <span class="n">mi</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="n">ep</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">m</span> <span class="o">/</span> <span class="n">mi</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">cost_min</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">ep</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">ep</span>
+    <span class="n">mi</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">ep</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">m</span> <span class="o">/</span> <span class="n">mi</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nb">min</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">cost_max</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">ep</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">ep</span>
+    <span class="n">mi</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">ep</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">m</span> <span class="o">/</span> <span class="n">mi</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">convert_dtw_struc_dist</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="n">startLayer</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param distances: dict of dict</span>
+<span class="sd">    :param startLayer:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">layers</span> <span class="ow">in</span> <span class="n">distances</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">keys_layers</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">startLayer</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">keys_layers</span><span class="p">),</span> <span class="n">startLayer</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">startLayer</span><span class="p">):</span>
+            <span class="n">keys_layers</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">keys_layers</span><span class="p">:</span>
+            <span class="n">layers</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span> <span class="o">+=</span> <span class="n">layers</span><span class="p">[</span><span class="n">layer</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">distances</span>
+
+
+<span class="k">def</span> <span class="nf">get_vertices</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">degree_v</span><span class="p">,</span> <span class="n">degrees</span><span class="p">,</span> <span class="n">n_nodes</span><span class="p">):</span>
+    <span class="n">a_vertices_selected</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">n_nodes</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">vertices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">c_v</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">v2</span> <span class="ow">in</span> <span class="n">degrees</span><span class="p">[</span><span class="n">degree_v</span><span class="p">][</span><span class="s1">&#39;vertices&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">v</span> <span class="o">!=</span> <span class="n">v2</span><span class="p">):</span>
+                <span class="n">vertices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>  <span class="c1"># same degree</span>
+                <span class="n">c_v</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">c_v</span> <span class="o">&gt;</span> <span class="n">a_vertices_selected</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">StopIteration</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;before&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">degrees</span><span class="p">[</span><span class="n">degree_v</span><span class="p">]):</span>
+            <span class="n">degree_b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">degree_b</span> <span class="o">=</span> <span class="n">degrees</span><span class="p">[</span><span class="n">degree_v</span><span class="p">][</span><span class="s1">&#39;before&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;after&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">degrees</span><span class="p">[</span><span class="n">degree_v</span><span class="p">]):</span>
+            <span class="n">degree_a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">degree_a</span> <span class="o">=</span> <span class="n">degrees</span><span class="p">[</span><span class="n">degree_v</span><span class="p">][</span><span class="s1">&#39;after&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">degree_b</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">degree_a</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">StopIteration</span>  <span class="c1"># not anymore v</span>
+        <span class="n">degree_now</span> <span class="o">=</span> <span class="n">verifyDegrees</span><span class="p">(</span><span class="n">degrees</span><span class="p">,</span> <span class="n">degree_v</span><span class="p">,</span> <span class="n">degree_a</span><span class="p">,</span> <span class="n">degree_b</span><span class="p">)</span>
+        <span class="c1"># nearest valid degree</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">v2</span> <span class="ow">in</span> <span class="n">degrees</span><span class="p">[</span><span class="n">degree_now</span><span class="p">][</span><span class="s1">&#39;vertices&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">v</span> <span class="o">!=</span> <span class="n">v2</span><span class="p">):</span>
+                    <span class="n">vertices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+                    <span class="n">c_v</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">c_v</span> <span class="o">&gt;</span> <span class="n">a_vertices_selected</span><span class="p">):</span>
+                        <span class="k">raise</span> <span class="ne">StopIteration</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">degree_now</span> <span class="o">==</span> <span class="n">degree_b</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;before&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">degrees</span><span class="p">[</span><span class="n">degree_b</span><span class="p">]):</span>
+                    <span class="n">degree_b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">degree_b</span> <span class="o">=</span> <span class="n">degrees</span><span class="p">[</span><span class="n">degree_b</span><span class="p">][</span><span class="s1">&#39;before&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;after&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">degrees</span><span class="p">[</span><span class="n">degree_a</span><span class="p">]):</span>
+                    <span class="n">degree_a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">degree_a</span> <span class="o">=</span> <span class="n">degrees</span><span class="p">[</span><span class="n">degree_a</span><span class="p">][</span><span class="s1">&#39;after&#39;</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">degree_b</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">degree_a</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">StopIteration</span>
+
+            <span class="n">degree_now</span> <span class="o">=</span> <span class="n">verifyDegrees</span><span class="p">(</span><span class="n">degrees</span><span class="p">,</span> <span class="n">degree_v</span><span class="p">,</span> <span class="n">degree_a</span><span class="p">,</span> <span class="n">degree_b</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">vertices</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">vertices</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">verifyDegrees</span><span class="p">(</span><span class="n">degrees</span><span class="p">,</span> <span class="n">degree_v_root</span><span class="p">,</span> <span class="n">degree_a</span><span class="p">,</span> <span class="n">degree_b</span><span class="p">):</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">degree_b</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">degree_now</span> <span class="o">=</span> <span class="n">degree_a</span>
+    <span class="k">elif</span><span class="p">(</span><span class="n">degree_a</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">degree_now</span> <span class="o">=</span> <span class="n">degree_b</span>
+    <span class="k">elif</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">degree_b</span> <span class="o">-</span> <span class="n">degree_v_root</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">degree_a</span> <span class="o">-</span> <span class="n">degree_v_root</span><span class="p">)):</span>
+        <span class="n">degree_now</span> <span class="o">=</span> <span class="n">degree_b</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">degree_now</span> <span class="o">=</span> <span class="n">degree_a</span>
+
+    <span class="k">return</span> <span class="n">degree_now</span>
+
+
+<span class="k">def</span> <span class="nf">compute_dtw_dist</span><span class="p">(</span><span class="n">part_list</span><span class="p">,</span> <span class="n">degreeList</span><span class="p">,</span> <span class="n">dist_func</span><span class="p">):</span>
+    <span class="n">dtw_dist</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">v1</span><span class="p">,</span> <span class="n">nbs</span> <span class="ow">in</span> <span class="n">part_list</span><span class="p">:</span>
+        <span class="n">lists_v1</span> <span class="o">=</span> <span class="n">degreeList</span><span class="p">[</span><span class="n">v1</span><span class="p">]</span>  <span class="c1"># lists_v1 :orderd degree list of v1</span>
+        <span class="k">for</span> <span class="n">v2</span> <span class="ow">in</span> <span class="n">nbs</span><span class="p">:</span>
+            <span class="n">lists_v2</span> <span class="o">=</span> <span class="n">degreeList</span><span class="p">[</span><span class="n">v2</span><span class="p">]</span>  <span class="c1"># lists_v1 :orderd degree list of v2</span>
+            <span class="n">max_layer</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lists_v1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">lists_v2</span><span class="p">))</span>  <span class="c1"># valid layer</span>
+            <span class="n">dtw_dist</span><span class="p">[</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_layer</span><span class="p">):</span>
+                <span class="n">dist</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="n">fastdtw</span><span class="p">(</span>
+                    <span class="n">lists_v1</span><span class="p">[</span><span class="n">layer</span><span class="p">],</span> <span class="n">lists_v2</span><span class="p">[</span><span class="n">layer</span><span class="p">],</span> <span class="n">radius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="n">dist_func</span><span class="p">)</span>
+                <span class="n">dtw_dist</span><span class="p">[</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">][</span><span class="n">layer</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span>
+    <span class="k">return</span> <span class="n">dtw_dist</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TopKRanker</span><span class="p">(</span><span class="n">OneVsRestClassifier</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">top_k_list</span><span class="p">):</span>
+        <span class="n">probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="nb">super</span><span class="p">(</span><span class="n">TopKRanker</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+        <span class="n">all_labels</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">top_k_list</span><span class="p">):</span>
+            <span class="n">probs_</span> <span class="o">=</span> <span class="n">probs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span>
+            <span class="n">labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">classes_</span><span class="p">[</span><span class="n">probs_</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[</span><span class="o">-</span><span class="n">k</span><span class="p">:]]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="n">probs_</span><span class="p">[:]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">probs_</span><span class="p">[</span><span class="n">labels</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">all_labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">probs_</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">all_labels</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Classifier</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">embeddings</span><span class="p">,</span> <span class="n">clf</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embeddings</span> <span class="o">=</span> <span class="n">embeddings</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clf</span> <span class="o">=</span> <span class="n">TopKRanker</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">binarizer</span> <span class="o">=</span> <span class="n">MultiLabelBinarizer</span><span class="p">(</span><span class="n">sparse_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Y_all</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">binarizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Y_all</span><span class="p">)</span>
+        <span class="n">X_train</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">embeddings</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">]</span>
+        <span class="n">Y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">binarizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+        <span class="n">top_k_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">Y</span><span class="p">]</span>
+        <span class="n">Y_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">top_k_list</span><span class="p">)</span>
+        <span class="n">Y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">binarizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+        <span class="n">averages</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;micro&quot;</span><span class="p">,</span> <span class="s2">&quot;macro&quot;</span><span class="p">,</span> <span class="s2">&quot;samples&quot;</span><span class="p">,</span> <span class="s2">&quot;weighted&quot;</span><span class="p">]</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">average</span> <span class="ow">in</span> <span class="n">averages</span><span class="p">:</span>
+            <span class="n">results</span><span class="p">[</span><span class="n">average</span><span class="p">]</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">Y_</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="n">average</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="s1">&#39;acc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="n">Y_</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-------------------&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">results</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-------------------&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">top_k_list</span><span class="p">):</span>
+        <span class="n">X_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">embeddings</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">])</span>
+        <span class="n">Y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_</span><span class="p">,</span> <span class="n">top_k_list</span><span class="o">=</span><span class="n">top_k_list</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Y</span>
+
+    <span class="k">def</span> <span class="nf">split_train_evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">train_precent</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
+
+        <span class="n">training_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">train_precent</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="n">shuffle_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)))</span>
+        <span class="n">X_train</span> <span class="o">=</span> <span class="p">[</span><span class="n">X</span><span class="p">[</span><span class="n">shuffle_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">training_size</span><span class="p">)]</span>
+        <span class="n">Y_train</span> <span class="o">=</span> <span class="p">[</span><span class="n">Y</span><span class="p">[</span><span class="n">shuffle_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">training_size</span><span class="p">)]</span>
+        <span class="n">X_test</span> <span class="o">=</span> <span class="p">[</span><span class="n">X</span><span class="p">[</span><span class="n">shuffle_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">training_size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))]</span>
+        <span class="n">Y_test</span> <span class="o">=</span> <span class="p">[</span><span class="n">Y</span><span class="p">[</span><span class="n">shuffle_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">training_size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">read_node_label</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">skip_head</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">fin</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">skip_head</span><span class="p">:</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">l</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">vec</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="n">X</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vec</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">Y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vec</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="n">fin</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!wget -q --show-progress https://github.com/shenweichen/GraphEmbedding/raw/master/data/flight/labels-brazil-airports.txt
+!wget -q --show-progress https://github.com/shenweichen/GraphEmbedding/raw/master/data/flight/brazil-airports.edgelist
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>labels-brazil-airpo 100%[===================&gt;]     687  --.-KB/s    in 0s      
+brazil-airports.edg 100%[===================&gt;]   5.91K  --.-KB/s    in 0s      
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="run">
+<h2>Run<a class="headerlink" href="#run" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">evaluate_embeddings</span><span class="p">(</span><span class="n">embeddings</span><span class="p">):</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">read_node_label</span><span class="p">(</span><span class="s1">&#39;labels-brazil-airports.txt&#39;</span><span class="p">,</span><span class="n">skip_head</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">tr_frac</span> <span class="o">=</span> <span class="mf">0.8</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training classifier using </span><span class="si">{:.2f}</span><span class="s2">% nodes...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">tr_frac</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+    <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">embeddings</span><span class="o">=</span><span class="n">embeddings</span><span class="p">,</span> <span class="n">clf</span><span class="o">=</span><span class="n">LogisticRegression</span><span class="p">())</span>
+    <span class="n">clf</span><span class="o">.</span><span class="n">split_train_evaluate</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">tr_frac</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">plot_embeddings</span><span class="p">(</span><span class="n">embeddings</span><span class="p">,):</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">read_node_label</span><span class="p">(</span><span class="s1">&#39;labels-brazil-airports.txt&#39;</span><span class="p">,</span><span class="n">skip_head</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">emb_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">X</span><span class="p">:</span>
+        <span class="n">emb_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">embeddings</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+    <span class="n">emb_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">emb_list</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">TSNE</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">node_pos</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">emb_list</span><span class="p">)</span>
+    <span class="n">color_idx</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
+        <span class="n">color_idx</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="p">[])</span>
+        <span class="n">color_idx</span><span class="p">[</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">color_idx</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">node_pos</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">node_pos</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>  <span class="c1"># c=node_colors)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">read_edgelist</span><span class="p">(</span><span class="s1">&#39;brazil-airports.edgelist&#39;</span><span class="p">,</span> <span class="n">create_using</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">(),</span> <span class="n">nodetype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">data</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)])</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Struc2Vec</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+    <span class="n">embeddings</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_embeddings</span><span class="p">()</span>
+    <span class="n">evaluate_embeddings</span><span class="p">(</span><span class="n">embeddings</span><span class="p">)</span>
+    <span class="n">plot_embeddings</span><span class="p">(</span><span class="n">embeddings</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   1 tasks      | elapsed:    2.5s
+[Parallel(n_jobs=4)]: Done   2 out of   4 | elapsed:    3.4s remaining:    3.4s
+[Parallel(n_jobs=4)]: Done   4 out of   4 | elapsed:    3.6s remaining:    0.0s
+[Parallel(n_jobs=4)]: Done   4 out of   4 | elapsed:    3.6s finished
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   1 tasks      | elapsed:    0.8s
+[Parallel(n_jobs=4)]: Done   2 out of   4 | elapsed:    1.3s remaining:    1.3s
+[Parallel(n_jobs=4)]: Done   4 out of   4 | elapsed:    2.3s remaining:    0.0s
+[Parallel(n_jobs=4)]: Done   4 out of   4 | elapsed:    2.3s finished
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Learning representation...
+Learning representation done!
+Training classifier using 80.00% nodes...
+-------------------
+{&#39;micro&#39;: 0.7142857142857143, &#39;macro&#39;: 0.7357142857142858, &#39;samples&#39;: 0.7142857142857143, &#39;weighted&#39;: 0.6979591836734694, &#39;acc&#39;: 0.7142857142857143}
+</pre></div>
+</div>
+<img alt="_images/T481518_Struc2vec_on_airports_graph_14_2.png" src="_images/T481518_Struc2vec_on_airports_graph_14_2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DATA_GRAPH</span> <span class="o">=</span> <span class="s1">&#39;labels-brazil-airports.txt&#39;</span>
+<span class="n">DATA_EDGES</span> <span class="o">=</span> <span class="s1">&#39;brazil-airports.edgelist&#39;</span>
+
+
+<span class="k">def</span> <span class="nf">evaluate_embeddings</span><span class="p">(</span><span class="n">embeddings</span><span class="p">):</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">read_node_label</span><span class="p">(</span><span class="n">DATA_GRAPH</span><span class="p">,</span> <span class="n">skip_head</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">tr_frac</span> <span class="o">=</span> <span class="mf">0.8</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training classifier using </span><span class="si">{:.2f}</span><span class="s2">% nodes...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">tr_frac</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+    <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">embeddings</span><span class="o">=</span><span class="n">embeddings</span><span class="p">,</span> <span class="n">clf</span><span class="o">=</span><span class="n">LogisticRegression</span><span class="p">())</span>
+    <span class="n">clf</span><span class="o">.</span><span class="n">split_train_evaluate</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">tr_frac</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">plot_embeddings</span><span class="p">(</span><span class="n">embeddings</span><span class="p">,):</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">read_node_label</span><span class="p">(</span><span class="n">DATA_GRAPH</span><span class="p">,</span> <span class="n">skip_head</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">emb_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">X</span><span class="p">:</span>
+        <span class="n">emb_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">embeddings</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+    <span class="n">emb_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">emb_list</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">TSNE</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">node_pos</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">emb_list</span><span class="p">)</span>
+    <span class="n">color_idx</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
+        <span class="n">color_idx</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="p">[])</span>
+        <span class="n">color_idx</span><span class="p">[</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">color_idx</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">node_pos</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">node_pos</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>  <span class="c1"># c=node_colors)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">read_edgelist</span><span class="p">(</span><span class="n">DATA_EDGES</span><span class="p">,</span> <span class="n">create_using</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">(),</span> <span class="n">nodetype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">data</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)])</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Struc2Vec</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+    <span class="n">embeddings</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_embeddings</span><span class="p">()</span>
+    <span class="n">evaluate_embeddings</span><span class="p">(</span><span class="n">embeddings</span><span class="p">)</span>
+    <span class="n">plot_embeddings</span><span class="p">(</span><span class="n">embeddings</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   1 tasks      | elapsed:    3.1s
+[Parallel(n_jobs=4)]: Done   2 out of   4 | elapsed:    4.1s remaining:    4.1s
+[Parallel(n_jobs=4)]: Done   4 out of   4 | elapsed:    4.3s remaining:    0.0s
+[Parallel(n_jobs=4)]: Done   4 out of   4 | elapsed:    4.3s finished
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   1 tasks      | elapsed:    1.1s
+[Parallel(n_jobs=4)]: Done   2 out of   4 | elapsed:    1.9s remaining:    1.9s
+[Parallel(n_jobs=4)]: Done   4 out of   4 | elapsed:    3.1s remaining:    0.0s
+[Parallel(n_jobs=4)]: Done   4 out of   4 | elapsed:    3.1s finished
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Learning representation...
+Learning representation done!
+Training classifier using 80.00% nodes...
+-------------------
+{&#39;micro&#39;: 0.7857142857142857, &#39;macro&#39;: 0.8041666666666667, &#39;samples&#39;: 0.7857142857142857, &#39;weighted&#39;: 0.7761904761904762, &#39;acc&#39;: 0.7857142857142857}
+</pre></div>
+</div>
+<img alt="_images/T481518_Struc2vec_on_airports_graph_15_2.png" src="_images/T481518_Struc2vec_on_airports_graph_15_2.png" />
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "sparsh-ai/graph-embeddings",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="T401127_GEM_on_Karateclub.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">GEM on Karateclub</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="T516490_Learn_embeddings_using_Graph_Networks.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Learn Embeddings using Graph Networks</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Sparsh A.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

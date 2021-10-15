@@ -1,0 +1,1101 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Graph ML Embeddings &#8212; graph-embeddings</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="KHGT knowledge graph embeddings" href="T457098_KHGT_knowledge_graph_embeddings.html" />
+    <link rel="prev" title="Graph embeddings using Convnet Stellargraph" href="T873032_Graph_embeddings_using_Convnet_Stellargraph.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">graph-embeddings</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="US549467_Graph_embeddings.html">
+   Graph embeddings
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="L742313_Key_developments.html">
+   Key developments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L991141_Random_walk.html">
+   Random walk
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L128493_Skip_gram_model.html">
+   Skip-gram model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L883045_Message_Passing_Neural_Networks.html">
+   Message Passing Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Models
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="C870584_DeepWalk.html">
+   DeepWalk
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C067906_LINE.html">
+   LINE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C662128_SDNE.html">
+   SDNE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C039027_Node2vec.html">
+   Node2vec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C694808_Struc2Vec.html">
+   Struc2Vec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C779816_Splitter.html">
+   Splitter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C652166_CoKE.html">
+   CoKE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C047239_GAT.html">
+   GAT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C110059_GATv2.html">
+   GATv2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C538124_BigGraph.html">
+   BigGraph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C503513_KHGT.html">
+   KHGT
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Tutorials
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="T050508_Introduction_to_Networkx.html">
+   Introduction to Networkx
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T528562_Graph_properties.html">
+   Graph properties
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T118630_Graph_Benchmarks.html">
+   Graph Benchmarks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T984528_Graph_encoder.html">
+   Graph encoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T384270_DeepWalk_in_python.html">
+   DeepWalk in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T382881_DeepWalk_on_Karateclub.html">
+   DeepWalk on Karateclub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T677598_DeepWalk_on_ML_100k.html">
+   DeepWalk on ML-100k
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T862985_LINE_on_Wiki_network.html">
+   LINE on Wiki network
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T186367_Node2vec_from_scratch.html">
+   Node2vec from scratch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T611050_Node2vec_in_PyTorch_Geometric_on_CORA_dataset.html">
+   Node2vec in PyTorch Geometric on CORA dataset
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T815556_Node2vec_on_Karateclub.html">
+   Node2vec on Karateclub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T894941_Node2vec_on_ML_latest_in_Keras.html">
+   Node2vec on ML-latest in Keras
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T926278_Node2vec%2C_Edge2vec%2C_and_Graph2vec.html">
+   Node2vec, Edge2vec, and Graph2vec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T401127_GEM_on_Karateclub.html">
+   GEM on Karateclub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T481518_Struc2vec_on_airports_graph.html">
+   Struc2vec on airports graph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T516490_Learn_embeddings_using_Graph_Networks.html">
+   Learn Embeddings using Graph Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T981902_Shallow_embedding_methods.html">
+   Shallow embedding methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T189677_Graph_embeddings_using_SDNE.html">
+   Graph embeddings using SDNE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T873032_Graph_embeddings_using_Convnet_Stellargraph.html">
+   Graph embeddings using Convnet Stellargraph
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Graph ML Embeddings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T457098_KHGT_knowledge_graph_embeddings.html">
+   KHGT knowledge graph embeddings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T403235_Contextualized_Knowledge_Graph_Embedding.html">
+   Contextualized Knowledge Graph Embedding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T643979_Learning_Node_Representations_from_Multiple_Social_Contexts.html">
+   SPLITTER: Learning Node Representations from Multiple Contexts
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T874868_GAT_in_Tensorflow.x.html">
+   GAT using Tensorflow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T249662_GAT_in_PyTorch_on_CORA.html">
+   GAT in PyTorch on CORA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T336765_FB15K_Graph_Embedding_Learning_in_PyTorch_Big_Graph.html">
+   FB15K Graph Embedding Learning in PyTorch Big Graph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T012114_SAGEConv_graph_embeddings_in_PyG.html">
+   SAGEConv graph embeddings in PyG
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/T674201_Graph_embeddings.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/T674201_Graph_embeddings.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/T674201_Graph_embeddings.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installations">
+   Installations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-utils">
+   Plot utils
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#draw-graph">
+     Draw graph
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#draw-enhanced-path-on-the-graph">
+     Draw enhanced path on the graph
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#embedding-module">
+   Embedding module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#runs">
+   Runs
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="graph-ml-embeddings">
+<h1>Graph ML Embeddings<a class="headerlink" href="#graph-ml-embeddings" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installations">
+<h2>Installations<a class="headerlink" href="#installations" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install node2vec
+!pip install karateclub
+!pip install python-Levenshtein
+!pip install gensim==3.8.0
+!pip install git+https://github.com/palash1992/GEM.git
+!pip install stellargraph[demos]==1.2.1
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">from</span> <span class="nn">networkx.drawing.layout</span> <span class="kn">import</span> <span class="n">bipartite_layout</span>
+<span class="kn">import</span> <span class="nn">networkx.algorithms.community</span> <span class="k">as</span> <span class="nn">nx_comm</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">scipy.io</span> <span class="kn">import</span> <span class="n">mmread</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">node2vec</span> <span class="kn">import</span> <span class="n">Node2Vec</span>
+<span class="kn">from</span> <span class="nn">karateclub</span> <span class="kn">import</span> <span class="n">Graph2Vec</span>
+<span class="kn">from</span> <span class="nn">node2vec.edges</span> <span class="kn">import</span> <span class="n">HadamardEmbedder</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+
+<span class="kn">import</span> <span class="nn">stellargraph</span> <span class="k">as</span> <span class="nn">sg</span>
+<span class="kn">from</span> <span class="nn">stellargraph.mapper</span> <span class="kn">import</span> <span class="n">FullBatchNodeGenerator</span>
+<span class="kn">from</span> <span class="nn">stellargraph.layer</span> <span class="kn">import</span> <span class="n">GCN</span>
+
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">layers</span><span class="p">,</span> <span class="n">optimizers</span><span class="p">,</span> <span class="n">losses</span><span class="p">,</span> <span class="n">metrics</span><span class="p">,</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span><span class="p">,</span> <span class="n">model_selection</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">sqrtm</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">TSNE</span>
+
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">default_edge_color</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
+<span class="n">default_node_color</span> <span class="o">=</span> <span class="s1">&#39;#407cc9&#39;</span>
+<span class="n">enhanced_node_color</span> <span class="o">=</span> <span class="s1">&#39;#f5b042&#39;</span>
+<span class="n">enhanced_edge_color</span> <span class="o">=</span> <span class="s1">&#39;#cc2f04&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="plot-utils">
+<h2>Plot utils<a class="headerlink" href="#plot-utils" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="draw-graph">
+<h3>Draw graph<a class="headerlink" href="#draw-graph" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">node_names</span><span class="o">=</span><span class="p">{},</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">plot_weight</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">pos_nodes</span> <span class="o">=</span> <span class="n">pos_nodes</span> <span class="k">if</span> <span class="n">pos_nodes</span> <span class="k">else</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="n">node_size</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    
+    <span class="n">pos_attrs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">coords</span> <span class="ow">in</span> <span class="n">pos_nodes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">pos_attrs</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.08</span><span class="p">)</span>
+        
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_attrs</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">node_names</span><span class="p">,</span> <span class="n">font_family</span><span class="o">=</span><span class="s1">&#39;serif&#39;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">plot_weight</span><span class="p">:</span>
+        <span class="n">pos_attrs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">coords</span> <span class="ow">in</span> <span class="n">pos_nodes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">pos_attrs</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.08</span><span class="p">)</span>
+        
+        <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_attrs</span><span class="p">,</span> <span class="n">font_family</span><span class="o">=</span><span class="s1">&#39;serif&#39;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="n">edge_labels</span><span class="o">=</span><span class="nb">dict</span><span class="p">([((</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,),</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">d</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)])</span>
+        <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">axis</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mf">1.2</span><span class="o">*</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">axis</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()])</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mf">1.2</span><span class="o">*</span><span class="n">y</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">axis</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="draw-enhanced-path-on-the-graph">
+<h3>Draw enhanced path on the graph<a class="headerlink" href="#draw-enhanced-path-on-the-graph" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">draw_enhanced_path</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">path_to_enhance</span><span class="p">,</span> <span class="n">node_names</span><span class="o">=</span><span class="p">{},</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">path_edges</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">path</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
+    <span class="n">pos_nodes</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span> <span class="k">if</span> <span class="n">layout</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="n">pos_nodes</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    
+    <span class="n">pos_attrs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">coords</span> <span class="ow">in</span> <span class="n">pos_nodes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">pos_attrs</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.08</span><span class="p">)</span>
+        
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_attrs</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">node_names</span><span class="p">,</span> <span class="n">font_family</span><span class="o">=</span><span class="s1">&#39;serif&#39;</span><span class="p">)</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">pos_nodes</span><span class="p">,</span><span class="n">edgelist</span><span class="o">=</span><span class="n">path_edges</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;#cc2f04&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">axis</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mf">1.2</span><span class="o">*</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">axis</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()])</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mf">1.2</span><span class="o">*</span><span class="n">y</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">axis</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()])</span>
+    
+    <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="embedding-module">
+<h2>Embedding module<a class="headerlink" href="#embedding-module" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Embeddings</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Shallow embedding methods</span>
+<span class="sd">        These methods are able to learn and return only the embedding values </span>
+<span class="sd">        for the learned input data. Generally speaking, all the unsupervised </span>
+<span class="sd">        embedding algorithms based on matrix factorization use the same principle. </span>
+<span class="sd">        They all factorize an input graph expressed as a matrix in different </span>
+<span class="sd">        components (commonly knows as matrix factorization). The main difference </span>
+<span class="sd">        between each method lies in the loss function used during the optimization </span>
+<span class="sd">        process. Indeed, different loss functions allow creating an embedding space </span>
+<span class="sd">        that emphasizes specific properties of the input graph.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">generate_random_graphs</span><span class="p">(</span><span class="n">n_graphs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">nx_class</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">generate_random</span><span class="p">():</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">nx_class</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">nx_class</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">p</span><span class="p">),</span> <span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">p</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">nx</span><span class="o">.</span><span class="n">watts_strogatz_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">p</span><span class="p">),</span> <span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">p</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">generate_random</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_graphs</span><span class="p">)]</span>
+
+    <span class="k">def</span> <span class="nf">graph_embedding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">wl_iterations</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Given a dataset with m different graphs, the task is to build a machine </span>
+<span class="sd">        learning algorithm capable of classifying a graph into the right class. </span>
+<span class="sd">        We can then see this problem as a classification problem, where the </span>
+<span class="sd">        dataset is defined by a list of pairs,  &lt;Gi,yi&gt; , where  Gi  is a graph </span>
+<span class="sd">        and  yi  is the class the graph belongs to.</span>
+<span class="sd">        Representation learning (network embedding) is the task that aims to </span>
+<span class="sd">        learn a mapping function  f:G→Rn , from a discrete graph to a continuous </span>
+<span class="sd">        domain. Function  f  will be capable of performing a low-dimensional </span>
+<span class="sd">        vector representation such that the properties (local and global) of </span>
+<span class="sd">        graph G are preserved.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">graph_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">graph_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_random_graphs</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Graph2Vec</span><span class="p">(</span><span class="n">dimensions</span><span class="o">=</span><span class="n">dim</span><span class="p">,</span> <span class="n">wl_iterations</span><span class="o">=</span><span class="n">wl_iterations</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">graph_list</span><span class="p">])</span>
+        <span class="n">graph_embeddings</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">graph_list</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">graph_embeddings</span>
+
+    <span class="k">def</span> <span class="nf">node_embedding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">G</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Given a (possibly large) graph G=(V,E), the goal is to classify each </span>
+<span class="sd">        vertex v∈V into the right class. In this setting, the dataset includes  </span>
+<span class="sd">        G and a list of pairs, &lt;vi,yi&gt;, where vi is a node of graph G and yi is </span>
+<span class="sd">        the class to which the node belongs. In this case, the mapping function </span>
+<span class="sd">        would be f:V→Rn.</span>
+<span class="sd">        The Node2Vec algorithm can be seen as an extension of DeepWalk. Indeed, </span>
+<span class="sd">        as with DeepWalk, Node2Vec also generates a set of random walks used as </span>
+<span class="sd">        input to a skip-gram model. Once trained, the hidden layers of the skip-gram</span>
+<span class="sd">        model are used to generate the embedding of the node in the graph. The main </span>
+<span class="sd">        difference between the two algorithms lies in the way the random walks are </span>
+<span class="sd">        generated.</span>
+<span class="sd">        Indeed, if DeepWalk generates random walks without using any bias, in Node2Vec </span>
+<span class="sd">        a new technique to generate biased random walks on the graph is introduced. </span>
+<span class="sd">        The algorithm to generate the random walks combines graph exploration by merging </span>
+<span class="sd">        Breadth-First Search (BFS) and Depth-First Search (DFS). The way those two </span>
+<span class="sd">        algorithms are combined in the random walk&#39;s generation is regularized by </span>
+<span class="sd">        two parameters p, and q. p defines the probability of a random walk getting </span>
+<span class="sd">        back to the previous node, while q defines the probability that a random </span>
+<span class="sd">        walk can pass through a previously unseen part of the graph.</span>
+<span class="sd">        Due to this combination, Node2Vec can preserve high-order proximities by </span>
+<span class="sd">        preserving local structures in the graph as well as global community structures. </span>
+<span class="sd">        This new method of random walk generation allows solving the limitation of </span>
+<span class="sd">        DeepWalk preserving the local neighborhood properties of the node.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">G</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">barbell_graph</span><span class="p">(</span><span class="n">m1</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">m2</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">node2vec</span> <span class="o">=</span> <span class="n">Node2Vec</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="n">dim</span><span class="p">)</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">node2vec</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">)</span>
+        <span class="n">node_embeddings</span> <span class="o">=</span> <span class="p">[</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_vector</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">()]</span>
+        <span class="k">return</span> <span class="n">G</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">node_embeddings</span>
+
+    <span class="k">def</span> <span class="nf">edge_embedding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">G</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Given a (possibly large) graph G=(V,E), the goal is to classify each </span>
+<span class="sd">        edge e∈E , into the right class. In this setting, the dataset includes  </span>
+<span class="sd">        G  and a list of pairs,  &lt;ei,yi&gt;, where ei is an edge of graph G  </span>
+<span class="sd">        and yi is the class to which the edge belongs. Another typical task for </span>
+<span class="sd">        this level of granularity is link prediction, the problem of predicting </span>
+<span class="sd">        the existence of a link between two existing nodes in a graph. In this </span>
+<span class="sd">        case, the mapping function would be  f:E→Rn.</span>
+<span class="sd">        Contrary to the other embedding function, the Edge to Vector (Edge2Vec) </span>
+<span class="sd">        algorithm generates the embedding space on edges, instead of nodes. </span>
+<span class="sd">        This algorithm is a simple side effect of the embedding generated by </span>
+<span class="sd">        using Node2Vec. The main idea is to use the node embedding of two adjacent </span>
+<span class="sd">        nodes to perform some basic mathematical operations in order to extract </span>
+<span class="sd">        the embedding of the edge connecting them.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">G</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_embedding</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">G</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="n">dim</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">)</span>
+        <span class="n">edges_embs</span> <span class="o">=</span> <span class="n">HadamardEmbedder</span><span class="p">(</span><span class="n">keyed_vectors</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">)</span>
+        <span class="n">edge_embeddings</span> <span class="o">=</span> <span class="p">[</span><span class="n">edges_embs</span><span class="p">[(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">()]</span>
+        <span class="k">return</span> <span class="n">G</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">edge_embeddings</span>
+
+    <span class="k">def</span> <span class="nf">graph_factorization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">G</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data_set</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="mi">10</span><span class="o">**-</span><span class="mi">4</span><span class="p">,</span> <span class="n">regu</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The GF algorithm was one of the first models to reach good computational </span>
+<span class="sd">        performance in order to perform the node embedding of a given graph. The </span>
+<span class="sd">        loss function used in this method was mainly designed to improve GF </span>
+<span class="sd">        performances and scalability. Indeed, the solution generated by this </span>
+<span class="sd">        method could be noisy. Moreover, it should be noted, by looking at its </span>
+<span class="sd">        matrix factorization formulation, that GF performs a strong symmetric </span>
+<span class="sd">        factorization. This property is particularly suitable for undirected </span>
+<span class="sd">        graphs, where the adjacency matrix is symmetric, but could be a potential </span>
+<span class="sd">        limitation for undirected graphs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">G</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">barbell_graph</span><span class="p">(</span><span class="n">m1</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">m2</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">gem.embedding.gf</span> <span class="kn">import</span> <span class="n">GraphFactorization</span>
+        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;gem/intermediate&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">GraphFactorization</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">data_set</span><span class="o">=</span><span class="n">data_set</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="n">max_iter</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="n">eta</span><span class="p">,</span> <span class="n">regu</span><span class="o">=</span><span class="n">regu</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">learn_embedding</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">G</span><span class="p">,</span> <span class="n">model</span>
+
+    <span class="k">def</span> <span class="nf">graph_representation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">G</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Graph representation with global structure information (GraphRep), such </span>
+<span class="sd">        as HOPE, allows us to preserve higher-order proximity without forcing </span>
+<span class="sd">        its embeddings to have symmetric properties.</span>
+<span class="sd">        We initialize the GraRep class from the karateclub library. In this </span>
+<span class="sd">        implementation, the dimension parameter represents the dimension of the </span>
+<span class="sd">        embedding space, while the order parameter defines the maximum number of </span>
+<span class="sd">        orders of proximity between nodes. The number of columns of the final </span>
+<span class="sd">        embedding matrix (stored, in the example, in the embeddings variable) </span>
+<span class="sd">        is dimension x order, since, as we said, for each proximity order an </span>
+<span class="sd">        embedding is computed and concatenated in the final embedding matrix.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">G</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">barbell_graph</span><span class="p">(</span><span class="n">m1</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">m2</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">karateclub.node_embedding.neighbourhood.grarep</span> <span class="kn">import</span> <span class="n">GraRep</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">GraRep</span><span class="p">(</span><span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+        <span class="n">embeddings</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">G</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">embeddings</span>
+
+    <span class="k">def</span> <span class="nf">hope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">G</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">G</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">barbell_graph</span><span class="p">(</span><span class="n">m1</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">m2</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">gem.embedding.hope</span> <span class="kn">import</span> <span class="n">HOPE</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">HOPE</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">learn_embedding</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">G</span><span class="p">,</span> <span class="n">model</span>
+
+    <span class="k">def</span> <span class="nf">gcn_embedding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">G</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Unsupervised graph representation learning using Graph ConvNet as encoder</span>
+<span class="sd">        The model embeds a graph by using stacked Graph ConvNet layers</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">G</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">barbell_graph</span><span class="p">(</span><span class="n">m1</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">m2</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">())</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_numpy_matrix</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">nodelist</span><span class="o">=</span><span class="n">order</span><span class="p">)</span>
+        <span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">())</span>
+        <span class="n">A_hat</span> <span class="o">=</span> <span class="n">A</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">())</span> <span class="c1"># add self-connections</span>
+        <span class="n">D_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">A_hat</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">D_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">D_hat</span><span class="p">))</span>
+        <span class="n">D_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">sqrtm</span><span class="p">(</span><span class="n">D_hat</span><span class="p">))</span>
+        <span class="n">A_hat</span> <span class="o">=</span> <span class="n">D_hat</span> <span class="o">@</span> <span class="n">A_hat</span> <span class="o">@</span> <span class="n">D_hat</span>
+        <span class="n">gcn1</span> <span class="o">=</span> <span class="n">GCNLayer</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">(),</span> <span class="mi">8</span><span class="p">)</span>
+        <span class="n">gcn2</span> <span class="o">=</span> <span class="n">GCNLayer</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">gcn3</span> <span class="o">=</span> <span class="n">GCNLayer</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">H1</span> <span class="o">=</span> <span class="n">gcn1</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">A_hat</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
+        <span class="n">H2</span> <span class="o">=</span> <span class="n">gcn2</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">A_hat</span><span class="p">,</span> <span class="n">H1</span><span class="p">)</span>
+        <span class="n">H3</span> <span class="o">=</span> <span class="n">gcn3</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">A_hat</span><span class="p">,</span> <span class="n">H2</span><span class="p">)</span>
+        <span class="n">embeddings</span> <span class="o">=</span> <span class="n">H3</span>
+        <span class="k">return</span> <span class="n">G</span><span class="p">,</span> <span class="n">embeddings</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">GCNLayer</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_inputs</span><span class="p">,</span> <span class="n">n_outputs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_inputs</span> <span class="o">=</span> <span class="n">n_inputs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_outputs</span> <span class="o">=</span> <span class="n">n_outputs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_glorot_init</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_outputs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_inputs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_glorot_init</span><span class="p">(</span><span class="n">nin</span><span class="p">,</span> <span class="n">nout</span><span class="p">):</span>
+        <span class="n">sd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">6.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">nin</span> <span class="o">+</span> <span class="n">nout</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">sd</span><span class="p">,</span> <span class="n">sd</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">nin</span><span class="p">,</span> <span class="n">nout</span><span class="p">))</span>
+      
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_X</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span> <span class="o">@</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="c1"># (N,N)*(N,n_outputs) ==&gt; (n_outputs,N)</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">W</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">_X</span> <span class="c1"># (N, D)*(D, n_outputs) =&gt; (N, n_outputs)</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">H</span><span class="o">.</span><span class="n">T</span> <span class="c1"># (n_outputs, N)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="runs">
+<h2>Runs<a class="headerlink" href="#runs" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">###############################################################################</span>
+<span class="c1"># Drawing Undirected Graphs</span>
+<span class="c1">###############################################################################</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">V</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span> <span class="s1">&#39;Paris&#39;</span><span class="p">,</span> <span class="s1">&#39;Milan&#39;</span><span class="p">,</span> <span class="s1">&#39;Rome&#39;</span><span class="p">}</span>
+<span class="n">E</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Dublin&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Paris&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="s1">&#39;Dublin&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Rome&#39;</span><span class="p">)]</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">shell_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+<span class="n">new_nodes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;London&#39;</span><span class="p">,</span> <span class="s1">&#39;Madrid&#39;</span><span class="p">}</span>
+<span class="n">new_edges</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;London&#39;</span><span class="p">,</span><span class="s1">&#39;Rome&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Madrid&#39;</span><span class="p">,</span><span class="s1">&#39;Paris&#39;</span><span class="p">)]</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">new_nodes</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">new_edges</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">shell_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+<span class="n">node_remove</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;London&#39;</span><span class="p">,</span> <span class="s1">&#39;Rome&#39;</span><span class="p">}</span>
+<span class="n">G</span><span class="o">.</span><span class="n">remove_nodes_from</span><span class="p">(</span><span class="n">node_remove</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">shell_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+<span class="n">node_edges</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Dublin&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Paris&#39;</span><span class="p">)]</span>
+<span class="n">G</span><span class="o">.</span><span class="n">remove_edges_from</span><span class="p">(</span><span class="n">node_edges</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">shell_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">:</span><span class="s1">&#39;Rome&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="s1">&#39;Naples&#39;</span><span class="p">,</span><span class="mi">6</span><span class="p">:</span><span class="s1">&#39;Moscow&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">:</span><span class="s1">&#39;Tokyo&#39;</span><span class="p">}</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">node_names</span><span class="o">=</span><span class="n">nodes</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Drawing Directed Graphs</span>
+<span class="c1">###############################################################################</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+<span class="n">V</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span> <span class="s1">&#39;Paris&#39;</span><span class="p">,</span> <span class="s1">&#39;Milan&#39;</span><span class="p">,</span> <span class="s1">&#39;Rome&#39;</span><span class="p">}</span>
+<span class="n">E</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Dublin&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="s1">&#39;Milan&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="s1">&#39;Dublin&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Rome&#39;</span><span class="p">)]</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">shell_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Drawing Weighted Directed Graphs</span>
+<span class="c1">###############################################################################</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">MultiDiGraph</span><span class="p">()</span>
+<span class="n">V</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span> <span class="s1">&#39;Dublin&#39;</span><span class="p">,</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span> <span class="s1">&#39;Rome&#39;</span><span class="p">}</span>
+<span class="n">E</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+     <span class="p">(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Rome&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),(</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span> <span class="mi">19</span><span class="p">)]</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_weighted_edges_from</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">shell_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">plot_weight</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Drawing Shortest Path</span>
+<span class="c1">###############################################################################</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">:</span><span class="s1">&#39;Rome&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="s1">&#39;Naples&#39;</span><span class="p">,</span><span class="mi">6</span><span class="p">:</span><span class="s1">&#39;Moscow&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">:</span><span class="s1">&#39;Tokyo&#39;</span><span class="p">}</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">draw_enhanced_path</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">node_names</span><span class="o">=</span><span class="n">nodes</span><span class="p">)</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Network Efficieny Graphs</span>
+<span class="c1">###############################################################################</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">complete_graph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="s1">&#39;Rome&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">:</span><span class="s1">&#39;Naples&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="s1">&#39;Moscow&#39;</span><span class="p">,</span><span class="mi">6</span><span class="p">:</span><span class="s1">&#39;Tokyo&#39;</span><span class="p">}</span>
+<span class="n">ge</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">global_efficiency</span><span class="p">(</span><span class="n">G</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mf">.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3</span><span class="p">,</span> <span class="s2">&quot;Global Efficiency:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ge</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">);</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">node_names</span><span class="o">=</span><span class="n">nodes</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">cycle_graph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="s1">&#39;Rome&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">:</span><span class="s1">&#39;Naples&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="s1">&#39;Moscow&#39;</span><span class="p">,</span><span class="mi">6</span><span class="p">:</span><span class="s1">&#39;Tokyo&#39;</span><span class="p">}</span>
+<span class="n">le</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">global_efficiency</span><span class="p">(</span><span class="n">G</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mf">.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3</span><span class="p">,</span> <span class="s2">&quot;Global Efficiency:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">le</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">);</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">node_names</span><span class="o">=</span><span class="n">nodes</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Clustering Coefficient</span>
+<span class="c1">###############################################################################</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">:</span><span class="s1">&#39;Rome&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="s1">&#39;Naples&#39;</span><span class="p">,</span><span class="mi">6</span><span class="p">:</span><span class="s1">&#39;Moscow&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">:</span><span class="s1">&#39;Tokyo&#39;</span><span class="p">}</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+<span class="n">cc</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">clustering</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">node_size</span><span class="o">=</span><span class="p">[(</span><span class="n">v</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">200</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">cc</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">node_names</span><span class="o">=</span><span class="n">nodes</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="n">node_size</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Drawing Benchmark Graphs</span>
+<span class="c1">###############################################################################</span>
+
+<span class="n">complete</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">complete_graph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">lollipop</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">lollipop_graph</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">barbell</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">barbell_graph</span><span class="p">(</span><span class="n">m1</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">m2</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">complete</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Complete&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Lollipop&quot;</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">lollipop</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Barbell&quot;</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">barbell</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">###############################################################################</span>
+<span class="c1"># Graph2vec embedding</span>
+<span class="c1">###############################################################################</span>
+
+<span class="n">embedder</span> <span class="o">=</span> <span class="n">Embeddings</span><span class="p">()</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">graph_embeddings</span> <span class="o">=</span> <span class="n">embedder</span><span class="o">.</span><span class="n">graph_embedding</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">vec</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">graph_embeddings</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">vec</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="p">(</span><span class="n">vec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">vec</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Node2vec embedding</span>
+<span class="c1">###############################################################################</span>
+
+<span class="n">embedder</span> <span class="o">=</span> <span class="n">Embeddings</span><span class="p">()</span>
+<span class="n">G</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">node_embeddings</span> <span class="o">=</span> <span class="n">embedder</span><span class="o">.</span><span class="n">node_embedding</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_vector</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Edge2vec embedding</span>
+<span class="c1">###############################################################################</span>
+
+<span class="n">embedder</span> <span class="o">=</span> <span class="n">Embeddings</span><span class="p">()</span>
+<span class="n">G</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">edge_embeddings</span> <span class="o">=</span> <span class="n">embedder</span><span class="o">.</span><span class="n">edge_embedding</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">(),</span><span class="n">edge_embeddings</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Graph Factorization embedding</span>
+<span class="c1">###############################################################################</span>
+
+<span class="n">embedder</span> <span class="o">=</span> <span class="n">Embeddings</span><span class="p">()</span>
+<span class="n">G</span><span class="p">,</span> <span class="n">model</span> <span class="o">=</span> <span class="n">embedder</span><span class="o">.</span><span class="n">graph_factorization</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">()[</span><span class="n">x</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Graph Representation embedding</span>
+<span class="c1">###############################################################################</span>
+
+<span class="n">embedder</span> <span class="o">=</span> <span class="n">Embeddings</span><span class="p">()</span>
+<span class="n">G</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">embeddings</span> <span class="o">=</span> <span class="n">embedder</span><span class="o">.</span><span class="n">graph_representation</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">()[</span><span class="n">x</span><span class="p">]</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;k=1&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;k=2&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">5</span><span class="p">]),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;k=3&#39;</span><span class="p">)</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># HOPE embedding</span>
+<span class="c1">###############################################################################</span>
+
+<span class="n">embedder</span> <span class="o">=</span> <span class="n">Embeddings</span><span class="p">()</span>
+<span class="n">G</span><span class="p">,</span> <span class="n">model</span> <span class="o">=</span> <span class="n">embedder</span><span class="o">.</span><span class="n">hope</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">()[</span><span class="n">x</span><span class="p">,</span><span class="mi">2</span><span class="p">:]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "sparsh-ai/graph-embeddings",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="T873032_Graph_embeddings_using_Convnet_Stellargraph.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Graph embeddings using Convnet Stellargraph</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="T457098_KHGT_knowledge_graph_embeddings.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">KHGT knowledge graph embeddings</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Sparsh A.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
