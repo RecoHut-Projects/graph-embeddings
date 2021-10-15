@@ -11,3 +11,5 @@ parts:
   chapters:
   - file: C870584_DeepWalk
   - file: C067906_LINE
+  - file: C662128_SDNE
+  - file: C039027_Node2vec
