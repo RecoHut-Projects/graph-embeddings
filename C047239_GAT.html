@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LINE &#8212; graph-embeddings</title>
+    <title>GAT &#8212; graph-embeddings</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -42,6 +42,8 @@
     <script src="_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe,.cell"
@@ -51,8 +53,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="SDNE" href="C662128_SDNE.html" />
-    <link rel="prev" title="DeepWalk" href="C870584_DeepWalk.html" />
+    <link rel="next" title="GATv2" href="C110059_GATv2.html" />
+    <link rel="prev" title="CoKE" href="C652166_CoKE.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -126,8 +128,8 @@
    DeepWalk
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="C067906_LINE.html">
    LINE
   </a>
  </li>
@@ -156,8 +158,8 @@
    CoKE
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="C047239_GAT.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    GAT
   </a>
  </li>
@@ -217,7 +219,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/C067906_LINE.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/C047239_GAT.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -242,7 +244,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/C067906_LINE.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/C047239_GAT.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -250,7 +252,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/C067906_LINE.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/C047239_GAT.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -273,8 +275,8 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#abstract">
-   Abstract
+  <a class="reference internal nav-link" href="#references">
+   References
   </a>
  </li>
 </ul>
@@ -288,15 +290,27 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="line">
-<h1>LINE<a class="headerlink" href="#line" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="gat">
+<h1>GAT<a class="headerlink" href="#gat" title="Permalink to this headline">¶</a></h1>
 <blockquote>
-<div><p>Large-scale Information Network Embedding</p>
+<div><p>Graph Attention Networks</p>
 </div></blockquote>
-<div class="section" id="abstract">
-<h2>Abstract<a class="headerlink" href="#abstract" title="Permalink to this headline">¶</a></h2>
-<p><em>This paper studies the problem of embedding very large information networks into low-dimensional vector spaces, which is useful in many tasks such as visualization, node classification, and link prediction. Most existing graph embedding methods do not scale for real world information networks which usually contain millions of nodes. In this paper, we propose a novel network embedding method called the “LINE,” which is suitable for arbitrary types of information networks: undirected, directed, and/or weighted. The method optimizes a carefully designed objective function that preserves both the local and global network structures. An edge-sampling algorithm is proposed that addresses the limitation of the classical stochastic gradient descent and improves both the effectiveness and the efficiency of the inference. Empirical experiments prove the effectiveness of the LINE on a variety of real-world information networks, including language networks, social networks, and citation networks. The algorithm is very efficient, which is able to learn the embedding of a network with millions of vertices and billions of edges in a few hours on a typical single machine.</em></p>
-<p>It defines loss functions to preserve the first-order or second-order proximity separately. After optimizing the loss functions, it concatenates these representations.</p>
+<p>GATs work on graph data. A graph consists of nodes and edges connecting nodes. For example, in Cora dataset the nodes are research papers and the edges are citations that connect the papers.</p>
+<p>GAT uses masked self-attention, kind of similar to <a class="reference external" href="https://nn.labml.ai/transformers/mha.html">transformers</a>. GAT consists of graph attention layers stacked on top of each other. Each graph attention layer gets node embeddings as inputs and outputs transformed embeddings. The node embeddings pay attention to the embeddings of other nodes it’s connected to.</p>
+<p>The idea is to compute the hidden representations of each node in the graph, by attending over its neighbors, following a self-attention strategy. The attention architecture has several interesting properties: (1) the operation is efficient, since it is parallelizable across node neighbor pairs; (2) it can be applied to graph nodes having different degrees by specifying arbitrary weights to the neighbors; and (3) the model is directly applicable to inductive learning problems, including tasks where the model has to generalize to completely unseen graphs.</p>
+<p><center><figure><img src='_images/C047239_1.png'><figcaption>An illustration of multi-head attention (with K = 3 heads) by node 1 on its neighborhood. Different arrow styles and colors denote independent attention computations. The aggregated features from each head are concatenated or averaged to obtain \vec{h}'_1.</figcaption></figure></center></p><p>Formally,</p>
+<div class="math notranslate nohighlight">
+\[\vec{h'}_i = \sigma \left( \sum_{j \in \mathcal{N_i}} \alpha_{ij}W\vec{h}_j \right)\]</div>
+<p>To stabilize the learning process of self-attention, we have found extending our mechanism to employ multi-head attention to be beneficial, similarly to Vaswani et al. (2017). Specifically, K independent attention mechanisms execute the transformation, and then their features are concatenated, resulting in the following output feature representation:</p>
+<div class="math notranslate nohighlight">
+\[\vec{h'}_i = \sigma \left( \frac{1}{K} \sum_{k=1}^K \sum_{j \in \mathcal{N_i}} \alpha_{ij}^k W^k \vec{h}_j \right)\]</div>
+<p>If we perform multi-head attention on the final (prediction) layer of the network, concatenation is no longer sensible—instead, we employ averaging, and delay applying the final nonlinearity (usually a softmax or logistic sigmoid for classification problems) until then.</p>
+<p><center><figure><img src='_images/C047239_2.png'><figcaption>A t-SNE plot of the computed feature representations of a pre-trained GAT model’s first hidden layer on the Cora dataset. Node colors denote classes. Edge thickness indicates aggregated normalized attention coefficients between nodes i and j, across all eight attention heads (\sum_{k=1}^K \alpha_{ij}^k + \alpha{ji}^k).</figcaption></figure></center></p><div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="https://youtu.be/uFLeKkXWq2c">https://youtu.be/uFLeKkXWq2c</a></p></li>
+<li><p><a class="reference external" href="https://nn.labml.ai/graphs/gat/index.html">https://nn.labml.ai/graphs/gat/index.html</a></p></li>
+</ol>
 </div>
 </div>
 
@@ -330,19 +344,19 @@
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="C870584_DeepWalk.html" title="previous page">
+        <a class="left-prev" href="C652166_CoKE.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">DeepWalk</p>
+                <p class="prevnext-title">CoKE</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="C662128_SDNE.html" title="next page">
+        <a class="right-next" href="C110059_GATv2.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">SDNE</p>
+                <p class="prevnext-title">GATv2</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

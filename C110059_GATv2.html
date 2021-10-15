@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LINE &#8212; graph-embeddings</title>
+    <title>GATv2 &#8212; graph-embeddings</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="SDNE" href="C662128_SDNE.html" />
-    <link rel="prev" title="DeepWalk" href="C870584_DeepWalk.html" />
+    <link rel="next" title="BigGraph" href="C538124_BigGraph.html" />
+    <link rel="prev" title="GAT" href="C047239_GAT.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -126,8 +126,8 @@
    DeepWalk
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="C067906_LINE.html">
    LINE
   </a>
  </li>
@@ -161,8 +161,8 @@
    GAT
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="C110059_GATv2.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    GATv2
   </a>
  </li>
@@ -217,7 +217,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/C067906_LINE.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/C110059_GATv2.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -242,7 +242,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/C067906_LINE.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/C110059_GATv2.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -250,7 +250,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/C067906_LINE.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/C110059_GATv2.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -277,6 +277,11 @@
    Abstract
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -288,15 +293,23 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="line">
-<h1>LINE<a class="headerlink" href="#line" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="gatv2">
+<h1>GATv2<a class="headerlink" href="#gatv2" title="Permalink to this headline">¶</a></h1>
 <blockquote>
-<div><p>Large-scale Information Network Embedding</p>
+<div><p>How Attentive are Graph Attention Networks?</p>
 </div></blockquote>
 <div class="section" id="abstract">
 <h2>Abstract<a class="headerlink" href="#abstract" title="Permalink to this headline">¶</a></h2>
-<p><em>This paper studies the problem of embedding very large information networks into low-dimensional vector spaces, which is useful in many tasks such as visualization, node classification, and link prediction. Most existing graph embedding methods do not scale for real world information networks which usually contain millions of nodes. In this paper, we propose a novel network embedding method called the “LINE,” which is suitable for arbitrary types of information networks: undirected, directed, and/or weighted. The method optimizes a carefully designed objective function that preserves both the local and global network structures. An edge-sampling algorithm is proposed that addresses the limitation of the classical stochastic gradient descent and improves both the effectiveness and the efficiency of the inference. Empirical experiments prove the effectiveness of the LINE on a variety of real-world information networks, including language networks, social networks, and citation networks. The algorithm is very efficient, which is able to learn the embedding of a network with millions of vertices and billions of edges in a few hours on a typical single machine.</em></p>
-<p>It defines loss functions to preserve the first-order or second-order proximity separately. After optimizing the loss functions, it concatenates these representations.</p>
+<p><em>Graph Attention Networks (GATs) are one of the most popular GNN architectures and are considered as the state-of-the-art architecture for representation learning with graphs. In GAT, every node attends to its neighbors given its own representation as the query. However, in this paper we show that GATs can only compute a restricted kind of attention where the ranking of attended nodes is unconditioned on the query node. We formally define this restricted kind of attention as static attention and distinguish it from a strictly more expressive dynamic attention. Because GATs use a static attention mechanism, there are simple graph problems that GAT cannot express: in a controlled problem, we show that static attention hinders GAT from even fitting the training data. To remove this limitation, we introduce a simple fix by modifying the order of operations and propose GATv2: a dynamic graph attention variant that is strictly more expressive than GAT. We perform an extensive evaluation and show that GATv2 outperforms GAT across 11 OGB and other benchmarks while we match their parametric costs.</em></p>
+<p>GATv2s work on graph data similar to <a class="reference external" href="https://nn.labml.ai/graphs/gat/index.html">GAT</a>. A graph consists of nodes and edges connecting nodes. For example, in Cora dataset the nodes are research papers and the edges are citations that connect the papers.</p>
+<p>The GATv2 operator fixes the static attention problem of the standard <a class="reference external" href="https://nn.labml.ai/graphs/gat/index.html">GAT</a>. Static attention is when the attention to the key nodes has the same rank (order) for any query node.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="https://github.com/tech-srl/how_attentive_are_gats">https://github.com/tech-srl/how_attentive_are_gats</a></p></li>
+<li><p><a class="reference external" href="https://nn.labml.ai/graphs/gatv2/index.html">https://nn.labml.ai/graphs/gatv2/index.html</a></p></li>
+</ol>
 </div>
 </div>
 
@@ -330,19 +343,19 @@
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="C870584_DeepWalk.html" title="previous page">
+        <a class="left-prev" href="C047239_GAT.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">DeepWalk</p>
+                <p class="prevnext-title">GAT</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="C662128_SDNE.html" title="next page">
+        <a class="right-next" href="C538124_BigGraph.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">SDNE</p>
+                <p class="prevnext-title">BigGraph</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

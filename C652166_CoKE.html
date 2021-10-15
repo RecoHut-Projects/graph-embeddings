@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LINE &#8212; graph-embeddings</title>
+    <title>CoKE &#8212; graph-embeddings</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -42,6 +42,8 @@
     <script src="_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe,.cell"
@@ -51,8 +53,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="SDNE" href="C662128_SDNE.html" />
-    <link rel="prev" title="DeepWalk" href="C870584_DeepWalk.html" />
+    <link rel="next" title="GAT" href="C047239_GAT.html" />
+    <link rel="prev" title="Splitter" href="C779816_Splitter.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -126,8 +128,8 @@
    DeepWalk
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="C067906_LINE.html">
    LINE
   </a>
  </li>
@@ -151,8 +153,8 @@
    Splitter
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="C652166_CoKE.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    CoKE
   </a>
  </li>
@@ -217,7 +219,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/C067906_LINE.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/C652166_CoKE.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -242,7 +244,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/C067906_LINE.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/C652166_CoKE.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -250,7 +252,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/C067906_LINE.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/C652166_CoKE.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -273,8 +275,13 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#abstract">
-   Abstract
+  <a class="reference internal nav-link" href="#problem-formulation">
+   Problem Formulation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training-tasks">
+   Training Tasks
   </a>
  </li>
 </ul>
@@ -288,16 +295,38 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="line">
-<h1>LINE<a class="headerlink" href="#line" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="coke">
+<h1>CoKE<a class="headerlink" href="#coke" title="Permalink to this headline">¶</a></h1>
 <blockquote>
-<div><p>Large-scale Information Network Embedding</p>
+<div><p>Contextualized Knowledge Graph Embedding</p>
 </div></blockquote>
-<div class="section" id="abstract">
-<h2>Abstract<a class="headerlink" href="#abstract" title="Permalink to this headline">¶</a></h2>
-<p><em>This paper studies the problem of embedding very large information networks into low-dimensional vector spaces, which is useful in many tasks such as visualization, node classification, and link prediction. Most existing graph embedding methods do not scale for real world information networks which usually contain millions of nodes. In this paper, we propose a novel network embedding method called the “LINE,” which is suitable for arbitrary types of information networks: undirected, directed, and/or weighted. The method optimizes a carefully designed objective function that preserves both the local and global network structures. An edge-sampling algorithm is proposed that addresses the limitation of the classical stochastic gradient descent and improves both the effectiveness and the efficiency of the inference. Empirical experiments prove the effectiveness of the LINE on a variety of real-world information networks, including language networks, social networks, and citation networks. The algorithm is very efficient, which is able to learn the embedding of a network with millions of vertices and billions of edges in a few hours on a typical single machine.</em></p>
-<p>It defines loss functions to preserve the first-order or second-order proximity separately. After optimizing the loss functions, it concatenates these representations.</p>
+<p>CoKE takes a sequence as input and uses a Transformer encoder to obtain contextualized representations. The model is then trained by predicting a missing component in the sequence, based on these contextualized representations.</p>
+<p>Unlike sequential left-to-right or right-to-left encoding strategies, Transformer uses a multi-head self-attention mechanism, which allows each element to attend to all elements in the sequence, and thus is more effective in context modeling.</p>
+<p><center><figure><img src='_images/C652166_1.png'><figcaption>An example of Barack Obama, where the left subgraph shows his political role (dashed blue) and the right one his family role (solid orange).</figcaption></figure></center></p><p>Take relation HasPart as an example, which also presents contextualized meanings, e.g., composition-related as (Table, HasPart, Leg) and location-related as (Atlantics, HasPart, NewYorkBay) (Xiao et al., 2016). Learning entity and relation representations that could effectively capture their contextual meanings poses a new challenge to KG embedding.</p>
+<div class="section" id="problem-formulation">
+<h2>Problem Formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this headline">¶</a></h2>
+<p>We are given a KG composed of subject-relation-object triples {(s, r, o)}. Each triple indicates a relation r ∈ R between two entities s, o ∈ E, e.g., (Barack Obama, Has Child, Sasha Obama). Here, E is the entity vocabulary and R the relation set. These entities and relations form rich, varied graph contexts. Two types of graph contexts are considered here: edges and paths, both formalized as sequences composed of entities and relations.</p>
+<ul class="simple">
+<li><p>An edge s → r → o is a sequence formed by a triple, e.g., Barack Obama → Has Child → Sasha Obama. This is the basic unit of a KG, and also the simplest form of graph contexts.</p></li>
+<li><p>A path <span class="math notranslate nohighlight">\(s → r_1 → · · · → r_k → o\)</span> is a sequence formed by a list of relations linking two entities, e.g., Barack Obama → Has Child (Sasha) −−−−−→ Lives In (US) −−→ Official Language → English. The length of a path is defined as the number of relations therein. The example above is a path of length 3. Edges can be viewed as special paths of length 1.</p></li>
+</ul>
+<p>Given a graph context, i.e., an edge or a path, we unify the input as a sequence <span class="math notranslate nohighlight">\(X = (x_1, x_2, · · · , x_n)\)</span>, where the first and last elements are entities from <span class="math notranslate nohighlight">\(E\)</span>, and the others in between are relations from <span class="math notranslate nohighlight">\(R\)</span>. For each element <span class="math notranslate nohighlight">\(x_i\)</span> in <span class="math notranslate nohighlight">\(X\)</span>, we construct its input representation as:</p>
+<div class="math notranslate nohighlight">
+\[h_i^0 = x_i^{ele} + x_i^{pos},\]</div>
+<p>where <span class="math notranslate nohighlight">\(x_i^{ele}\)</span> is the element embedding and <span class="math notranslate nohighlight">\(x_i^{pos}\)</span> the position embedding. The former is used to identify the current element, and the latter its position in the sequence. We allow an element embedding for each entity/relation in E ∪ R, and a position embedding for each position within length K. After constructing all input representations, we feed them into a stack of L successive Transformer encoders (Vaswani et al., 2017) to encode the sequence and obtain:</p>
+<div class="math notranslate nohighlight">
+\[h_i^l = Transformer(h_i^{l−1}),\ l= 1, 2, · · · , L\]</div>
+<p>where <span class="math notranslate nohighlight">\(h_i^l\)</span> is the hidden state of xi after the <span class="math notranslate nohighlight">\(l\)</span>-th layer.</p>
 </div>
+<div class="section" id="training-tasks">
+<h2>Training Tasks<a class="headerlink" href="#training-tasks" title="Permalink to this headline">¶</a></h2>
+<p>To train the model, we design an entity prediction task, i.e., to predict a missing entity from a given graph context. This task amounts to single-hop or multi-hop question answering on KGs.</p>
+<ul class="simple">
+<li><p>Each edge s → r → o is associated with two training instances: ? → r → o and s → r →?. It is a single-hop question answering task, e.g., Barack Obama → Has Child →? is to answer “Who is the child of Barack Obama?”.</p></li>
+<li><p>Each path <span class="math notranslate nohighlight">\(s → r_1 → · · · → r_k → o\)</span> is also associated with two training instances, one to predict s and the other to predict o. This is a multi-hop question answering task, e.g., Barack Obama → Has Child → Lives In → Official Language →? is to answer “What is the official language of the country where Barack Obama’s child lives in?”.</p></li>
+</ul>
+<p>This entity prediction task resembles the masked language model (MLM) task studied in (Devlin et al., 2019). But unlike MLM that randomly picks some input tokens to mask and predict, we restrict the masking and prediction solely to entities in a given edge/path, so as to create meaningful question answering instances. Moreover, many downstream tasks considered in the evaluation phase, e.g., link prediction and path query answering, can be formulated exactly in the same way as entity prediction, which avoids training-test discrepancy.</p>
+<p><center><img src='_images/C652166_2.png'></center></p></div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -330,19 +359,19 @@
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="C870584_DeepWalk.html" title="previous page">
+        <a class="left-prev" href="C779816_Splitter.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">DeepWalk</p>
+                <p class="prevnext-title">Splitter</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="C662128_SDNE.html" title="next page">
+        <a class="right-next" href="C047239_GAT.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">SDNE</p>
+                <p class="prevnext-title">GAT</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

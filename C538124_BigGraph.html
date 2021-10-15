@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LINE &#8212; graph-embeddings</title>
+    <title>BigGraph &#8212; graph-embeddings</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="SDNE" href="C662128_SDNE.html" />
-    <link rel="prev" title="DeepWalk" href="C870584_DeepWalk.html" />
+    <link rel="next" title="KHGT" href="C503513_KHGT.html" />
+    <link rel="prev" title="GATv2" href="C110059_GATv2.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -126,8 +126,8 @@
    DeepWalk
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="C067906_LINE.html">
    LINE
   </a>
  </li>
@@ -166,8 +166,8 @@
    GATv2
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="C538124_BigGraph.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    BigGraph
   </a>
  </li>
@@ -217,7 +217,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/C067906_LINE.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/C538124_BigGraph.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -242,7 +242,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/C067906_LINE.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/C538124_BigGraph.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -250,7 +250,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/C067906_LINE.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/C538124_BigGraph.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -267,19 +267,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#abstract">
-   Abstract
-  </a>
- </li>
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -288,16 +275,13 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="line">
-<h1>LINE<a class="headerlink" href="#line" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="biggraph">
+<h1>BigGraph<a class="headerlink" href="#biggraph" title="Permalink to this headline">¶</a></h1>
 <blockquote>
-<div><p>Large-scale Information Network Embedding</p>
+<div><p>PyTorch-BigGraph: A Large-scale Graph Embedding System</p>
 </div></blockquote>
-<div class="section" id="abstract">
-<h2>Abstract<a class="headerlink" href="#abstract" title="Permalink to this headline">¶</a></h2>
-<p><em>This paper studies the problem of embedding very large information networks into low-dimensional vector spaces, which is useful in many tasks such as visualization, node classification, and link prediction. Most existing graph embedding methods do not scale for real world information networks which usually contain millions of nodes. In this paper, we propose a novel network embedding method called the “LINE,” which is suitable for arbitrary types of information networks: undirected, directed, and/or weighted. The method optimizes a carefully designed objective function that preserves both the local and global network structures. An edge-sampling algorithm is proposed that addresses the limitation of the classical stochastic gradient descent and improves both the effectiveness and the efficiency of the inference. Empirical experiments prove the effectiveness of the LINE on a variety of real-world information networks, including language networks, social networks, and citation networks. The algorithm is very efficient, which is able to learn the embedding of a network with millions of vertices and billions of edges in a few hours on a typical single machine.</em></p>
-<p>It defines loss functions to preserve the first-order or second-order proximity separately. After optimizing the loss functions, it concatenates these representations.</p>
-</div>
+<p><a class="reference external" href="https://github.com/facebookresearch/PyTorch-BigGraph">PyTorch BigGraph</a> handles the second approach, and we will do so as well below. Just for reference let’s talk about the size aspect for a second. Graphs are usually encoded by their <a class="reference external" href="https://en.wikipedia.org/wiki/Adjacency_matrix">adjacency matrix</a>. If you have a graph with 3,000 nodes and an edge between each node, you end up with around 10,000,000 entries in your matrix. Even if that’s sparse, apparently this bursts most GPUs according to <a class="reference external" href="https://arxiv.org/abs/1609.02907">the paper</a> linked above. If you think about the usual graphs used in recommendation systems, you’ll realize they are typically much larger than that.</p>
+<p>BigGraph is made to work around the memory limit of machines, so it’s completely file based. You’ll have to trigger processes to create the appropriate file structure. And if you want run an example again, you’ll have to delete the checkpoints.</p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -330,19 +314,19 @@
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="C870584_DeepWalk.html" title="previous page">
+        <a class="left-prev" href="C110059_GATv2.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">DeepWalk</p>
+                <p class="prevnext-title">GATv2</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="C662128_SDNE.html" title="next page">
+        <a class="right-next" href="C503513_KHGT.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">SDNE</p>
+                <p class="prevnext-title">KHGT</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
