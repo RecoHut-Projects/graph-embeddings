@@ -100,6 +100,11 @@
    Key developments
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L991141_Random_walk.html">
+   Random walk
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -288,11 +293,6 @@
    Taxonomy
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#general-framework">
-   General framework
-  </a>
- </li>
 </ul>
 
             </nav>
@@ -307,13 +307,13 @@
   <div class="tex2jax_ignore mathjax_ignore section" id="graph-embeddings">
 <h1>Graph embeddings<a class="headerlink" href="#graph-embeddings" title="Permalink to this headline">¶</a></h1>
 <p>Due to their nature, graphs can be analyzed at different levels of granularity: at the node, edge, and graph level (the whole graph), as depicted in the following figure. For each of those levels, different problems could be faced and, as a consequence, specific algorithms should be used.</p>
-<p><center><figure><img src='_images/US549467_1.png'><figcaption>Visual representation of the three different levels of granularity in graphs</figcaption></figure></center></p><p>The first, and most straightforward, way of creating features capable of representing structural information from graphs is the extraction of certain statistics. For instance, a graph could be represented by its degree distribution, efficiency, and other metrics.</p>
+<p><center><figure><img src='https://github.com/sparsh-ai/graph-embeddings/blob/main/docs/_images/US549467_1.png?raw=1'><figcaption>Visual representation of the three different levels of granularity in graphs</figcaption></figure></center></p><p>The first, and most straightforward, way of creating features capable of representing structural information from graphs is the extraction of certain statistics. For instance, a graph could be represented by its degree distribution, efficiency, and other metrics.</p>
 <p>A more complex procedure consists of applying specific kernel functions or, in other cases, engineering-specific features that are capable of incorporating the desired properties into the final machine learning model. However, as you can imagine, this process could be really time-consuming and, in certain cases, the features used in the model could represent just a subset of the information that is really needed to get the best performance for the final model.</p>
-<p><center><figure><img src='_images/US549467_2.png'><figcaption>Converting Adjacency Matrices to low-dimensional continuous vector spaces.</figcaption></figure></center></p><p>In the last decade, a lot of work has been done in order to define new approaches for creating meaningful and compact representations of graphs. The general idea behind all these approaches is to create algorithms capable of <em>learning</em> a good representation of the original dataset such that geometric relationships in the new space reflect the structure of the original graph. We usually call the process of learning a good representation of a given graph <strong>representation learning</strong> or <strong>network embedding.</strong></p>
-<p><center><figure><img src='_images/US549467_3.png'><figcaption>Example of a workflow for a network embedding algorithm</figcaption></figure></center></p><div class="section" id="the-generalized-network-embedding-problem">
+<p><center><figure><img src='https://github.com/sparsh-ai/graph-embeddings/blob/main/docs/_images/US549467_2.png?raw=1'><figcaption>Converting Adjacency Matrices to low-dimensional continuous vector spaces.</figcaption></figure></center></p><p>In the last decade, a lot of work has been done in order to define new approaches for creating meaningful and compact representations of graphs. The general idea behind all these approaches is to create algorithms capable of <em>learning</em> a good representation of the original dataset such that geometric relationships in the new space reflect the structure of the original graph. We usually call the process of learning a good representation of a given graph <strong>representation learning</strong> or <strong>network embedding.</strong></p>
+<p><center><figure><img src='https://github.com/sparsh-ai/graph-embeddings/blob/main/docs/_images/US549467_3.png?raw=1'><figcaption>Example of a workflow for a network embedding algorithm</figcaption></figure></center></p><div class="section" id="the-generalized-network-embedding-problem">
 <h2>The generalized network embedding problem<a class="headerlink" href="#the-generalized-network-embedding-problem" title="Permalink to this headline">¶</a></h2>
 <p>Network embedding is the task that aims at learning a mapping function from a discrete graph to a continuous domain. Formally, given a graph <span class="math notranslate nohighlight">\(G = (V, E)\)</span> with weighted adjacency matrix <span class="math notranslate nohighlight">\(W \in \mathbb{R}^{|V|×|V|}\)</span>, the goal is to learn low-dimensional vector representations <span class="math notranslate nohighlight">\({Z_i}_{\{i \in V\}}\)</span> (embeddings) for nodes in the graph <span class="math notranslate nohighlight">\({v_i}_{\{i \in V\}}\)</span>, such that important graph properties (e.g. local or global structure) are preserved in the embedding space. For instance, if two nodes have similar connections in the original graph, their learned vector representations should be close. Let <span class="math notranslate nohighlight">\(Z \in \mathbb{R}^{|V|×d}\)</span> denote the node embedding matrix. In practice, we often want low-dimensional embeddings (<span class="math notranslate nohighlight">\(d \ll |V|\)</span>) for scalability purposes. That is, network embedding can be viewed as a dimensionality reduction technique for graph structured data, where the input data is defined on a non-Euclidean, high-dimensional, discrete domain.</p>
-</div>
+<p><center><figure><img src='https://github.com/sparsh-ai/graph-embeddings/blob/main/docs/_images/US549467_8.png?raw=1'><figcaption>A general design pipeline of graph embedding-based recommendation. source.</figcaption></figure></center></p></div>
 <div class="section" id="graph-level-embedding">
 <h2>Graph level embedding<a class="headerlink" href="#graph-level-embedding" title="Permalink to this headline">¶</a></h2>
 <p>Given a dataset with <em>m</em> different graphs, the task is to build a machine learning algorithm capable of classifying a graph into the right class. We can then see this problem as a classification problem, where the dataset is defined by a list of pairs, <span class="math notranslate nohighlight">\(*&lt;G_i,y_i&gt;*\)</span>, where <span class="math notranslate nohighlight">\(*G_i*\)</span> is a graph and <span class="math notranslate nohighlight">\(*y_i*\)</span> is the class the graph belongs to.</p>
@@ -323,7 +323,7 @@
 <h2>Node-level embedding<a class="headerlink" href="#node-level-embedding" title="Permalink to this headline">¶</a></h2>
 <p>Given a (possibly large) graph <span class="math notranslate nohighlight">\(G = (V,E)\)</span>, the goal is to classify each vertex <span class="math notranslate nohighlight">\(v \in V\)</span> into the right class. In this setting, the dataset includes <span class="math notranslate nohighlight">\(*G*\)</span> and a list of pairs, <span class="math notranslate nohighlight">\(*&lt;v_i,y_i&gt;*\)</span>, where <span class="math notranslate nohighlight">\(*v_i*\)</span> is a node of graph <span class="math notranslate nohighlight">\(*G*\)</span> and <span class="math notranslate nohighlight">\(*y_i*\)</span> is the class to which the node belongs. In this case, the mapping function would be <span class="math notranslate nohighlight">\(f:V \to \mathbb{R}^n\)</span>.</p>
 <p>The goal of node embedding is “efficient task-independent feature-learning for machine learning with graphs”.</p>
-<p><center><img src='_images/US549467_4.png'></center></p></div>
+<p><center><img src='https://github.com/sparsh-ai/graph-embeddings/blob/main/docs/_images/US549467_4.png?raw=1'></center></p></div>
 <div class="section" id="edge-level-embedding">
 <h2>Edge level embedding<a class="headerlink" href="#edge-level-embedding" title="Permalink to this headline">¶</a></h2>
 <p>Given a (possibly large) graph <span class="math notranslate nohighlight">\(G = (V,E)\)</span>, the goal is to classify each edge <span class="math notranslate nohighlight">\(e \in E\)</span>, into the right class. In this setting, the dataset includes <span class="math notranslate nohighlight">\(*G*\)</span> and a list of pairs, <span class="math notranslate nohighlight">\(*&lt;e_i,y_i&gt;*\)</span>, where <span class="math notranslate nohighlight">\(*e_i*\)</span> is an edge of graph <span class="math notranslate nohighlight">\(*G*\)</span> and <span class="math notranslate nohighlight">\(*y_i*\)</span> is the class to which the edge belongs. Another typical task for this level of granularity is <strong>link prediction</strong>, the problem of predicting the existence of a link between two existing nodes in a graph. In this case, the mapping function would be <span class="math notranslate nohighlight">\(f:E \to \mathbb{R}^n\)</span>.</p>
@@ -331,7 +331,7 @@
 <div class="section" id="encoder-and-decoder">
 <h2>Encoder and Decoder<a class="headerlink" href="#encoder-and-decoder" title="Permalink to this headline">¶</a></h2>
 <p>Every graph, node, or edge embedding method can be described by two fundamental components, named the encoder and the decoder. The encoder (ENC) maps the input into the embedding space, while the decoder (DEC) decodes structural information about the graph from the learned embedding. It follows an intuitive idea: if we are able to encode a graph such that the decoder is able to retrieve all the necessary information, then the embedding must contain a compressed version of all this information and can be used to downstream machine learning tasks:</p>
-<p><center><figure><img src='_images/US549467_5.png'><figcaption>Generalized encoder (ENC) and decoder (DEC) architecture for embedding algorithms</figcaption></figure></center></p></div>
+<p><center><figure><img src='https://github.com/sparsh-ai/graph-embeddings/blob/main/docs/_images/US549467_5.png?raw=1'><figcaption>Generalized encoder (ENC) and decoder (DEC) architecture for embedding algorithms</figcaption></figure></center></p></div>
 <div class="section" id="categorization-of-embedding-algorithms">
 <h2>Categorization of embedding algorithms<a class="headerlink" href="#categorization-of-embedding-algorithms" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="shallow-embedding-methods">
@@ -353,7 +353,7 @@
 <div class="section" id="graph-neural-networks">
 <h3>Graph neural networks<a class="headerlink" href="#graph-neural-networks" title="Permalink to this headline">¶</a></h3>
 <p>GNNs are deep learning methods that work on graph-structured data. This family of methods is also known as geometric deep learning and is gaining increasing interest in a variety of applications, including social network analysis and computer graphics. The original formulation of GNN was proposed by Scarselli et al. back in 2009. It relies on the fact that each node can be described by its features and its neighborhood. Information coming from the neighborhood (which represents the concept of locality in the graph domain) can be aggregated and used to compute more complex and high-level features.</p>
-<p><center><figure><img src='_images/US549467_6.png'><figcaption>The hierarchical structure of the different unsupervised embedding algorithms</figcaption></figure></center></p><div class="tip admonition">
+<p><center><figure><img src='https://github.com/sparsh-ai/graph-embeddings/blob/main/docs/_images/US549467_6.png?raw=1'><figcaption>The hierarchical structure of the different unsupervised embedding algorithms</figcaption></figure></center></p><div class="tip admonition">
 <p class="admonition-title">Note</p>
 <p>It is important to highlight the main role that these algorithms play when we try to solve a machine learning problem on a graph. They can be used passively in order to transform a graph into a feature vector suitable for a classical machine learning algorithm or for data visualization tasks. But they can also be used actively during the learning process, where the machine learning algorithm finds a compact and meaningful solution to a specific problem.</p>
 </div>
@@ -406,13 +406,11 @@
 </div>
 <div class="section" id="taxonomy">
 <h2>Taxonomy<a class="headerlink" href="#taxonomy" title="Permalink to this headline">¶</a></h2>
-<p><center><img src='_images/US549467_7.png'></center></p></div>
-<div class="section" id="general-framework">
-<h2>General framework<a class="headerlink" href="#general-framework" title="Permalink to this headline">¶</a></h2>
-<p><center><figure><img src='_images/US549467_8.png'><figcaption>A general design pipeline of graph embedding-based recommendation. source.</figcaption></figure></center></p><p><center><img src='_images/US549467_7.png'></center></p><div class="toctree-wrapper compound">
+<p><center><img src='https://github.com/sparsh-ai/graph-embeddings/blob/main/docs/_images/US549467_7.png?raw=1'></center></p><div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="L742313_Key_developments.html">Key developments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L991141_Random_walk.html">Random walk</a></li>
 </ul>
 </div>
 </div>
