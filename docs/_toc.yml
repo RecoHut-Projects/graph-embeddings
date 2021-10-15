@@ -13,3 +13,10 @@ parts:
   - file: C067906_LINE
   - file: C662128_SDNE
   - file: C039027_Node2vec
+  - file: C694808_Struc2Vec
+  - file: C779816_Splitter
+  - file: C652166_CoKE
+  - file: C047239_GAT
+  - file: C110059_GATv2
+  - file: C538124_BigGraph
+  - file: C503513_KHGT
