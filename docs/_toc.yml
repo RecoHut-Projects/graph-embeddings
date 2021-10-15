@@ -20,3 +20,32 @@ parts:
   - file: C110059_GATv2
   - file: C538124_BigGraph
   - file: C503513_KHGT
+- caption: Tutorials
+  chapters:
+  - file: T050508_Introduction_to_Networkx
+  - file: T528562_Graph_properties
+  - file: T118630_Graph_Benchmarks
+  - file: T984528_Graph_encoder
+  - file: T384270_DeepWalk_in_python
+  - file: T382881_DeepWalk_on_Karateclub
+  - file: T677598_DeepWalk_on_ML_100k
+  - file: T862985_LINE_on_Wiki_network
+  - file: T186367_Node2vec_from_scratch
+  - file: T611050_Node2vec_in_PyTorch_Geometric_on_CORA_dataset
+  - file: T815556_Node2vec_on_Karateclub
+  - file: T894941_Node2vec_on_ML_latest_in_Keras
+  - file: T926278_Node2vec,_Edge2vec,_and_Graph2vec
+  - file: T401127_GEM_on_Karateclub
+  - file: T481518_Struc2vec_on_airports_graph
+  - file: T516490_Learn_embeddings_using_Graph_Networks
+  - file: T981902_Shallow_embedding_methods
+  - file: T189677_Graph_embeddings_using_SDNE
+  - file: T873032_Graph_embeddings_using_Convnet_Stellargraph
+  - file: T674201_Graph_embeddings
+  - file: T457098_KHGT_knowledge_graph_embeddings
+  - file: T403235_Contextualized_Knowledge_Graph_Embedding
+  - file: T643979_Learning_Node_Representations_from_Multiple_Social_Contexts
+  - file: T874868_GAT_in_Tensorflow.x
+  - file: T249662_GAT_in_PyTorch_on_CORA
+  - file: T336765_FB15K_Graph_Embedding_Learning_in_PyTorch_Big_Graph
+  - file: T012114_SAGEConv_graph_embeddings_in_PyG
