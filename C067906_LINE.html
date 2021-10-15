@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Random walk &#8212; graph-embeddings</title>
+    <title>LINE &#8212; graph-embeddings</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Skip-gram model" href="L128493_Skip_gram_model.html" />
-    <link rel="prev" title="Key developments" href="L742313_Key_developments.html" />
+    <link rel="prev" title="DeepWalk" href="C870584_DeepWalk.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -93,14 +92,14 @@
   Concepts
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="L742313_Key_developments.html">
    Key developments
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="L991141_Random_walk.html">
    Random walk
   </a>
  </li>
@@ -120,14 +119,14 @@
   Models
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="C870584_DeepWalk.html">
    DeepWalk
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="C067906_LINE.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    LINE
   </a>
  </li>
@@ -172,7 +171,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/L991141_Random_walk.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/C067906_LINE.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -197,7 +196,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/L991141_Random_walk.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/C067906_LINE.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -205,7 +204,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/L991141_Random_walk.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/C067906_LINE.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -228,8 +227,8 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   References
+  <a class="reference internal nav-link" href="#abstract">
+   Abstract
   </a>
  </li>
 </ul>
@@ -243,16 +242,15 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="random-walk">
-<h1>Random walk<a class="headerlink" href="#random-walk" title="Permalink to this headline">¶</a></h1>
-<p>The term “random walk” was first mentioned by Karl Pearson in 1905 in a letter to Nature magazine titled <strong><a class="reference external" href="https://www.nature.com/physics/looking-back/pearson/index.html">The Problem of the Random Walk</a></strong>. Study of random walks date back even further to the <strong><a class="reference external" href="https://en.wikipedia.org/wiki/Gambler%27s_ruin">Gambler’s ruin</a></strong> problem, where it could be used to show that a gambler would eventually go bankrupt against an opponent with infinite wealth. It’s only in the last couple of decades, however, that researchers have studied them with respect to networks.</p>
-<p><center><img src='_images/L991141_1.png'></center></p><p>Random Walk is an algorithm that provides random paths in a graph. A random walk means that we start at one node, choose a neighbor to navigate to at random or based on a provided probability distribution, and then do the same from that node, keeping the resulting path in a list. It’s similar to how a drunk person traverses a city.</p>
-<p><center><figure><img src='_images/L991141_2.png'><figcaption>An overview of the pipeline for random-walk graph embedding methods.</figcaption></figure></center></p><div class="section" id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
-<li><p><a class="reference external" href="https://www.mit.edu/~kardar/teaching/projects/chemotaxis(AndreaSchmidt)/random.htm">https://www.mit.edu/~kardar/teaching/projects/chemotaxis(AndreaSchmidt)/random.htm</a></p></li>
-<li><p><a class="reference external" href="https://youtu.be/stgYW6M5o4k">What is a Random Walk? | Infinite Series</a></p></li>
-</ol>
+  <div class="tex2jax_ignore mathjax_ignore section" id="line">
+<h1>LINE<a class="headerlink" href="#line" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>Large-scale Information Network Embedding</p>
+</div></blockquote>
+<div class="section" id="abstract">
+<h2>Abstract<a class="headerlink" href="#abstract" title="Permalink to this headline">¶</a></h2>
+<p><em>This paper studies the problem of embedding very large information networks into low-dimensional vector spaces, which is useful in many tasks such as visualization, node classification, and link prediction. Most existing graph embedding methods do not scale for real world information networks which usually contain millions of nodes. In this paper, we propose a novel network embedding method called the “LINE,” which is suitable for arbitrary types of information networks: undirected, directed, and/or weighted. The method optimizes a carefully designed objective function that preserves both the local and global network structures. An edge-sampling algorithm is proposed that addresses the limitation of the classical stochastic gradient descent and improves both the effectiveness and the efficiency of the inference. Empirical experiments prove the effectiveness of the LINE on a variety of real-world information networks, including language networks, social networks, and citation networks. The algorithm is very efficient, which is able to learn the embedding of a network with millions of vertices and billions of edges in a few hours on a typical single machine.</em></p>
+<p>It defines loss functions to preserve the first-order or second-order proximity separately. After optimizing the loss functions, it concatenates these representations.</p>
 </div>
 </div>
 
@@ -286,23 +284,14 @@
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="L742313_Key_developments.html" title="previous page">
+        <a class="left-prev" href="C870584_DeepWalk.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Key developments</p>
+                <p class="prevnext-title">DeepWalk</p>
             </div>
         </a>
     </div>
-     <div id="next">
-        <a class="right-next" href="L128493_Skip_gram_model.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Skip-gram model</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
 
 </div>
         

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Random walk &#8212; graph-embeddings</title>
+    <title>Message Passing Neural Networks &#8212; graph-embeddings</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Skip-gram model" href="L128493_Skip_gram_model.html" />
-    <link rel="prev" title="Key developments" href="L742313_Key_developments.html" />
+    <link rel="next" title="DeepWalk" href="C870584_DeepWalk.html" />
+    <link rel="prev" title="Skip-gram model" href="L128493_Skip_gram_model.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -99,8 +99,8 @@
    Key developments
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="L991141_Random_walk.html">
    Random walk
   </a>
  </li>
@@ -109,8 +109,8 @@
    Skip-gram model
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="L883045_Message_Passing_Neural_Networks.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Message Passing Neural Networks
   </a>
  </li>
@@ -172,7 +172,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/L991141_Random_walk.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/L883045_Message_Passing_Neural_Networks.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -197,7 +197,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/L991141_Random_walk.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/graph-embeddings/main?urlpath=lab/tree/docs/L883045_Message_Passing_Neural_Networks.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -205,7 +205,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/L991141_Random_walk.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/graph-embeddings/blob/main/docs/L883045_Message_Passing_Neural_Networks.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -243,15 +243,15 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="random-walk">
-<h1>Random walk<a class="headerlink" href="#random-walk" title="Permalink to this headline">¶</a></h1>
-<p>The term “random walk” was first mentioned by Karl Pearson in 1905 in a letter to Nature magazine titled <strong><a class="reference external" href="https://www.nature.com/physics/looking-back/pearson/index.html">The Problem of the Random Walk</a></strong>. Study of random walks date back even further to the <strong><a class="reference external" href="https://en.wikipedia.org/wiki/Gambler%27s_ruin">Gambler’s ruin</a></strong> problem, where it could be used to show that a gambler would eventually go bankrupt against an opponent with infinite wealth. It’s only in the last couple of decades, however, that researchers have studied them with respect to networks.</p>
-<p><center><img src='_images/L991141_1.png'></center></p><p>Random Walk is an algorithm that provides random paths in a graph. A random walk means that we start at one node, choose a neighbor to navigate to at random or based on a provided probability distribution, and then do the same from that node, keeping the resulting path in a list. It’s similar to how a drunk person traverses a city.</p>
-<p><center><figure><img src='_images/L991141_2.png'><figcaption>An overview of the pipeline for random-walk graph embedding methods.</figcaption></figure></center></p><div class="section" id="references">
+  <div class="tex2jax_ignore mathjax_ignore section" id="message-passing-neural-networks">
+<h1>Message Passing Neural Networks<a class="headerlink" href="#message-passing-neural-networks" title="Permalink to this headline">¶</a></h1>
+<p>One of the first work on this topic was published by Duvenaud et al. (2015). He defined the model as a stack of differentiable layers where each layer is another round of passing the messages. He used the message passing architecture to extract valuable information from graph molecules and then transform it into a single feature vector. At that time, his work was groundbreaking because he made the architecture differentiable. It was de-facto one of the first convolutional neural network architectures that could operate on graphs.</p>
+<p>Another attempt on this architecture was done by Li et al. (2016). Here, they focus on the sequential output from graphs, for example finding an optimal path in graph. To achieve that, they embedded GRU (Gated Recurrent Unit) into their algorithm.</p>
+<p>Although these algorithms seem to be quite different, they have the same underlying concept in common which is a message passing between nodes in the graph. We will next see how those models can be combined into a single framework.</p>
+<p><center><figure><img src='_images/L883045_1.png'><figcaption>A very simple example of message passing architecture for node V1. In this case a message is a sum of neighbour’s hidden states. The update function is an average between a message m and h1.</figcaption></figure></center></p><div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
-<li><p><a class="reference external" href="https://www.mit.edu/~kardar/teaching/projects/chemotaxis(AndreaSchmidt)/random.htm">https://www.mit.edu/~kardar/teaching/projects/chemotaxis(AndreaSchmidt)/random.htm</a></p></li>
-<li><p><a class="reference external" href="https://youtu.be/stgYW6M5o4k">What is a Random Walk? | Infinite Series</a></p></li>
+<li><p><a class="reference external" href="https://youtu.be/ijmxpItkRjc">Simple Message Passing on Graphs</a></p></li>
 </ol>
 </div>
 </div>
@@ -286,19 +286,19 @@
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="L742313_Key_developments.html" title="previous page">
+        <a class="left-prev" href="L128493_Skip_gram_model.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Key developments</p>
+                <p class="prevnext-title">Skip-gram model</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="L128493_Skip_gram_model.html" title="next page">
+        <a class="right-next" href="C870584_DeepWalk.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Skip-gram model</p>
+                <p class="prevnext-title">DeepWalk</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
